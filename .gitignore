@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+
+# Output Directory
+bin
+
+# Thanks
+*.sw*

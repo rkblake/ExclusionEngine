@@ -12,7 +12,7 @@ int main(int, char**)
 {
 	//TestGame game;
 	ScriptingEngine scripter;
-	Script config = scripter.LoadScript("../scripts/config.lua");
+	Script config = scripter.LoadScript("scripts/config.lua");
 	int *width = (int*)scripter.GetNumber(config, "width");
 	int *height = (int*)scripter.GetNumber(config, "height");
 	Window window(*width, *height, "test");
