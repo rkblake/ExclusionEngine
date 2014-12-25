@@ -14,11 +14,11 @@ public:
 	ScriptingEngine() {}
 	~ScriptingEngine() {}
 
-	Script LoadScript(char* path);
+	Script LoadScript(const char* path);
 	void CloseScript(Script L);
-	double* GetNumber(Script L, char* var_name);
-	bool GetBoolean(Script L, char* var_name);
-	const char* GetString(Script L, char* var_name);
+	double GetNumber(Script L, const char* var_name);
+	bool GetBoolean(Script L, const char* var_name);
+	const char* GetString(Script L, const char* var_name);
 	//TODO: get fields for tables
 private:
 

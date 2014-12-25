@@ -12,10 +12,12 @@ int main(int, char**)
 {
 	//TestGame game;
 	ScriptingEngine scripter;
+	//char* path = system("pwd");
+	//printf("%s", path);
 	Script config = scripter.LoadScript("scripts/config.lua");
-	int *width = (int*)scripter.GetNumber(config, "width");
-	int *height = (int*)scripter.GetNumber(config, "height");
-	Window window(*width, *height, "test");
+	int width = (int)scripter.GetNumber(config, "width");
+	int height = (int)scripter.GetNumber(config, "height");
+	Window window(width, height, "test");
 	window.SwapBuffers();
 	//RenderingEngine renderer(window);
 	//CoreEngine
