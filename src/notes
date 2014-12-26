@@ -1,0 +1,10 @@
+GLuint vertexbuffer
+GLuint uvbuffer
+GLuint programID
+GLuint Texture
+GLuint VertexArrayID
+GLuint normalbuffer
+
+glGenVertexArrays(1, &VertexArrayID)
+glBindVertexArray(VertexArrayID)
+
