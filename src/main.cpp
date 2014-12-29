@@ -10,6 +10,13 @@ class TestGame : public Game {
 
 int main(int, char**)
 {
+	ScriptingEngine* scripter = CoreEngine::GetScriptingEngine();
+	Script config = scripter->LoadScript("../scripts/config.lua");
+	int width = (int)scripter->GetNumber(config, "width");
+	int height = (int)scripter->GetNumber(config, "height");
+	Window window(width, height, "test");
+	window.SwapBuffers();
+	/*
 	//TestGame game;
 	ScriptingEngine scripter;
 	//char* path = system("pwd");
@@ -19,8 +26,7 @@ int main(int, char**)
 	int height = (int)scripter.GetNumber(config, "height");
 	Window window(width, height, "test");
 	window.SwapBuffers();
-	//RenderingEngine renderer(window);
-	//CoreEngine
+	*/
 	
 	return 0;
 }

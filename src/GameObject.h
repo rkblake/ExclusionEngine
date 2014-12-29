@@ -8,11 +8,11 @@ public:
 	GameObject() {}
 	~GameObject() {}
 
-	inline InitUid() {uid = uid_counter++;}
+	//inline InitUid() {uid = uid_counter++;}
 private:
 	const char* name;
 	Script L;
-	static int uid_counter = 0;
+	//static int uid_counter = 0;
 	int uid;
 };
 
