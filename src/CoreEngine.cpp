@@ -1,12 +1,14 @@
 #include "CoreEngine.h"
 
 CoreEngine::CoreEngine():
-	renderer(RenderingEngine::GetInstance()),
-	physics(PhysicsEngine::GetInstance()),
-	scripter(ScriptingEngine::GetInstance()) {
+    renderer(RenderingEngine::GetInstance()),
+    physics(PhysicsEngine::GetInstance()),
+    scripter(ScriptingEngine::GetInstance())
+{
 
 }
 
-CoreEngine::~CoreEngine() {
-	
+CoreEngine::~CoreEngine()
+{
+
 }

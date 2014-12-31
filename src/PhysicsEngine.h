@@ -3,17 +3,19 @@
 
 #include "ExclusionEngine.h"
 
-class PhysicsEngine {
+class PhysicsEngine
+{
 public:
-	static inline PhysicsEngine& GetInstance() {
-		static PhysicsEngine sPhysicsEngine;
-		return sPhysicsEngine;
-	}
+    static inline PhysicsEngine& GetInstance()
+    {
+        static PhysicsEngine sPhysicsEngine;
+        return sPhysicsEngine;
+    }
 private:
-	PhysicsEngine() {}
-	~PhysicsEngine() {}
+    PhysicsEngine() {}
+    ~PhysicsEngine() {}
 
-	//static PhysicsEngine* sPhysicsEngine;
+    //static PhysicsEngine* sPhysicsEngine;
 };
 
 #endif

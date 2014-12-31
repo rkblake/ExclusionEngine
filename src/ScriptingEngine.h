@@ -5,30 +5,32 @@
 //#include "ExclusionEngine.h"
 
 extern "C" {
-	#include <lua.h>
-	#include <lauxlib.h>
-	#include <lualib.h>
+#include <lua.h>
+#include <lauxlib.h>
+#include <lualib.h>
 }
 
 typedef lua_State* Script;
 
-class ScriptingEngine {
+class ScriptingEngine
+{
 public:
-	static inline ScriptingEngine& GetInstance() {
-		static ScriptingEngine sScriptingEngine;
-		return sScriptingEngine;
-	}
-	Script LoadScript(const char* path);
-	void CloseScript(Script L);
-	double GetNumber(Script L, const char* var_name);
-	bool GetBoolean(Script L, const char* var_name);
-	const char* GetString(Script L, const char* var_name);
-	//TODO: get fields for tables
+    static inline ScriptingEngine& GetInstance()
+    {
+        static ScriptingEngine sScriptingEngine;
+        return sScriptingEngine;
+    }
+    Script LoadScript(const char* path);
+    void CloseScript(Script L);
+    double GetNumber(Script L, const char* var_name);
+    bool GetBoolean(Script L, const char* var_name);
+    const char* GetString(Script L, const char* var_name);
+    //TODO: get fields for tables
 private:
-	ScriptingEngine() {}
-	~ScriptingEngine() {}
+    ScriptingEngine() {}
+    ~ScriptingEngine() {}
 
-	//static ScriptingEngine* sScriptingEngine;
+    //static ScriptingEngine* sScriptingEngine;
 };
 
 #endif

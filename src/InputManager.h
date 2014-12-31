@@ -1,12 +1,13 @@
 #ifndef INPUTMANAGER_H
 #define INPUTMANAGER_H
 
-class InputManager {
+class InputManager
+{
 public:
-	
+
 private:
 
-	static InputManager sInputManager;
+    static InputManager sInputManager;
 };
 
 #endif
