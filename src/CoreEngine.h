@@ -3,6 +3,9 @@
 
 #include <string>
 #include "ExclusionEngine.h"
+//#include "PhysicsEngine.h"
+//#include "RenderingEngine.h"
+//#include "ScriptingEngine.h"
 //class Game;
 
 class PhysicsEngine;
@@ -14,15 +17,23 @@ public:
 	CoreEngine();
 	~CoreEngine();
 
-	static inline PhysicsEngine* GetPhysicsEngine() {return physics;}
-	static inline RenderingEngine* GetRenderingEngine() {return renderer;}
-	static inline ScriptingEngine* GetScriptingEngine() {return scripter;}
+	inline PhysicsEngine* GetPhysicsEngine() {
+		PhysicsEngine* physics_ptr = &physics;
+		return physics_ptr;}
+	inline RenderingEngine* GetRenderingEngine() {
+		RenderingEngine* renderer_ptr = &renderer;
+		return renderer_ptr;
+	}
+	inline ScriptingEngine* GetScriptingEngine() {
+		ScriptingEngine* scripter_ptr = &scripter;
+		return scripter_ptr;
+	}
 private:
 	
 protected:
-	static PhysicsEngine* physics;
-	static RenderingEngine* renderer;
-	static ScriptingEngine* scripter;
+	PhysicsEngine& physics;
+	RenderingEngine& renderer;
+	ScriptingEngine& scripter;
 };
 
 #endif

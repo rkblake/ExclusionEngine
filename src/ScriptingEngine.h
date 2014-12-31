@@ -2,7 +2,7 @@
 #define SCRIPTINGENGINE_H
 
 //#include "ExclusionEngine.h"
-#include "ExclusionEngine.h"
+//#include "ExclusionEngine.h"
 
 extern "C" {
 	#include <lua.h>
@@ -12,11 +12,12 @@ extern "C" {
 
 typedef lua_State* Script;
 
-class ScriptingEngine : public CoreEngine {
+class ScriptingEngine {
 public:
-	//ScriptingEngine() {}
-	//~ScriptingEngine() {}
-	static inline ScriptingEngine* GetInstance() {return new ScriptingEngine;}
+	static inline ScriptingEngine& GetInstance() {
+		static ScriptingEngine sScriptingEngine;
+		return sScriptingEngine;
+	}
 	Script LoadScript(const char* path);
 	void CloseScript(Script L);
 	double GetNumber(Script L, const char* var_name);
@@ -26,6 +27,8 @@ public:
 private:
 	ScriptingEngine() {}
 	~ScriptingEngine() {}
+
+	//static ScriptingEngine* sScriptingEngine;
 };
 
 #endif

@@ -10,8 +10,9 @@ class TestGame : public Game {
 
 int main(int, char**)
 {
-	ScriptingEngine* scripter = CoreEngine::GetScriptingEngine();
-	Script config = scripter->LoadScript("../scripts/config.lua");
+	CoreEngine core;
+	ScriptingEngine* scripter = core.GetScriptingEngine();
+	Script config = scripter->LoadScript("scripts/config.lua");
 	int width = (int)scripter->GetNumber(config, "width");
 	int height = (int)scripter->GetNumber(config, "height");
 	Window window(width, height, "test");
