@@ -6,17 +6,17 @@
 class RenderingEngine
 {
 public:
-    static inline RenderingEngine& GetInstance()
-    {
-        static RenderingEngine sRenderingEngine;
-        return sRenderingEngine;
-    }
+	static inline RenderingEngine& GetInstance()
+	{
+		static RenderingEngine sRenderingEngine;
+		return sRenderingEngine;
+	}
 
 private:
-    RenderingEngine() {}
-    ~RenderingEngine() {}
+	RenderingEngine() {}
+	~RenderingEngine() {}
 
-    //static RenderingEngine sRenderingEngine;
+	//static RenderingEngine sRenderingEngine;
 
 };
 

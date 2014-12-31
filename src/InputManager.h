@@ -7,7 +7,7 @@ public:
 
 private:
 
-    static InputManager sInputManager;
+	static InputManager sInputManager;
 };
 
 #endif
