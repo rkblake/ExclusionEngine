@@ -3,7 +3,8 @@
 CoreEngine::CoreEngine():
 	renderer(RenderingEngine::GetInstance()),
 	physics(PhysicsEngine::GetInstance()),
-	scripter(ScriptingEngine::GetInstance())
+	scripter(ScriptingEngine::GetInstance()),
+	input(InputManager::GetInstance())
 {
 
 }

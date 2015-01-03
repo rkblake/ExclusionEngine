@@ -1,9 +1,6 @@
 #ifndef SCRIPTINGENGINE_H
 #define SCRIPTINGENGINE_H
 
-//#include "ExclusionEngine.h"
-//#include "ExclusionEngine.h"
-
 extern "C" {
 #include <lua.h>
 #include <lauxlib.h>

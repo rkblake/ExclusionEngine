@@ -1,6 +1,7 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include "InputManager.h"
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
 //#include <SDL2/SDL_opengl.h>
@@ -37,6 +38,7 @@ private:
 	SDL_Window* m_window;
 	SDL_GLContext m_glContext;
 	SDL_Event e;
+	InputManager* input;
 };
 
 #endif

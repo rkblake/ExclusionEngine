@@ -11,13 +11,17 @@
 class PhysicsEngine;
 class RenderingEngine;
 class ScriptingEngine;
+class InputManager;
 
 class CoreEngine
 {
 public:
-	CoreEngine();
-	~CoreEngine();
 
+	static inline CoreEngine& GetInstance()
+	{
+		static CoreEngine sCoreEngine;
+		return sCoreEngine;
+	}
 	inline PhysicsEngine* GetPhysicsEngine()
 	{
 		PhysicsEngine* physics_ptr = &physics;
@@ -33,12 +37,21 @@ public:
 		ScriptingEngine* scripter_ptr = &scripter;
 		return scripter_ptr;
 	}
+	inline InputManager* GetInputManager()
+	{
+		InputManager* input_ptr = &input;
+		return input_ptr;
+	}
 private:
 
 protected:
+	CoreEngine();
+	~CoreEngine();
+
 	PhysicsEngine& physics;
 	RenderingEngine& renderer;
 	ScriptingEngine& scripter;
+	InputManager& input;
 };
 
 #endif

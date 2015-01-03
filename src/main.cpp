@@ -11,8 +11,8 @@ class TestGame : public Game
 
 int main(int, char**)
 {
-	CoreEngine core;
-	ScriptingEngine* scripter = core.GetScriptingEngine();
+	CoreEngine* core = &CoreEngine::GetInstance();
+	ScriptingEngine* scripter = core->GetScriptingEngine();
 	Script config = scripter->LoadScript("scripts/config.lua");
 	int width = (int)scripter->GetNumber(config, "width");
 	int height = (int)scripter->GetNumber(config, "height");
