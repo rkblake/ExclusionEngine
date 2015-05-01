@@ -2,14 +2,16 @@
 #define WINDOW_H
 
 #include "InputManager.h"
-#include <GL/glew.h>
+#ifndef __APPLE__
+	#include <GL/glew.h>
+#endif
 #include <SDL2/SDL.h>
 //#include <SDL2/SDL_opengl.h>
 
 class Window
 {
 public:
-	Window(int,int,char*);
+	Window(int,int,const char*);
 	~Window();
 
 	void SwapBuffers();

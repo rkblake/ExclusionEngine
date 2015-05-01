@@ -1,7 +1,7 @@
 #include "window.h"
 #include <stdio.h>
 
-Window::Window(int width,int height,char* title)
+Window::Window(int width,int height,const char* title)
 {
 	m_width = width;
 	m_height = height;
@@ -19,12 +19,14 @@ Window::Window(int width,int height,char* title)
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,16);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 
+#ifndef __APPLE__
 	glewExperimental = true;
 	GLenum err = glewInit();
 	if(glewInit() != err) {
 		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
 		exit(1);
 	}
+#endif
 
 	glClearColor(0,0,0,1);
 	glClear(GL_COLOR_BUFFER_BIT);
