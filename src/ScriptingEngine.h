@@ -1,6 +1,9 @@
 #ifndef SCRIPTINGENGINE_H
 #define SCRIPTINGENGINE_H
 
+class CoreEngine;
+#include "CoreEngine.h"
+
 extern "C" {
 #include <lua.h>
 #include <lauxlib.h>
@@ -9,13 +12,15 @@ extern "C" {
 
 typedef lua_State* Script;
 
-class ScriptingEngine
+class ScriptingEngine : public Engine
 {
+
 public:
-	static inline ScriptingEngine& GetInstance()
+	static inline ScriptingEngine* GetInstance()
 	{
 		static ScriptingEngine sScriptingEngine;
-		return sScriptingEngine;
+		ScriptingEngine* scripter = &sScriptingEngine;
+		return scripter;
 	}
 	Script LoadScript(const char* path);
 	void CloseScript(Script L);
@@ -24,10 +29,9 @@ public:
 	const char* GetString(Script L, const char* var_name);
 	//TODO: get fields for tables
 private:
+	CoreEngine* core;
 	ScriptingEngine() {}
 	~ScriptingEngine() {}
-
-	//static ScriptingEngine* sScriptingEngine;
 };
 
 #endif

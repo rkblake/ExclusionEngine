@@ -4,6 +4,12 @@
 #include "ExclusionEngine.h"
 #undef main
 
+#ifdef _WIN32
+	#include <direct.h>
+#else
+	#include <unistd.h>
+#endif
+
 class TestGame : public Game
 {
 
@@ -11,7 +17,7 @@ class TestGame : public Game
 
 int main(int, char**)
 {
-	CoreEngine* core = &CoreEngine::GetInstance();
+	CoreEngine* core = CoreEngine::GetInstance();
 	ScriptingEngine* scripter = core->GetScriptingEngine();
 	Script config = scripter->LoadScript("scripts/config.lua");
 	int width = (int)scripter->GetNumber(config, "width");

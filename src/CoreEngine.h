@@ -3,9 +3,6 @@
 
 #include <string>
 #include "ExclusionEngine.h"
-//#include "PhysicsEngine.h"
-//#include "RenderingEngine.h"
-//#include "ScriptingEngine.h"
 //class Game;
 
 class PhysicsEngine;
@@ -17,41 +14,26 @@ class CoreEngine
 {
 public:
 
-	static inline CoreEngine& GetInstance()
+	static inline CoreEngine* GetInstance()
 	{
 		static CoreEngine sCoreEngine;
-		return sCoreEngine;
+		CoreEngine* core_ptr = &sCoreEngine;
+		return core_ptr;
 	}
-	inline PhysicsEngine* GetPhysicsEngine()
-	{
-		PhysicsEngine* physics_ptr = &physics;
-		return physics_ptr;
-	}
-	inline RenderingEngine* GetRenderingEngine()
-	{
-		RenderingEngine* renderer_ptr = &renderer;
-		return renderer_ptr;
-	}
-	inline ScriptingEngine* GetScriptingEngine()
-	{
-		ScriptingEngine* scripter_ptr = &scripter;
-		return scripter_ptr;
-	}
-	inline InputManager* GetInputManager()
-	{
-		InputManager* input_ptr = &input;
-		return input_ptr;
-	}
+	inline PhysicsEngine* GetPhysicsEngine() {return physics;}
+	inline RenderingEngine* GetRenderingEngine() {return renderer;}
+	inline ScriptingEngine* GetScriptingEngine() {return scripter;}
+	inline InputManager* GetInputManager() {return input;}
 private:
 
-protected:
 	CoreEngine();
 	~CoreEngine();
+protected:
 
-	PhysicsEngine& physics;
-	RenderingEngine& renderer;
-	ScriptingEngine& scripter;
-	InputManager& input;
+	PhysicsEngine* physics;
+	RenderingEngine* renderer;
+	ScriptingEngine* scripter;
+	InputManager* input;
 };
 
 #endif

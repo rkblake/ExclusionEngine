@@ -6,10 +6,11 @@
 class PhysicsEngine
 {
 public:
-	static inline PhysicsEngine& GetInstance()
+	static inline PhysicsEngine* GetInstance()
 	{
 		static PhysicsEngine sPhysicsEngine;
-		return sPhysicsEngine;
+		PhysicsEngine* physics = &sPhysicsEngine;
+		return physics;
 	}
 private:
 	PhysicsEngine() {}

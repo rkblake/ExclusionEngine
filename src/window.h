@@ -2,7 +2,9 @@
 #define WINDOW_H
 
 #include "InputManager.h"
-#ifndef __APPLE__
+#ifdef __APPLE__
+	#include <OpenGL/gl3.h>
+#else
 	#include <GL/glew.h>
 #endif
 #include <SDL2/SDL.h>

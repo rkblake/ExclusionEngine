@@ -1,21 +1,26 @@
 #ifndef INPUTMANAGER_H
 #define INPUTMANAGER_H
 
+#include "ExclusionEngine.h"
+
 #include <map>
 #include <SDL2/SDL.h>
 #include <string>
 
+class Engine;
+
 //TODO:map sdl keys to game commands as defined to config.lua
 
-class InputManager
+class InputManager : public Engine
 {
 public:
 	void HandleEvent();
 
-	static inline InputManager& GetInstance()
+	static inline InputManager* GetInstance()
 	{
 		static InputManager sInputManager;
-		return sInputManager;
+		InputManager* input = &sInputManager;
+		return input;
 	}
 private:
 	InputManager() {}
