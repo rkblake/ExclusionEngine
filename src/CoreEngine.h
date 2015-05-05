@@ -14,8 +14,7 @@ class CoreEngine
 {
 public:
 
-	static inline CoreEngine* GetInstance()
-	{
+	static inline CoreEngine* GetInstance() {
 		static CoreEngine sCoreEngine;
 		CoreEngine* core_ptr = &sCoreEngine;
 		return core_ptr;

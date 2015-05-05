@@ -14,7 +14,7 @@ class Engine;
 class InputManager : public Engine
 {
 public:
-	void HandleEvent();
+	void HandleKey();
 
 	static inline InputManager* GetInstance()
 	{
