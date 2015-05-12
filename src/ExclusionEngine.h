@@ -10,7 +10,8 @@ enum {RENDERING, INPUT, PHYSICS, SCRIPTING};
 #include "InputManager.h"
 #include "Shaders.h"
 #include "PhysicsEngine.h"
-#include "ScriptingEngine.h"
+//#include "ScriptingEngine.h"
+#include "Script.h"
 #include "CoreEngine.h"
 #include "Window.h"
 //#include <octree/octree.h>

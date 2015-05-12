@@ -1,3 +1,5 @@
+//THIS CLASS IS DEPRECATED
+
 #include "ScriptingEngine.h"
 
 Script ScriptingEngine::LoadScript(const char* path)
