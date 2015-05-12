@@ -1,5 +1,5 @@
-#ifndef RENDERINGENGINE_H
-#define RENDERINGENGINE_H
+#ifndef EE_RENDERINGENGINE_H
+#define EE_RENDERINGENGINE_H
 
 //#include "ExclusionEngine.h"
 

@@ -1,13 +1,9 @@
-//#define GLEW_NO_GLU
-#include <GL/glew.h>
-//#include <SDL2/SDL.h>
-//#include <SDL2/SDL_opengl.h>
-//#include <SDL2/SDL_image.h>
+#include "Shaders.h"
+
 #include <fstream>
 #include <string>
 #include <vector>
-//#include <stdlib.h>
-//#include <algorithm>
+
 
 GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path)
 {

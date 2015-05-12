@@ -4,12 +4,6 @@
 #include "ExclusionEngine.h"
 #undef main
 
-#ifdef _WIN32
-	#include <direct.h>
-#else
-	#include <unistd.h>
-#endif
-
 class TestGame : public Game
 {
 
@@ -26,7 +20,7 @@ int main(int, char**)
 	Window window(width, height, title);
 	window.SwapBuffers();
 
-	
+
 
 	return 0;
 }

@@ -1,5 +1,5 @@
-#ifndef INPUTMANAGER_H
-#define INPUTMANAGER_H
+#ifndef EE_INPUTMANAGER_H
+#define EE_INPUTMANAGER_H
 
 #include "ExclusionEngine.h"
 

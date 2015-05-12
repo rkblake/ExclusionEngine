@@ -1,5 +1,5 @@
-#ifndef WINDOW_H
-#define WINDOW_H
+#ifndef EE_WINDOW_H
+#define EE_WINDOW_H
 
 #include "InputManager.h"
 #ifdef __APPLE__

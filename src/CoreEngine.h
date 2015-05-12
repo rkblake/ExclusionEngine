@@ -1,5 +1,5 @@
-#ifndef COREENGINE_H
-#define COREENGINE_H
+#ifndef EE_COREENGINE_H
+#define EE_COREENGINE_H
 
 #include <string>
 #include "ExclusionEngine.h"

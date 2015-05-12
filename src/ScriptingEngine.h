@@ -1,5 +1,5 @@
-#ifndef SCRIPTINGENGINE_H
-#define SCRIPTINGENGINE_H
+#ifndef EE_SCRIPTINGENGINE_H
+#define EE_SCRIPTINGENGINE_H
 
 class CoreEngine;
 #include "CoreEngine.h"

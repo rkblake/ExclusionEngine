@@ -1,5 +1,5 @@
-#ifndef GAMEOBJECT_H
-#define GAMEOBJECT_H
+#ifndef EE_ENTITY_H
+#define EE_ENTITY_H
 
 #ifdef __APPLE__
 	#include <OpenGL/gl3.h>
@@ -8,11 +8,11 @@
 #endif
 #include "ScriptingEngine.h"
 
-class GameObject
+class Entity
 {
 public:
-	GameObject() {}
-	~GameObject() {}
+	Entity() {}
+	~Entity() {}
 
 
 	//inline InitUid() {uid = uid_counter++;}

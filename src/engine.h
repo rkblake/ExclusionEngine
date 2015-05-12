@@ -1,5 +1,5 @@
-#ifndef ENGINE_H
-#define ENGINE_H
+#ifndef EE_ENGINE_H
+#define EE_ENGINE_H
 
 class Engine {
 public:

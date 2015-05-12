@@ -1,5 +1,5 @@
-#ifndef PHYSICSENGINE_H
-#define PHYSICSENGINE_H
+#ifndef EE_PHYSICSENGINE_H
+#define EE_PHYSICSENGINE_H
 
 #include "ExclusionEngine.h"
 
