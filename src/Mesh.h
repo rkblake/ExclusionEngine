@@ -7,30 +7,29 @@
     #include <GL/glew.h>
 #endif
 #include <glm/glm.hpp>
+#include <vector>
 
-class Vertex {
+/*class Vertex {
 public:
     Vertex(const glm::vec3& pos) {this->pos = pos;}
 private:
     glm::vec3 pos;
-};
+};*/
 
 class Mesh {
 public:
     Mesh() {}
-    Mesh(Vertex* vertices, unsigned int numVertices);
+    Mesh(const char* path);
     ~Mesh();
 
     void Draw();
 private:
-    enum {
-        POSITION_VB,
-        NUM_BUFFERS
-    };
-
+    GLuint textureID;
     GLuint vao;
-    GLuint vab[NUM_BUFFERS];
-    unsigned int drawCount;
+    GLuint vertex_buffer;
+    GLuint uv_buffer;
+    GLuint normal_buffer;
+    GLuint element_buffer;
 };
 
 #endif

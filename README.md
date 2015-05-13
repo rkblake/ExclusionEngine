@@ -19,4 +19,3 @@ design goals:
 [ ] decals
 
 [ ] different lighting types
-
