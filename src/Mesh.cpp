@@ -14,23 +14,25 @@ Mesh::Mesh(const char* path) {
 	std::vector<glm::vec3> indexed_normals;
 	indexVBO(vertices, uvs, normals, indices, indexed_vertices, indexed_uvs, indexed_normals);
 
+    indices_count = indices.size();
+
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
 
-	glGenBuffers(1, &vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glGenBuffers(1, &vertex_buffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
 	glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(glm::vec3), &indexed_vertices[0], GL_STATIC_DRAW);
 
-	glGenBuffers(1, &uvbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+	glGenBuffers(1, &uv_buffer);
+	glBindBuffer(GL_ARRAY_BUFFER, uv_buffer);
 	glBufferData(GL_ARRAY_BUFFER, indexed_uvs.size() * sizeof(glm::vec2), &indexed_uvs[0], GL_STATIC_DRAW);
 
-	glGenBuffers(1, &normalbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
+	glGenBuffers(1, &normal_buffer);
+	glBindBuffer(GL_ARRAY_BUFFER, normal_buffer);
 	glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals[0], GL_STATIC_DRAW);
 
-	glGenBuffers(1, &elementbuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
+	glGenBuffers(1, &element_buffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned short), &indices[0] , GL_STATIC_DRAW);
 
     glBindVertexArray(0);
@@ -52,9 +54,9 @@ void Mesh::Draw() {
 
     // Bind our texture in Texture Unit 0
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, TextureID);
+    glBindTexture(GL_TEXTURE_2D, textureID);
     // Set our "myTextureSampler" sampler to user Texture Unit 0
-    glUniform1i(TextureID, 0);
+    glUniform1i(textureID, 0);
 
     // 1rst attribute buffer : vertices
     glEnableVertexAttribArray(0);
@@ -92,11 +94,11 @@ void Mesh::Draw() {
         (void*)0                          // array buffer offset
     );
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
 
     glDrawElements(
          GL_TRIANGLES,      // mode
-         indices.size(),    // count
+         indices_count,    // count
          GL_UNSIGNED_SHORT,   // type
          (void*)0           // element array buffer offset
      );

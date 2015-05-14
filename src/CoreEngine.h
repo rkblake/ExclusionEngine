@@ -7,7 +7,7 @@
 
 class PhysicsEngine;
 class RenderingEngine;
-class ScriptingEngine;
+//class ScriptingEngine;
 class InputManager;
 
 class CoreEngine
@@ -21,7 +21,7 @@ public:
 	}
 	inline PhysicsEngine* GetPhysicsEngine() {return physics;}
 	inline RenderingEngine* GetRenderingEngine() {return renderer;}
-	inline ScriptingEngine* GetScriptingEngine() {return scripter;}
+	//inline ScriptingEngine* GetScriptingEngine() {return scripter;}
 	inline InputManager* GetInputManager() {return input;}
 private:
 
@@ -31,7 +31,7 @@ protected:
 
 	PhysicsEngine* physics;
 	RenderingEngine* renderer;
-	ScriptingEngine* scripter;
+	//ScriptingEngine* scripter;
 	InputManager* input;
 };
 

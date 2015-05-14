@@ -24,9 +24,10 @@ public:
 	//inline InitUid() {uid = uid_counter++;}
 private:
 	float x, y, z;
+	GLuint MatrixID, ViewMatrixID, ModelMatrixID;
 
 	Script script;
-	unsigned int uuid;
+	//unsigned int uuid;
 
 
 	Mesh mesh;

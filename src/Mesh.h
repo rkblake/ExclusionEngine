@@ -9,6 +9,9 @@
 #include <glm/glm.hpp>
 #include <vector>
 
+#include "objloader.h"
+#include "vboindexer.h"
+
 /*class Vertex {
 public:
     Vertex(const glm::vec3& pos) {this->pos = pos;}
@@ -24,6 +27,7 @@ public:
 
     void Draw();
 private:
+    unsigned int indices_count;
     GLuint textureID;
     GLuint vao;
     GLuint vertex_buffer;

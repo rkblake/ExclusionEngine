@@ -1,10 +1,13 @@
 #ifndef EE_RENDERINGENGINE_H
 #define EE_RENDERINGENGINE_H
 
-//#include "ExclusionEngine.h"
+#include <glm/glm.hpp>
 
 class RenderingEngine
 {
+	friend void ComputeMatrices();
+	friend glm::mat4 GetProjectionMatrix();
+	friend glm::mat4 GetViewMatrix();
 public:
 	static inline RenderingEngine* GetInstance() {
 		static RenderingEngine sRenderingEngine;

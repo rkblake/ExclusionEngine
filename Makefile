@@ -7,7 +7,7 @@ CPPFLAGS+=-g -O2 -I$(DIR) -I$(LUA_INC)
 TARGET  = ExclusionEngine
 
 LIBS=-lSDL2 -lGL -lGLEW -llua
-MAC_LIBS= -framework OpenGL -framework SDL2 -lGlew -llua
+MAC_LIBS= -framework OpenGL -framework SDL2 -llua
 
 OBJ := $(patsubst %.cpp,%.o,$(wildcard src/*.cpp))
 
