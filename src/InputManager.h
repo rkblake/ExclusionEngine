@@ -16,11 +16,10 @@ class InputManager : public Engine
 public:
 	void HandleKey();
 
-	static inline InputManager* GetInstance()
+	static inline InputManager& GetInstance()
 	{
 		static InputManager sInputManager;
-		InputManager* input = &sInputManager;
-		return input;
+		return sInputManager;
 	}
 private:
 	InputManager() {}

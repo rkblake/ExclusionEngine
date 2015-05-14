@@ -4,16 +4,21 @@
 enum {RENDERING, INPUT, PHYSICS, SCRIPTING};
 #define ENGINE_COUNT 4
 
+#include "Window.h"
 #include "Engine.h"
-#include "game.h"
-#include "RenderingEngine.h"
 #include "InputManager.h"
+#include "RenderingEngine.h"
+
+
+#include "game.h"
+
+
 #include "Shaders.h"
 #include "PhysicsEngine.h"
 //#include "ScriptingEngine.h"
 #include "Script.h"
 #include "CoreEngine.h"
-#include "Window.h"
+#include "Entity.h"
 //#include <octree/octree.h>
 
 #endif

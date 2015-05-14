@@ -3,19 +3,21 @@
 
 #include <glm/glm.hpp>
 
-class RenderingEngine
-{
-	friend void ComputeMatrices();
-	friend glm::mat4 GetProjectionMatrix();
-	friend glm::mat4 GetViewMatrix();
+class RenderingEngine {
 public:
-	static inline RenderingEngine* GetInstance() {
+	static inline RenderingEngine& GetInstance() {
 		static RenderingEngine sRenderingEngine;
-		RenderingEngine* renderer = &sRenderingEngine;
-		return renderer;
+		return sRenderingEngine;
 	}
 
+	void ComputeMatrices();
+	glm::mat4 GetProjectionMatrix();
+	glm::mat4 GetViewMatrix();
+	void CreateWindow(const char* title, int width, int height);
+	void Swap();
 private:
+	Window window;
+
 	RenderingEngine() {}
 	~RenderingEngine() {}
 

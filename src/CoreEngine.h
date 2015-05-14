@@ -3,6 +3,7 @@
 
 #include <string>
 #include "ExclusionEngine.h"
+//extern SDL_Window* mWindow;
 //class Game;
 
 class PhysicsEngine;
@@ -14,25 +15,27 @@ class CoreEngine
 {
 public:
 
-	static inline CoreEngine* GetInstance() {
+	static inline CoreEngine& GetInstance() {
 		static CoreEngine sCoreEngine;
-		CoreEngine* core_ptr = &sCoreEngine;
-		return core_ptr;
+		return sCoreEngine;
 	}
-	inline PhysicsEngine* GetPhysicsEngine() {return physics;}
-	inline RenderingEngine* GetRenderingEngine() {return renderer;}
+	//inline PhysicsEngine GetPhysicsEngine() {return physics;}
+	//inline RenderingEngine* GetRenderingEngine() {return renderer;}
 	//inline ScriptingEngine* GetScriptingEngine() {return scripter;}
-	inline InputManager* GetInputManager() {return input;}
-private:
+	//inline InputManager* GetInputManager() {return input;}
 
+	void Run();
+	void CreateWindow(const char* name, int width, int height);
+private:
+	void init();
 	CoreEngine();
 	~CoreEngine();
 protected:
 
-	PhysicsEngine* physics;
-	RenderingEngine* renderer;
+	//PhysicsEngine* physics;
+	//RenderingEngine* renderer;
 	//ScriptingEngine* scripter;
-	InputManager* input;
+	//InputManager* input;
 };
 
 #endif

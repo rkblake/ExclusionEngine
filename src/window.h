@@ -1,7 +1,7 @@
 #ifndef EE_WINDOW_H
 #define EE_WINDOW_H
 
-#include "InputManager.h"
+//#include "InputManager.h"
 #ifdef __APPLE__
 	#include <OpenGL/gl3.h>
 #else
@@ -13,7 +13,8 @@
 class Window
 {
 public:
-	Window(int,int,const char*);
+	Window() {}
+	Window(const char*,int,int);
 	~Window();
 
 	void SwapBuffers();
@@ -42,7 +43,7 @@ private:
 	SDL_Window* m_window;
 	SDL_GLContext m_glContext;
 	SDL_Event e;
-	InputManager* input;
+	//InputManager* input;
 };
 
 #endif

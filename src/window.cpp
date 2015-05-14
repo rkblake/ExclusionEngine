@@ -1,7 +1,7 @@
 #include "Window.h"
 #include <stdio.h>
 
-Window::Window(int width,int height,const char* title)
+Window::Window(const char* title, int width, int height)
 {
 	m_width = width;
 	m_height = height;
