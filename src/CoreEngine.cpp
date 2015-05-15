@@ -1,5 +1,7 @@
 #include "CoreEngine.h"
 
+#include "ExclusionEngine.h"
+
 #ifdef __APPLE__
 	#include <OpenGL/gl3.h>
 #else

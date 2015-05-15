@@ -2,7 +2,7 @@
 #define EE_COREENGINE_H
 
 #include <string>
-#include "ExclusionEngine.h"
+
 //extern SDL_Window* mWindow;
 //class Game;
 
@@ -30,6 +30,9 @@ private:
 	void init();
 	CoreEngine();
 	~CoreEngine();
+
+	//Entity* player;
+	//Camera* camera;
 protected:
 
 	//PhysicsEngine* physics;

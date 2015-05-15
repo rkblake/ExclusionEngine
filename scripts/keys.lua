@@ -1,0 +1,7 @@
+require "keyboard"
+
+FORWARD=W
+BACKWARD=S
+LEFT_STRAFE=A
+RIGHT_STRAFE=D
+RELOAD=R
