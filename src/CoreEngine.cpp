@@ -1,6 +1,7 @@
 #include "CoreEngine.h"
 
-#include "ExclusionEngine.h"
+//#include "ExclusionEngine.h"
+#include "RenderingEngine.h"
 
 #ifdef __APPLE__
 	#include <OpenGL/gl3.h>
@@ -9,6 +10,7 @@
 #endif
 #include <SDL2/SDL.h>
 #include <map>
+
 
 CoreEngine::CoreEngine()
 	//renderer(RenderingEngine::GetInstance()),

@@ -1,6 +1,8 @@
 #ifndef EE_RENDERINGENGINE_H
 #define EE_RENDERINGENGINE_H
 
+#include "Window.h"
+
 #include <glm/glm.hpp>
 
 class RenderingEngine {

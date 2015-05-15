@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include <string>
 
-#include "ExclusionEngine.h"
+//#include "ExclusionEngine.h"
+#include "CoreEngine.h"
+#include "Script.h"
 #undef main
 
-class TestGame : public Game
+/*class TestGame : public Game
 {
 
-};
+};*/
 
 int main(int, char**)
 {

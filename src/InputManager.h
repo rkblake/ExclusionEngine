@@ -1,7 +1,7 @@
 #ifndef EE_INPUTMANAGER_H
 #define EE_INPUTMANAGER_H
 
-#include "ExclusionEngine.h"
+#include "Engine.h"
 
 #include <map>
 //#include <pair>
@@ -25,15 +25,16 @@ enum CommandsEnum {
 	RELOAD
 };
 
-/*std::string Commands[] = {
+const std::string Commands[] = {
 	"FORWARD",
 	"BACKWARD",
 	"LEFT_STRAFE",
 	"RIGHT_STRAFE",
+	"JUMP",
 	"FIRE",
 	"RELOAD",
 	"\0"
-};*/
+};
 
 typedef std::pair<Button, std::string*> map_item;
 typedef std::pair<std::string*, bool> press_map_item;
