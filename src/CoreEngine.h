@@ -24,10 +24,11 @@ public:
 	//inline ScriptingEngine* GetScriptingEngine() {return scripter;}
 	//inline InputManager* GetInputManager() {return input;}
 
+	void Start();
 	void Run();
 	void CreateWindow(const char* name, int width, int height);
 private:
-	void init();
+	//void init();
 	CoreEngine();
 	~CoreEngine();
 

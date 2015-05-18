@@ -23,6 +23,7 @@ int main(int, char**)
 	//Window window(width, height, title);
 	//window.SwapBuffers();
 	core->CreateWindow(title, width, height);
+	core->Start();
 
 	return 0;
 }

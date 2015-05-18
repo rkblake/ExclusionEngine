@@ -2,6 +2,8 @@
 
 //#include "ExclusionEngine.h"
 #include "RenderingEngine.h"
+#include "Script.h"
+#include "Entity.h"
 
 #ifdef __APPLE__
 	#include <OpenGL/gl3.h>
@@ -21,10 +23,6 @@ CoreEngine::CoreEngine()
 
 }
 
-void CoreEngine::init() {
-
-}
-
 CoreEngine::~CoreEngine()
 {
 
@@ -32,6 +30,14 @@ CoreEngine::~CoreEngine()
 
 void CoreEngine::CreateWindow(const char* title, int width, int height) {
 	RenderingEngine::GetInstance().CreateWindow(title, width, height);
+}
+
+void CoreEngine::Start() {
+	Script main("scripts/main.lua");
+
+	Entity test("scripts/test_entity.lua");
+
+	Run();
 }
 
 void CoreEngine::Run() {
