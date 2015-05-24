@@ -3,13 +3,16 @@
 
 Window::Window(const char* title, int width, int height)
 {
-	m_width = width;
-	m_height = height;
+	_width = width;
+	_height = height;
 
 	SDL_Init(SDL_INIT_EVERYTHING);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
 
-	m_window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_width, m_height, SDL_WINDOW_OPENGL);
-	m_glContext = SDL_GL_CreateContext(m_window);
+	_window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _width, _height, SDL_WINDOW_OPENGL);
+	_glContext = SDL_GL_CreateContext(_window);
 
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
@@ -18,6 +21,8 @@ Window::Window(const char* title, int width, int height)
 	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,32);
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,16);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
+
+	printf("%s\n", glGetString(GL_VERSION));
 
 #ifndef __APPLE__
 	glewExperimental = true;
@@ -28,21 +33,22 @@ Window::Window(const char* title, int width, int height)
 	}
 #endif
 
-	glClearColor(0,0,0,1);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(0,0,1,1);
+	SwapBuffers();
+	//glClear(GL_COLOR_BUFFER_BIT);
 	SDL_Delay(2000);
 }
 
 Window::~Window()
 {
-	SDL_GL_DeleteContext(m_glContext);
-	SDL_DestroyWindow(m_window);
+	SDL_GL_DeleteContext(_glContext);
+	SDL_DestroyWindow(_window);
 	SDL_Quit();
 }
 
 void Window::SwapBuffers()
 {
-	SDL_GL_SwapWindow(m_window);
+	SDL_GL_SwapWindow(_window);
 }
 
 void Window::Update()

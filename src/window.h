@@ -23,25 +23,25 @@ public:
 	void BindAsRenderTarget() const;
 	inline int getWidth()
 	{
-		return m_width;
+		return _width;
 	}
 	inline int getHeight()
 	{
-		return m_height;
+		return _height;
 	}
 	inline SDL_Window* getWindow()
 	{
-		return m_window;
+		return _window;
 	}
 	inline bool getIsCloseRequested()
 	{
 		return isCloseRequested;
 	}
 private:
-	int m_width, m_height;
+	int _width, _height;
 	bool isCloseRequested;
-	SDL_Window* m_window;
-	SDL_GLContext m_glContext;
+	SDL_Window* _window;
+	SDL_GLContext _glContext;
 	SDL_Event e;
 	//InputManager* input;
 };

@@ -35,7 +35,7 @@ void CoreEngine::CreateWindow(const char* title, int width, int height) {
 void CoreEngine::Start() {
 	Script main("scripts/main.lua");
 
-	Entity test("scripts/test_entity.lua");
+	//Entity test("scripts/test_entity.lua");
 
 	Run();
 }

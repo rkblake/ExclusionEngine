@@ -1,7 +1,11 @@
 #ifndef EE_PHYSICSENGINE_H
 #define EE_PHYSICSENGINE_H
 
-#include "ExclusionEngine.h"
+#include "Entity.h"
+
+#include <btBulletDynamicsCommon.h>
+#include <bullet/BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h>
+#include <map>
 
 class PhysicsEngine
 {
@@ -11,11 +15,22 @@ public:
 		static PhysicsEngine sPhysicsEngine;
 		return sPhysicsEngine;
 	}
-private:
-	PhysicsEngine() {}
-	~PhysicsEngine() {}
+	void Register(Entity* e, unsigned int uid);
+	void Unregister(Entity* e, unsigned int uid);
+	void StepSimulation();
+	void Dispose();
 
-	//static PhysicsEngine* sPhysicsEngine;
+private:
+	PhysicsEngine();
+	~PhysicsEngine();
+
+	std::map<unsigned int, btRigidBody> bodies;
+
+	btBroadphaseInterface* broadphase;
+	btDefaultCollisionConfiguration* collisionConfiguration;
+	btCollisionDispatcher* dispatcher;
+	btSequentialImpulseConstraintSolver* solver;
+	btDiscreteDynamicsWorld* dynamicsWorld;
 };
 
 #endif
