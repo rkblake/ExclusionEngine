@@ -7,6 +7,21 @@
 #include <bullet/BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h>
 #include <map>
 
+class ExclusionMotionState : public btMotionState {
+public:
+    void getWorldTransform (btTransform &worldTrans) const {
+
+    }
+    void setWorldTransform (const btTransform &worldTrans) {
+
+    }
+};
+
+typedef struct {
+    ExclusionMotionState motionState;
+    btRigidBody body;
+} PhysicsObjectWrapper;
+
 class PhysicsEngine
 {
 public:
@@ -24,7 +39,7 @@ private:
 	PhysicsEngine();
 	~PhysicsEngine();
 
-	std::map<unsigned int, btRigidBody> bodies;
+	std::map<unsigned int, PhysicsObjectWrapper> PhysicsObjects;
 
 	btBroadphaseInterface* broadphase;
 	btDefaultCollisionConfiguration* collisionConfiguration;

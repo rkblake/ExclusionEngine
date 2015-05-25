@@ -18,9 +18,9 @@ public:
 	~Window();
 
 	void SwapBuffers();
-	void Update();
+	//void Update();
 	void SetFullscreen();
-	void BindAsRenderTarget() const;
+	//void BindAsRenderTarget() const;
 	inline int getWidth()
 	{
 		return _width;
@@ -29,7 +29,7 @@ public:
 	{
 		return _height;
 	}
-	inline SDL_Window* getWindow()
+	inline SDL_Window* GetWindow()
 	{
 		return _window;
 	}

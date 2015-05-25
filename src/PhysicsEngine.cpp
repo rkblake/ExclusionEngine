@@ -1,6 +1,5 @@
 #include "PhysicsEngine.h"
 
-
 PhysicsEngine::PhysicsEngine() {
     broadphase = new btDbvtBroadphase();
     collisionConfiguration = new btDefaultCollisionConfiguration();
@@ -9,8 +8,7 @@ PhysicsEngine::PhysicsEngine() {
     //register of algorithms here
     solver = new btSequentialImpulseConstraintSolver;
     dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-    dynamicsWorld->setGravity(btVector3(0, -10, 0));
-
+    dynamicsWorld->setGravity(btVector3(0, -9.8, 0));
 }
 
 PhysicsEngine::~PhysicsEngine() {
@@ -22,7 +20,7 @@ PhysicsEngine::~PhysicsEngine() {
 }
 
 void PhysicsEngine::Register(Entity* e, unsigned int uid) {
-    
+
 }
 
 void PhysicsEngine::Unregister(Entity* e, unsigned int uid) {

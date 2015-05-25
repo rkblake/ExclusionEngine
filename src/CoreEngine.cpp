@@ -29,12 +29,16 @@ CoreEngine::~CoreEngine()
 }
 
 void CoreEngine::CreateWindow(const char* title, int width, int height) {
-	RenderingEngine::GetInstance().CreateWindow(title, width, height);
+	window = RenderingEngine::GetInstance().CreateWindow(title, width, height);
 }
 
 void CoreEngine::Start() {
+	Script config("scripts/config.lua");
 	Script main("scripts/main.lua");
-
+	int width = (int)config.GetNumber("width");
+	int height = (int)config.GetNumber("height");
+	const char* title = config.GetString("title");
+	CreateWindow(title, width, height);
 	//Entity test("scripts/test_entity.lua");
 
 	Run();
@@ -56,14 +60,32 @@ void CoreEngine::Run() {
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		/*glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		//glFrustum(-aspect*near/lens, aspect*near/lens, -near/lens, near/lens, near, far);
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();*/
 
 		//update, render, and handle input here
+		while(SDL_PollEvent(&e)) {
+			switch(e.type) {
+				case SDL_QUIT:
+					isRunning = false;
+					break;
+				case SDL_MOUSEMOTION:
+					//mouse motion
+					//SDL_WarpMouse()
+					break;
+				case SDL_MOUSEBUTTONDOWN:
+					//mouse button down
+					break;
+				case SDL_MOUSEBUTTONUP:
+					//mouse button up
+					break;
+				case SDL_KEYDOWN:
+					//key down
+					break;
+				case SDL_KEYUP:
+					//key up
+					break;
+			}
+		}
 
-		//SDL_GL_SwapWindow(m_window);
+		window->SwapBuffers();
 	}
 }

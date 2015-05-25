@@ -1,6 +1,9 @@
 #ifndef EE_COREENGINE_H
 #define EE_COREENGINE_H
 
+#include "Entity.h"
+#include "Window.h"
+
 #include <string>
 
 //extern SDL_Window* mWindow;
@@ -26,14 +29,14 @@ public:
 
 	void Start();
 	void Run();
-	void CreateWindow(const char* name, int width, int height);
+
 private:
-	//void init();
+	void CreateWindow(const char* name, int width, int height);
 	CoreEngine();
 	~CoreEngine();
 
-	//Entity* player;
-	//Camera* camera;
+	Entity* player;
+	Window* window;
 protected:
 
 	//PhysicsEngine* physics;
