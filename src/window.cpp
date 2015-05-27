@@ -51,7 +51,7 @@ void Window::SwapBuffers()
 	SDL_GL_SwapWindow(_window);
 }
 
-void Window::Update()
+/*void Window::Update()
 {
 	while(SDL_PollEvent(&e)) {
 		switch(e.type) {
@@ -73,4 +73,4 @@ void Window::Update()
 		}
 
 	}
-}
+}*/

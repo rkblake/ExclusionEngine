@@ -12,13 +12,6 @@
 #include "objloader.h"
 #include "vboindexer.h"
 
-/*class Vertex {
-public:
-    Vertex(const glm::vec3& pos) {this->pos = pos;}
-private:
-    glm::vec3 pos;
-};*/
-
 class Mesh {
 public:
     Mesh() {}

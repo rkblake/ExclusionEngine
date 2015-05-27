@@ -30,6 +30,7 @@ public:
 	void SetThirdPerson() {camera_style = THIRD_PERSON;}
 	Window* CreateWindow(const char* title, int width, int height);
 	void Swap();
+	void RenderScene();
 private:
 	Window window;
 	int _width, _height;
@@ -41,6 +42,7 @@ private:
 	Entity* attached_entity; //entity that the camera is attached
 	unsigned int camera_style;
 	bool isFocus;
+	std::vector<Entity*> entities;
 
 	RenderingEngine() {
 		mouseSpeed = 0.005f;
