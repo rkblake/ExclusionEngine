@@ -2,6 +2,10 @@ ExclusionEngine
 ===============
 the bestest game engine that will never be done
 
+Required pacakages
+Bullet 
+lua 
+
 design goals:
 
 [ ]	first, third, and free look camera

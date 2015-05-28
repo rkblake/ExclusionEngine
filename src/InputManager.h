@@ -1,7 +1,7 @@
 #ifndef EE_INPUTMANAGER_H
 #define EE_INPUTMANAGER_H
 
-#include "Engine.h"
+//#include "Engine.h"
 
 #include <map>
 //#include <pair>
@@ -39,7 +39,7 @@ const std::string Commands[] = {
 typedef std::pair<Button, std::string*> map_item;
 typedef std::pair<std::string*, bool> press_map_item;
 
-class InputManager : public Engine
+class InputManager
 {
 public:
 	static inline InputManager& GetInstance() {
