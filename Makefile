@@ -22,7 +22,7 @@ endif
 
 
 $(TARGET): bin $(OBJ)
-	$(CC) $(MAC_LIBS) $(OBJ) -o bin/$@
+	$(CC) $(LIBS) $(OBJ) -o bin/$@
 
 #linux:
 #	LIBS+=-lSDL2 -lGL -lGLEW -llua
