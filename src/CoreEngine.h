@@ -29,7 +29,7 @@ public:
 
 	void Start();
 	void Run();
-
+	Entity* GetNullEntity();
 private:
 	void CreateWindow(const char* name, int width, int height);
 	CoreEngine();

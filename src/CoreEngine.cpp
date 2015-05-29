@@ -1,6 +1,5 @@
 #include "CoreEngine.h"
 
-//#include "ExclusionEngine.h"
 #include "RenderingEngine.h"
 #include "Script.h"
 #include "Entity.h"
@@ -42,6 +41,10 @@ void CoreEngine::Start() {
 	//Entity test("scripts/test_entity.lua");
 
 	Run();
+}
+
+Entity* CoreEngine::GetNullEntity() {
+
 }
 
 void CoreEngine::Run() {

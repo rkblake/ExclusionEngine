@@ -16,7 +16,8 @@ static unsigned int uuid_counter = 0;
 class Entity
 {
 public:
-	Entity(Script script);
+	Entity() {}
+	//Entity(Script script);
 	Entity(const char* path_to_script);
 	~Entity();
 
@@ -24,7 +25,8 @@ public:
 	//inline InitUid() {uid = uid_counter++;}
 private:
 	float x, y, z;
-	GLuint MatrixID, ViewMatrixID, ModelMatrixID;
+	GLuint ModelMatrixID;
+	
 
 	Script script;
 	//unsigned int uuid;
