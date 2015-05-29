@@ -6,7 +6,7 @@ CPPFLAGS+=-g -O2 -I$(INCLUDE) -I$(LIB_DIR) -I$(BULLET_INC)
 #CPPFLAGS+=-g -O2 -I$(DIR) -I$(LUA_INC) -L$(LUA_LIB)
 TARGET = ExclusionEngine
 
-UNIX_LIBS=-lSDL2 -lGL -lGLEW -llua
+UNIX_LIBS=-lSDL2 -lGL -lGLEW -llua -lBulletDynamics -lBulletCollision -lLinearMath
 MAC_LIBS=-framework OpenGL -framework SDL2 -framework BulletDynamics -framework BulletCollision -framework LinearMath -llua
 
 OBJ := $(patsubst %.cpp,%.o,$(wildcard src/*.cpp))

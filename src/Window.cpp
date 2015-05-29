@@ -7,9 +7,13 @@ Window::Window(const char* title, int width, int height)
 	_height = height;
 
 	SDL_Init(SDL_INIT_EVERYTHING);
+
+	//required to get OpenGL 4.1. this may change
+#ifdef __APPLE__
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+#endif
 
 	_window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _width, _height, SDL_WINDOW_OPENGL);
 	_glContext = SDL_GL_CreateContext(_window);
