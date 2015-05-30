@@ -36,11 +36,11 @@ Window::Window(const char* title, int width, int height)
 		exit(1);
 	}
 #endif
-
-	glClearColor(0,0,1,1);
-	SwapBuffers();
 	//glClear(GL_COLOR_BUFFER_BIT);
-	SDL_Delay(2000);
+	//glClearColor(0,0,1,1);
+	//SwapBuffers();
+	//glClear(GL_COLOR_BUFFER_BIT);
+	//SDL_Delay(2000);
 }
 
 Window::~Window()

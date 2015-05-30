@@ -2,7 +2,6 @@
 
 #include "RenderingEngine.h"
 #include "Script.h"
-#include "Entity.h"
 
 #ifdef __APPLE__
 	#include <OpenGL/gl3.h>
@@ -33,7 +32,7 @@ void CoreEngine::CreateWindow(const char* title, int width, int height) {
 
 void CoreEngine::Start() {
 	Script config("scripts/config.lua");
-	Script main("scripts/main.lua");
+	//Script main("scripts/main.lua");
 	int width = (int)config.GetNumber("width");
 	int height = (int)config.GetNumber("height");
 	const char* title = config.GetString("title");
@@ -43,8 +42,12 @@ void CoreEngine::Start() {
 	Run();
 }
 
-Entity* CoreEngine::GetNullEntity() {
+void CoreEngine::Stop() {
+	//do cleanup
+}
 
+Entity* CoreEngine::GetNullEntity() {
+	
 }
 
 void CoreEngine::Run() {
@@ -91,4 +94,5 @@ void CoreEngine::Run() {
 
 		window->SwapBuffers();
 	}
+	Stop();
 }

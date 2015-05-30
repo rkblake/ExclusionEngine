@@ -10,6 +10,7 @@
 #else
 	#include <GL/glew.h>
 #endif
+#include <btBulletDynamicsCommon.h>
 
 static unsigned int uuid_counter = 0;
 
@@ -24,9 +25,10 @@ public:
 	void Draw();
 	//inline InitUid() {uid = uid_counter++;}
 private:
-	float x, y, z;
+	//float x, y, z;
+	btRigidBody* body;
 	GLuint ModelMatrixID;
-	
+
 
 	Script script;
 	//unsigned int uuid;
