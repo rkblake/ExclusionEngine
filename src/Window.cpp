@@ -26,7 +26,7 @@ Window::Window(const char* title, int width, int height)
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,16);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 
-	printf("%s\n", glGetString(GL_VERSION));
+	//printf("%s\n", glGetString(GL_VERSION));
 
 #ifndef __APPLE__
 	glewExperimental = true;
@@ -35,12 +35,17 @@ Window::Window(const char* title, int width, int height)
 		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
 		exit(1);
 	}
+	else		
+		printf("%s\n", glGetString(GL_VERSION));
+#else	
+	printf("%s\n", glGetString(GL_VERSION));
 #endif
+
 	//glClear(GL_COLOR_BUFFER_BIT);
 	//glClearColor(0,0,1,1);
 	//SwapBuffers();
 	//glClear(GL_COLOR_BUFFER_BIT);
-	//SDL_Delay(2000);
+	SDL_Delay(2000);
 }
 
 Window::~Window()

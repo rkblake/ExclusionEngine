@@ -1,6 +1,7 @@
 #include "CoreEngine.h"
 
 #include "RenderingEngine.h"
+#include "PhysicsEngine.h"
 #include "Script.h"
 
 #ifdef __APPLE__
@@ -30,15 +31,22 @@ void CoreEngine::CreateWindow(const char* title, int width, int height) {
 	window = RenderingEngine::GetInstance().CreateWindow(title, width, height);
 }
 
+void CoreEngine::RegisterEntity(Entity* entity) {
+	RenderingEngine::GetInstance().RegisterEntity(entity);
+	PhysicsEngine::GetInstance().RegisterEntity(entity);
+}
+
 void CoreEngine::Start() {
+	printf("starting engine\n");
 	Script config("scripts/config.lua");
 	//Script main("scripts/main.lua");
 	int width = (int)config.GetNumber("width");
 	int height = (int)config.GetNumber("height");
 	const char* title = config.GetString("title");
 	CreateWindow(title, width, height);
-	//Entity test("scripts/test_entity.lua");
-
+	RenderingEngine::GetInstance().Init();
+	Entity test("test_entity");
+	RegisterEntity(&test);
 	Run();
 }
 
@@ -47,13 +55,14 @@ void CoreEngine::Stop() {
 }
 
 Entity* CoreEngine::GetNullEntity() {
-	
+
 }
 
 void CoreEngine::Run() {
 	bool isRunning = true;
 	SDL_Event e;
-
+	
+	printf("entering game loop\n");
 	while(isRunning) {
 		/*double currentTime = SDL_GetTicks();
 		nbFrames++;
@@ -65,7 +74,8 @@ void CoreEngine::Run() {
 		}*/
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+		PhysicsEngine::GetInstance().StepSimulation();
+		RenderingEngine::GetInstance().RenderScene();
 
 		//update, render, and handle input here
 		while(SDL_PollEvent(&e)) {

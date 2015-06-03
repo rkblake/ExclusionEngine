@@ -12,6 +12,7 @@
 class Texture
 {
 public:
+	Texture() {}
 	Texture(const std::string& filename);
 
 	void Bind(unsigned int unit);

@@ -1,5 +1,37 @@
 #include "RenderingEngine.h"
 
+RenderingEngine::RenderingEngine() {
+	mouseSpeed = 0.005f;
+	fov = 45.0f;
+	camera_style = FREE_LOOK;
+	
+/*	GLuint shader = LoadShaders("res/vertex.shader", "res/fragment.shader");
+	glUseProgram(shader);
+	glm::vec3 lightPos(0, 5, 0);
+	GLuint projectionID = glGetUniformLocation(shader, "P");
+	GLuint viewID = glGetUniformLocation(shader, "V");
+	GLuint lightPosID = glGetUniformLocation(shader, "LightPosition_worldspace");
+	GLuint MvpID = glGetUniformLocation(shader, "MVP");
+	GLuint TextureID = glGetUniformLocation(shader, "texture_sampler");
+
+	glUniform3f(lightPosID, lightPos.x, lightPos.y, lightPos.z);
+*/
+}
+
+void RenderingEngine::Init() {
+	
+	GLuint shader = LoadShaders("res/vertex.shader", "res/fragment.shader");
+	glUseProgram(shader);
+	glm::vec3 lightPos(0, 5, 0);
+	GLuint projectionID = glGetUniformLocation(shader, "P");
+	GLuint viewID = glGetUniformLocation(shader, "V");
+	GLuint lightPosID = glGetUniformLocation(shader, "LightPosition_worldspace");
+	GLuint MvpID = glGetUniformLocation(shader, "MVP");
+	GLuint TextureID = glGetUniformLocation(shader, "texture_sampler");
+
+	glUniform3f(lightPosID, lightPos.x, lightPos.y, lightPos.z);
+}
+
 void RenderingEngine::ComputeMatrices() {
     int x_pos, y_pos;
     SDL_GetMouseState(&x_pos, &y_pos);
@@ -52,6 +84,17 @@ Window* RenderingEngine::CreateWindow(const char* title, int width, int height) 
     return &window;
 }
 
+void RenderingEngine::RegisterEntity(Entity* entity) {
+	entities.push_back(entity);
+}
+
 void RenderingEngine::Swap() {
     window.SwapBuffers();
+}
+
+void RenderingEngine::RenderScene() {
+
+	for(std::vector<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i) {
+		(*i)->Draw();
+	}
 }

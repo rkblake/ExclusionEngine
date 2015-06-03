@@ -3,7 +3,13 @@
 
 #include "Window.h"
 #include "Entity.h"
+#include "Shaders.h"
 
+#ifdef __APPLE__
+	#include <OpenGL/gl3.h>
+#else
+	#include <GL/glew.h>
+#endif
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
@@ -29,6 +35,8 @@ public:
 	void SetFirstPerson() {camera_style = FIRST_PERSON;}
 	void SetThirdPerson() {camera_style = THIRD_PERSON;}
 	Window* CreateWindow(const char* title, int width, int height);
+	void Init();
+	void RegisterEntity(Entity* entity);
 	void Swap();
 	void RenderScene();
 private:
@@ -44,11 +52,7 @@ private:
 	bool isFocus;
 	std::vector<Entity*> entities;
 
-	RenderingEngine() {
-		mouseSpeed = 0.005f;
-		fov = 45.0f;
-		camera_style = FIRST_PERSON;
-	}
+	RenderingEngine();
 	~RenderingEngine() {}
 };
 

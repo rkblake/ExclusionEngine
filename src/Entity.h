@@ -3,6 +3,7 @@
 
 #include "Script.h"
 #include "Mesh.h"
+#include "Texture.h"
 #include "Shaders.h"
 
 #ifdef __APPLE__
@@ -11,21 +12,22 @@
 	#include <GL/glew.h>
 #endif
 #include <btBulletDynamicsCommon.h>
+#include <string>
 
-static unsigned int uuid_counter = 0;
+//static unsigned int uuid_counter = 0;
 
 class Entity
 {
 public:
 	Entity() {}
 	//Entity(Script script);
-	Entity(const char* path_to_script);
-	~Entity();
-
+	Entity(const char* name);
+	~Entity() {}
+	btRigidBody* GetRigidBody() {return body;}
 	void Draw();
 	//inline InitUid() {uid = uid_counter++;}
 private:
-	//float x, y, z;
+	float x, y, z;
 	btRigidBody* body;
 	GLuint ModelMatrixID;
 
@@ -35,6 +37,7 @@ private:
 
 
 	Mesh mesh;
+	Texture texture;
 	GLuint shader;
 };
 

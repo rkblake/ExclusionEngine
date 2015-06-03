@@ -31,6 +31,7 @@ public:
 	void Run();
 	void Stop();
 	Entity* GetNullEntity();
+	void RegisterEntity(Entity* entity);
 private:
 	void CreateWindow(const char* name, int width, int height);
 	CoreEngine();

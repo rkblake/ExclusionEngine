@@ -6,6 +6,7 @@
 #include <btBulletDynamicsCommon.h>
 #include <bullet/BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h>
 #include <map>
+#include <vector>
 
 class ExclusionMotionState : public btMotionState {
 public:
@@ -30,8 +31,8 @@ public:
 		static PhysicsEngine sPhysicsEngine;
 		return sPhysicsEngine;
 	}
-	void Register(Entity* e, unsigned int uid);
-	void Unregister(Entity* e, unsigned int uid);
+	void RegisterEntity(Entity* e);
+	void Unregister(Entity* e);
 	void StepSimulation();
 	void Dispose();
 
@@ -39,7 +40,8 @@ private:
 	PhysicsEngine();
 	~PhysicsEngine();
 
-	std::map<unsigned int, PhysicsObjectWrapper> PhysicsObjects;
+	//std::map<unsigned int, PhysicsObjectWrapper> PhysicsObjects;
+	std::vector<Entity*> entities;
 
 	btBroadphaseInterface* broadphase;
 	btDefaultCollisionConfiguration* collisionConfiguration;
