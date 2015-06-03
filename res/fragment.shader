@@ -11,7 +11,7 @@ in vec3 LightDirection_cameraspace;
 out vec3 color;
 
 // Values that stay constant for the whole mesh.
-uniform sampler2D texture_sampler
+uniform sampler2D texture_sampler;
 uniform mat4 MV;
 uniform vec3 LightPosition_worldspace;
 

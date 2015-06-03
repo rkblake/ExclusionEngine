@@ -40,7 +40,7 @@ public:
 	void Swap();
 	void RenderScene();
 private:
-	Window window;
+	Window* window;
 	int _width, _height;
 	glm::mat4 view_matrix;
 	glm::mat4 projection_matrix;

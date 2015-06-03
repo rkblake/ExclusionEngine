@@ -37,7 +37,7 @@ void RenderingEngine::ComputeMatrices() {
     SDL_GetMouseState(&x_pos, &y_pos);
 
     if(isFocus) {
-        SDL_WarpMouseInWindow(window.GetWindow(), _width/2, _height/2);
+        SDL_WarpMouseInWindow(window->GetWindow(), _width/2, _height/2);
         horizontalAngle += mouseSpeed * (_width/2 - x_pos);
         verticalAngle += mouseSpeed * (_height/2 - y_pos);
     }
@@ -80,8 +80,8 @@ Window* RenderingEngine::CreateWindow(const char* title, int width, int height) 
     //probably better to grab values from config script here than from inside main
     _width = width;
     _height = height;
-    window = Window(title, width, height);
-    return &window;
+    window = new Window(title, width, height);
+    return window;
 }
 
 void RenderingEngine::RegisterEntity(Entity* entity) {
@@ -89,7 +89,7 @@ void RenderingEngine::RegisterEntity(Entity* entity) {
 }
 
 void RenderingEngine::Swap() {
-    window.SwapBuffers();
+    window->SwapBuffers();
 }
 
 void RenderingEngine::RenderScene() {
