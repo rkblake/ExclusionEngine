@@ -4,6 +4,7 @@ RenderingEngine::RenderingEngine() {
 	mouseSpeed = 0.005f;
 	fov = 45.0f;
 	camera_style = FREE_LOOK;
+	isFocus = true;
 	
 /*	GLuint shader = LoadShaders("res/vertex.shader", "res/fragment.shader");
 	glUseProgram(shader);
