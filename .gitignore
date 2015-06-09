@@ -2,7 +2,7 @@
 *.slo
 *.lo
 *.o
-*.obj
+#*.obj #this is the extension for wavefront object files
 
 # Precompiled Headers
 *.gch
