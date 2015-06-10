@@ -29,7 +29,7 @@ public:
 private:
 	float x, y, z;
 	btRigidBody* body;
-	GLuint ModelMatrixID;
+	GLuint ModelMatrixID, TextureID;
 
 
 	Script script;
@@ -38,7 +38,7 @@ private:
 
 	Mesh mesh;
 	Texture texture;
-	GLuint shader;
+	//GLuint shader;
 };
 
 #endif

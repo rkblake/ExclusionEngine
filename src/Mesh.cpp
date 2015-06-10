@@ -53,10 +53,10 @@ void Mesh::Draw() {
     // glUniformMatrix4fv(ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]);
 
     // Bind our texture in Texture Unit 0
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, textureID);
+    //glActiveTexture(GL_TEXTURE0);
+    //glBindTexture(GL_TEXTURE_2D, textureID);
     // Set our "myTextureSampler" sampler to user Texture Unit 0
-    glUniform1i(textureID, 0);
+    //glUniform1i(textureID, 0);
 
     // 1rst attribute buffer : vertices
     glEnableVertexAttribArray(0);

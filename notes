@@ -1,0 +1,5 @@
+TODO: make texture rendering work
+
+glActiveTexture(GL_TEXTURE0);
+glBindTexture(GL_TEXTURE_2D, TextureID);
+glUniform1i(TextureID, 0);

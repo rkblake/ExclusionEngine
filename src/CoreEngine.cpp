@@ -37,7 +37,6 @@ void CoreEngine::RegisterEntity(Entity* entity) {
 }
 
 void CoreEngine::Start() {
-	printf("starting engine\n");
 	Script config("scripts/config.lua");
 	//Script main("scripts/main.lua");
 	int width = (int)config.GetNumber("width");
@@ -45,8 +44,8 @@ void CoreEngine::Start() {
 	const char* title = config.GetString("title");
 	CreateWindow(title, width, height);
 	RenderingEngine::GetInstance().Init();
-	Entity test("test_entity");
-	RegisterEntity(&test);
+	Entity* test = new Entity("test_entity");
+	RegisterEntity(test);
 	Run();
 }
 
@@ -61,8 +60,8 @@ Entity* CoreEngine::GetNullEntity() {
 void CoreEngine::Run() {
 	bool isRunning = true;
 	SDL_Event e;
+	const Uint8* keys;
 	
-	printf("entering game loop\n");
 	while(isRunning) {
 		/*double currentTime = SDL_GetTicks();
 		nbFrames++;
@@ -77,7 +76,6 @@ void CoreEngine::Run() {
 		PhysicsEngine::GetInstance().StepSimulation();
 		RenderingEngine::GetInstance().RenderScene();
 
-		//update, render, and handle input here
 		while(SDL_PollEvent(&e)) {
 			switch(e.type) {
 				case SDL_QUIT:
@@ -88,7 +86,9 @@ void CoreEngine::Run() {
 					//SDL_WarpMouse()
 					break;
 				case SDL_MOUSEBUTTONDOWN:
-					//mouse button down
+					keys = SDL_GetKeyboardState(NULL);
+					if(keys[SDLK_ESCAPE])
+						isRunning = false;
 					break;
 				case SDL_MOUSEBUTTONUP:
 					//mouse button up

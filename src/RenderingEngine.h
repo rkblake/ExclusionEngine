@@ -39,11 +39,12 @@ public:
 	void RegisterEntity(Entity* entity);
 	void Swap();
 	void RenderScene();
+	void SetFocus(bool focus) {isFocus = focus;}
 private:
 	Window* window;
 	int _width, _height;
-	glm::mat4 view_matrix;
-	glm::mat4 projection_matrix;
+	glm::mat4 view_matrix, projection_matrix, model_matrix, mvp_matrix;
+	GLuint viewID, projectionID, lightPosID, MvpID, TextureID, ModelID;
 	float fov, horizontalAngle, verticalAngle;
 	float mouseSpeed;
 	glm::vec3 position, direction, right, up, front;

@@ -23,12 +23,13 @@ void RenderingEngine::Init() {
 	
 	GLuint shader = LoadShaders("res/vertex.shader", "res/fragment.shader");
 	glUseProgram(shader);
-	glm::vec3 lightPos(0, 5, 0);
-	GLuint projectionID = glGetUniformLocation(shader, "P");
-	GLuint viewID = glGetUniformLocation(shader, "V");
-	GLuint lightPosID = glGetUniformLocation(shader, "LightPosition_worldspace");
-	GLuint MvpID = glGetUniformLocation(shader, "MVP");
-	GLuint TextureID = glGetUniformLocation(shader, "texture_sampler");
+	glm::vec3 lightPos(5, 5, 0);
+	//projectionID = glGetUniformLocation(shader, "P");
+	viewID = glGetUniformLocation(shader, "V");
+	lightPosID = glGetUniformLocation(shader, "LightPosition_worldspace");
+	MvpID = glGetUniformLocation(shader, "MVP");
+	TextureID = glGetUniformLocation(shader, "texture_sampler");
+	ModelID = glGetUniformLocation(shader, "M");
 
 	glUniform3f(lightPosID, lightPos.x, lightPos.y, lightPos.z);
 }
@@ -44,6 +45,8 @@ void RenderingEngine::ComputeMatrices() {
     }
 
     if(camera_style == FREE_LOOK) {
+		position = glm::vec3(0, 0, -25);
+
         direction = glm::vec3(
     		cos(verticalAngle) * sin(horizontalAngle),
     		sin(verticalAngle),
@@ -94,8 +97,14 @@ void RenderingEngine::Swap() {
 }
 
 void RenderingEngine::RenderScene() {
+	ComputeMatrices();
+	glUniformMatrix4fv(viewID, 1, GL_FALSE, &view_matrix[0][0]);
+	//glUniformMatrix4fv(projectionID, 1, GL_FALSE, &projection_matrix[0][0]);
 
 	for(std::vector<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i) {
+		model_matrix = glm::mat4(1.0);
+		mvp_matrix = projection_matrix * view_matrix * model_matrix;
+		glUniformMatrix4fv(MvpID, 1, GL_FALSE, &mvp_matrix[0][0]);
 		(*i)->Draw();
 	}
 }

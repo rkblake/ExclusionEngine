@@ -39,6 +39,5 @@ void Entity::Draw() {
     //glUseProgram(shader);
 
 
-
     mesh.Draw();
 }
