@@ -46,6 +46,7 @@ void CoreEngine::Start() {
 	RenderingEngine::GetInstance().Init();
 	Entity* test = new Entity("test_entity");
 	RegisterEntity(test);
+	RenderingEngine::GetInstance().AttachEntity(test);
 	Run();
 }
 

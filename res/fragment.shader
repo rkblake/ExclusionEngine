@@ -50,7 +50,7 @@ void main(){
 	//  - Looking into the reflection -> 1
 	//  - Looking elsewhere -> < 1
 	float cosAlpha = clamp( dot( E,R ), 0,1 );
-
+	/*
 	color =
 		// Ambient : simulates indirect lighting
 		MaterialAmbientColor +
@@ -58,5 +58,6 @@ void main(){
 		MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance*distance) +
 		// Specular : reflective highlight, like a mirror
 		MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,5) / (distance*distance);
-
+	*/
+	color = vec3(1.0, 1.0, 1.0);
 }

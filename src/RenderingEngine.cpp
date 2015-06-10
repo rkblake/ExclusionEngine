@@ -1,5 +1,7 @@
 #include "RenderingEngine.h"
 
+#include <btBulletDynamicsCommon.h>
+
 RenderingEngine::RenderingEngine() {
 	mouseSpeed = 0.005f;
 	fov = 45.0f;
@@ -32,6 +34,7 @@ void RenderingEngine::Init() {
 	ModelID = glGetUniformLocation(shader, "M");
 
 	glUniform3f(lightPosID, lightPos.x, lightPos.y, lightPos.z);
+	glUniform1i(TextureID, 0);
 }
 
 void RenderingEngine::ComputeMatrices() {
@@ -45,7 +48,7 @@ void RenderingEngine::ComputeMatrices() {
     }
 
     if(camera_style == FREE_LOOK) {
-		position = glm::vec3(0, 0, -25);
+		//position = glm::vec3(0, 0, -25);
 
         direction = glm::vec3(
     		cos(verticalAngle) * sin(horizontalAngle),
@@ -67,6 +70,11 @@ void RenderingEngine::ComputeMatrices() {
         up = glm::vec3(0,1,0);
 
         projection_matrix = glm::perspective(fov, 4.0f / 3.0f, 0.1f, 100.0f);
+		btTransform entity_pos;
+		attached_entity->GetRigidBody()->getMotionState()->getWorldTransform(entity_pos);
+		btVector3 entity_vec = entity_pos.getOrigin();
+		position = glm::vec3(entity_vec.x(), entity_vec.y(), entity_vec.z());
+		//view_matrix = glm::lookAt(position, position, up);
     	view_matrix = glm::lookAt(position, position+direction, up);
     }
     else if(camera_style == FIRST_PERSON) {

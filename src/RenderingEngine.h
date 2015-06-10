@@ -40,6 +40,7 @@ public:
 	void Swap();
 	void RenderScene();
 	void SetFocus(bool focus) {isFocus = focus;}
+	void AttachEntity(Entity* entity) {attached_entity = entity;}
 private:
 	Window* window;
 	int _width, _height;
