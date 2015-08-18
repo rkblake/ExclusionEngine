@@ -23,7 +23,7 @@ void main(){
 	float LightPower = 50.0f;
 
 	// Material properties
-	vec3 MaterialDiffuseColor = texture2D( texture_sampler, UV ).rgb;
+	vec3 MaterialDiffuseColor = texture( texture_sampler, UV ).rgb;
 	vec3 MaterialAmbientColor = vec3(0.1,0.1,0.1) * MaterialDiffuseColor;
 	vec3 MaterialSpecularColor = vec3(0.3,0.3,0.3);
 
@@ -50,7 +50,7 @@ void main(){
 	//  - Looking into the reflection -> 1
 	//  - Looking elsewhere -> < 1
 	float cosAlpha = clamp( dot( E,R ), 0,1 );
-/*	
+/*
 	color =
 		// Ambient : simulates indirect lighting
 		MaterialAmbientColor +
