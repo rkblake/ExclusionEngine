@@ -6,6 +6,7 @@ double Script::GetNumber(const char* var_name) {
 		printf("%s is not a number\n", var_name);
 	double value = lua_tonumber(L, -1);
 	lua_remove(L, -1);
+	//lua_pop(L, 1);
 	return value;
 }
 

@@ -8,7 +8,7 @@ PhysicsEngine::PhysicsEngine() {
     //register of algorithms here
     solver = new btSequentialImpulseConstraintSolver;
     dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-    dynamicsWorld->setGravity(btVector3(0, -9.8, 0));
+    dynamicsWorld->setGravity(btVector3(0, -0.5, 0));
 
 	btCollisionShape* ground = new btStaticPlaneShape(btVector3(0, 1, 0), 1);
 	btDefaultMotionState* groundState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));

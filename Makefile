@@ -2,7 +2,7 @@ INCLUDE=/usr/include/
 BULLET_INC=/usr/include/bullet
 LIB_DIR=/usr/lib/
 CC=g++
-CPPFLAGS+=-g -I$(INCLUDE) -I$(LIB_DIR) -I$(BULLET_INC)
+CPPFLAGS+=-g -std=c++11 -I$(INCLUDE) -I$(LIB_DIR) -I$(BULLET_INC)
 #CPPFLAGS+=-g -O2 -I$(DIR) -I$(LUA_INC) -L$(LUA_LIB)
 TARGET = ExclusionEngine
 

@@ -12,7 +12,6 @@
 #include <SDL2/SDL.h>
 #include <map>
 
-
 CoreEngine::CoreEngine()
 	//renderer(RenderingEngine::GetInstance()),
 	//physics(PhysicsEngine::GetInstance()),
@@ -62,16 +61,14 @@ void CoreEngine::Run() {
 	bool isRunning = true;
 	SDL_Event e;
 	const Uint8* keys;
+	keys = SDL_GetKeyboardState(NULL);
+	double lastTime = SDL_GetTicks();
+	double deltaTime, currentTime;
 	
 	while(isRunning) {
-		/*double currentTime = SDL_GetTicks();
-		nbFrames++;
-		if ( currentTime - lastTime >= 1.0 ){ // If last prinf() was more than 1sec ago
-			// printf and reset
-			printf("%f ms/frame\n", double(nbFrames));
-			nbFrames = 0;
-			lastTime += 1.0;
-		}*/
+		currentTime = SDL_GetTicks();
+		deltaTime = currentTime - lastTime;
+		lastTime = currentTime;
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		PhysicsEngine::GetInstance().StepSimulation();
@@ -82,28 +79,16 @@ void CoreEngine::Run() {
 				case SDL_QUIT:
 					isRunning = false;
 					break;
-				case SDL_MOUSEMOTION:
-					//mouse motion
-					//SDL_WarpMouse()
-					break;
-				case SDL_MOUSEBUTTONDOWN:
-					keys = SDL_GetKeyboardState(NULL);
-					if(keys[SDLK_ESCAPE])
-						isRunning = false;
-					break;
-				case SDL_MOUSEBUTTONUP:
-					//mouse button up
-					break;
-				case SDL_KEYDOWN:
-					//key down
-					break;
-				case SDL_KEYUP:
-					//key up
-					break;
 			}
 		}
 
+		if(keys[SDL_SCANCODE_ESCAPE])
+			isRunning = false;
+
 		window->SwapBuffers();
+
+		if(FPS - deltaTime > 0)
+			SDL_Delay(FPS - deltaTime);
 	}
 	Stop();
 }
