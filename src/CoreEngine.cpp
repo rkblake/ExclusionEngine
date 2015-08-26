@@ -73,6 +73,7 @@ void CoreEngine::Run() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		PhysicsEngine::GetInstance().StepSimulation();
 		RenderingEngine::GetInstance().RenderScene();
+		window->SwapBuffers();
 
 		while(SDL_PollEvent(&e)) {
 			switch(e.type) {
@@ -85,10 +86,8 @@ void CoreEngine::Run() {
 		if(keys[SDL_SCANCODE_ESCAPE])
 			isRunning = false;
 
-		window->SwapBuffers();
-
-		if(FPS - deltaTime > 0)
-			SDL_Delay(FPS - deltaTime);
+		//if(FPS - deltaTime > 0)
+		//	SDL_Delay(FPS - deltaTime);
 	}
 	Stop();
 }

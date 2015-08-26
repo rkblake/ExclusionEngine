@@ -49,14 +49,15 @@ void RenderingEngine::ComputeMatrices() {
 
     if(camera_style == FREE_LOOK) {
 		position = glm::vec3(0, 10, -50);
-/*	
+	
         direction = glm::vec3(
     		cos(verticalAngle) * sin(horizontalAngle),
     		sin(verticalAngle),
     		cos(verticalAngle) * cos(horizontalAngle)
     	);
-*/
-		direction = glm::vec3(0, 0, 1);
+		printf("X:%f Y:%f Z:%f\n", direction.x, direction.y, direction.z);
+
+		//direction = glm::vec3(0, 0, 1);
         right = glm::vec3(
     		sin(horizontalAngle - 3.14f/2.0f),
     		0,
