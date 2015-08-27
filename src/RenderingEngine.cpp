@@ -3,7 +3,7 @@
 #include <btBulletDynamicsCommon.h>
 
 RenderingEngine::RenderingEngine() {
-	mouseSpeed = 0.005f;
+	mouseSpeed = 0.0005f;
 	fov = 45.0f;
 	camera_style = FREE_LOOK;
 	isFocus = true;
@@ -55,7 +55,7 @@ void RenderingEngine::ComputeMatrices() {
     		sin(verticalAngle),
     		cos(verticalAngle) * cos(horizontalAngle)
     	);
-		printf("X:%f Y:%f Z:%f\n", direction.x, direction.y, direction.z);
+		printf("<%.2f, %.2f, %.2f>\n", direction.x, direction.y, direction.z);
 
 		//direction = glm::vec3(0, 0, 1);
         right = glm::vec3(
