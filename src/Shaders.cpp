@@ -66,6 +66,11 @@ GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path
 	GLuint ProgramID = glCreateProgram();
 	glAttachShader(ProgramID, VertexShaderID);
 	glAttachShader(ProgramID, FragmentShaderID);
+
+	glBindAttribLocation(ProgramID, 0, "vertexPosition_modelspace");
+	glBindAttribLocation(ProgramID, 1, "vertexUV");
+	glBindAttribLocation(ProgramID, 2, "vertexNormal_modelspace");
+
 	glLinkProgram(ProgramID);
 
 	// Check the program

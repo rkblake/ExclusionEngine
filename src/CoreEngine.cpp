@@ -43,7 +43,7 @@ void CoreEngine::Start() {
 	const char* title = config.GetString("title");
 	CreateWindow(title, width, height);
 	RenderingEngine::GetInstance().Init();
-	Entity* test = new Entity("test_entity");
+	Entity* test = new Entity("plane");
 	RegisterEntity(test);
 	RenderingEngine::GetInstance().AttachEntity(test);
 	Run();

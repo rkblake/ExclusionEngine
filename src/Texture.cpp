@@ -7,7 +7,7 @@
 Texture::Texture(const std::string& filename)
 {
 	int width, height, numComponents;
-	unsigned char* imageData = stbi_load(filename.c_str(), &width, &height, &numComponents, 4);
+	unsigned char* imageData = stbi_load("res/plane.png", &width, &height, &numComponents, 4);
 
 	if(imageData == NULL)
 		printf("Texture loading failed: %s", filename.c_str());

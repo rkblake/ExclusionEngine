@@ -9,6 +9,7 @@ in vec3 LightDirection_cameraspace;
 
 // Ouput data
 out vec3 color;
+//layout(location = 0) out color;
 
 // Values that stay constant for the whole mesh.
 uniform sampler2D texture_sampler;
@@ -24,6 +25,7 @@ void main(){
 
 	// Material properties
 	vec3 MaterialDiffuseColor = texture( texture_sampler, UV ).rgb;
+	//vec3 MaterialDiffuseColor = vec3(1.0, 1.0, 1.0);
 	vec3 MaterialAmbientColor = vec3(0.1,0.1,0.1) * MaterialDiffuseColor;
 	vec3 MaterialSpecularColor = vec3(0.3,0.3,0.3);
 
@@ -60,4 +62,5 @@ void main(){
 		MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,5) / (distance*distance);
 */
 	color = vec3(1.0, 1.0, 1.0);
+	//color = MaterialDiffuseColor;
 }

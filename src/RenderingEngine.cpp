@@ -25,7 +25,7 @@ void RenderingEngine::Init() {
 	
 	GLuint shader = LoadShaders("res/vertex.shader", "res/fragment.shader");
 	glUseProgram(shader);
-	glm::vec3 lightPos(0, 15, -25);
+	glm::vec3 lightPos(5, 15, 0);
 	//projectionID = glGetUniformLocation(shader, "P");
 	viewID = glGetUniformLocation(shader, "V");
 	lightPosID = glGetUniformLocation(shader, "LightPosition_worldspace");
@@ -115,7 +115,9 @@ void RenderingEngine::RenderScene() {
 		btTransform entity_pos;
 		attached_entity->GetRigidBody()->getMotionState()->getWorldTransform(entity_pos);
 		btVector3 entity_vec = entity_pos.getOrigin();
-		model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(entity_vec.x(), entity_vec.y(), entity_vec.z()));
+		//model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(entity_vec.x(), entity_vec.y(), entity_vec.z()));
+		model_matrix = glm::mat4(1.0);
+		view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, 0, -5.0));
 		mvp_matrix = projection_matrix * view_matrix * model_matrix;
 		glUniformMatrix4fv(MvpID, 1, GL_FALSE, &mvp_matrix[0][0]);
 		(*i)->Draw();

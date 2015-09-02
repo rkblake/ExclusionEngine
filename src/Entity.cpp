@@ -38,6 +38,6 @@ Entity::Entity(const char* name) {
 void Entity::Draw() {
     //glUseProgram(shader);
 
-
+	texture.Bind(0);
     mesh.Draw();
 }
