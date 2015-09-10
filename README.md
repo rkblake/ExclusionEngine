@@ -4,7 +4,8 @@ the bestest game engine that will never be done
 
 Required pacakages
 Bullet 
-lua 
+lua
+assimp
 
 design goals:
 
