@@ -7,7 +7,7 @@ RenderingEngine::RenderingEngine() {
 	fov = 45.0f;
 	camera_style = FREE_LOOK;
 	isFocus = true;
-	
+
 /*	GLuint shader = LoadShaders("res/vertex.shader", "res/fragment.shader");
 	glUseProgram(shader);
 	glm::vec3 lightPos(0, 5, 0);
@@ -22,18 +22,18 @@ RenderingEngine::RenderingEngine() {
 }
 
 void RenderingEngine::Init() {
-	
+
 	GLuint shader = LoadShaders("res/vertex.shader", "res/fragment.shader");
 	glUseProgram(shader);
 	glm::vec3 lightPos(5, 15, 0);
 	//projectionID = glGetUniformLocation(shader, "P");
-	viewID = glGetUniformLocation(shader, "V");
-	lightPosID = glGetUniformLocation(shader, "LightPosition_worldspace");
+	//viewID = glGetUniformLocation(shader, "V");
+	//lightPosID = glGetUniformLocation(shader, "LightPosition_worldspace");
 	MvpID = glGetUniformLocation(shader, "MVP");
 	TextureID = glGetUniformLocation(shader, "texture_sampler");
-	ModelID = glGetUniformLocation(shader, "M");
+	//ModelID = glGetUniformLocation(shader, "M");
 
-	glUniform3f(lightPosID, lightPos.x, lightPos.y, lightPos.z);
+	//glUniform3f(lightPosID, lightPos.x, lightPos.y, lightPos.z);
 	glUniform1i(TextureID, 0);
 }
 
@@ -49,7 +49,7 @@ void RenderingEngine::ComputeMatrices() {
 
     if(camera_style == FREE_LOOK) {
 		position = glm::vec3(0, 10, -50);
-	
+
         direction = glm::vec3(
     		cos(verticalAngle) * sin(horizontalAngle),
     		sin(verticalAngle),
@@ -108,16 +108,16 @@ void RenderingEngine::Swap() {
 
 void RenderingEngine::RenderScene() {
 	ComputeMatrices();
-	glUniformMatrix4fv(viewID, 1, GL_FALSE, &view_matrix[0][0]);
+	//glUniformMatrix4fv(viewID, 1, GL_FALSE, &view_matrix[0][0]);
 	//glUniformMatrix4fv(projectionID, 1, GL_FALSE, &projection_matrix[0][0]);
 
 	for(std::vector<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i) {
 		btTransform entity_pos;
 		attached_entity->GetRigidBody()->getMotionState()->getWorldTransform(entity_pos);
 		btVector3 entity_vec = entity_pos.getOrigin();
-		//model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(entity_vec.x(), entity_vec.y(), entity_vec.z()));
-		model_matrix = glm::mat4(1.0);
-		view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, 0, -5.0));
+		model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(entity_vec.x(), entity_vec.y(), entity_vec.z()));
+		//model_matrix = glm::mat4(1.0);
+		view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, -15, -50.0));
 		mvp_matrix = projection_matrix * view_matrix * model_matrix;
 		glUniformMatrix4fv(MvpID, 1, GL_FALSE, &mvp_matrix[0][0]);
 		(*i)->Draw();

@@ -11,6 +11,7 @@
 
 #include "objloader.h"
 #include "vboindexer.h"
+#include "AssimpLoader.h"
 
 class Mesh {
 public:

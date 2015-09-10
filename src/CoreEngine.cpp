@@ -43,7 +43,7 @@ void CoreEngine::Start() {
 	const char* title = config.GetString("title");
 	CreateWindow(title, width, height);
 	RenderingEngine::GetInstance().Init();
-	Entity* test = new Entity("plane");
+	Entity* test = new Entity("test_entity");
 	RegisterEntity(test);
 	RenderingEngine::GetInstance().AttachEntity(test);
 	Run();
@@ -64,7 +64,7 @@ void CoreEngine::Run() {
 	keys = SDL_GetKeyboardState(NULL);
 	double lastTime = SDL_GetTicks();
 	double deltaTime, currentTime;
-	
+
 	while(isRunning) {
 		currentTime = SDL_GetTicks();
 		deltaTime = currentTime - lastTime;
@@ -86,8 +86,8 @@ void CoreEngine::Run() {
 		if(keys[SDL_SCANCODE_ESCAPE])
 			isRunning = false;
 
-		//if(FPS - deltaTime > 0)
-		//	SDL_Delay(FPS - deltaTime);
+		if(FPS - deltaTime > 0)
+			SDL_Delay(FPS - deltaTime);
 	}
 	Stop();
 }

@@ -7,7 +7,7 @@
 Texture::Texture(const std::string& filename)
 {
 	int width, height, numComponents;
-	unsigned char* imageData = stbi_load("res/plane.png", &width, &height, &numComponents, 4);
+	unsigned char* imageData = stbi_load("./res/test_entity.jpg", &width, &height, &numComponents, 4);
 
 	if(imageData == NULL)
 		printf("Texture loading failed: %s", filename.c_str());
@@ -24,6 +24,9 @@ Texture::Texture(const std::string& filename)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 
 	stbi_image_free(imageData);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, mTexture);
 }
 
 Texture::~Texture()

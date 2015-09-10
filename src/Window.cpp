@@ -26,6 +26,11 @@ Window::Window(const char* title, int width, int height)
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,16);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+	//glEnable(GL_CULL_FACE);
+
 	//printf("%s\n", glGetString(GL_VERSION));
 
 #ifndef __APPLE__
@@ -35,17 +40,13 @@ Window::Window(const char* title, int width, int height)
 		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
 		exit(1);
 	}
-	else		
+	else
 		printf("%s\n", glGetString(GL_VERSION));
-#else	
+#else
 	printf("%s\n", glGetString(GL_VERSION));
 #endif
 
-	//glClear(GL_COLOR_BUFFER_BIT);
-	//glClearColor(0,0,1,1);
-	//SwapBuffers();
-	//glClear(GL_COLOR_BUFFER_BIT);
-	SDL_Delay(2000);
+	//SDL_WarpMouse(_width/2, _height/2);
 }
 
 Window::~Window()
