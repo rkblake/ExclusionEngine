@@ -47,6 +47,8 @@ Mesh::Mesh(const char* path) {
 	glGenBuffers(1, &normal_buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, normal_buffer);
 	glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0 );
 
 	glGenBuffers(1, &element_buffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);

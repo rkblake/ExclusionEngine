@@ -7,10 +7,10 @@
 Texture::Texture(const std::string& filename)
 {
 	int width, height, numComponents;
-	unsigned char* imageData = stbi_load("./res/test_entity.jpg", &width, &height, &numComponents, 4);
+	unsigned char* imageData = stbi_load("./res/test_entity.jpg", &width, &height, &numComponents, STBI_rgb_alpha);
 
-	if(imageData == NULL)
-		printf("Texture loading failed: %s", filename.c_str());
+	if(imageData == nullptr)
+		printf("Texture loading failed: %s\n", filename.c_str());
 
 	glGenTextures(1, &mTexture);
 	glBindTexture(GL_TEXTURE_2D, mTexture);
@@ -31,7 +31,7 @@ Texture::Texture(const std::string& filename)
 
 Texture::~Texture()
 {
-	glDeleteTextures(1, &mTexture);
+	//glDeleteTextures(1, &mTexture);
 }
 
 void Texture::Bind(unsigned int unit)
