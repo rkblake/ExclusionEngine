@@ -6,7 +6,7 @@ Mesh::Mesh(const char* path) {
     std::vector< glm::vec3 > vertices;
 	std::vector< glm::vec2 > uvs;
 	std::vector< glm::vec3 > normals;
-	AssimpLoadFile("./res/test_entity.obj", vertices, uvs, normals);
+	AssimpLoadFile(path, vertices, uvs, normals);
 /*
 	vertices = {
 		glm::vec3(-0.5, -0.5, 0.0),
@@ -58,7 +58,7 @@ Mesh::Mesh(const char* path) {
 }
 
 Mesh::~Mesh() {
-    //glDeleteVertexArrays(1, &vao);
+    glDeleteVertexArrays(1, &vao);
 }
 
 void Mesh::Draw() {

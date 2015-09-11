@@ -17,9 +17,8 @@ Entity::Entity(const char* name) {
 	std::string path_to_mesh = "res/" + std::string(name) + ".obj";
 	std::string path_to_texture = "res/" +std::string(name) + ".jpg";
     this->script = Script(path_to_script.c_str());
-	this->texture = Texture(path_to_texture.c_str());
-	//texture.Bind(0);
-    this->mesh = Mesh(path_to_mesh.c_str());
+	this->texture = new Texture(path_to_texture.c_str());
+    this->mesh = new Mesh(path_to_mesh.c_str());
 
 	btCollisionShape* collisionShape = new btSphereShape(1);
 	btDefaultMotionState* motionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 25, 0)));
@@ -33,6 +32,6 @@ Entity::Entity(const char* name) {
 void Entity::Draw() {
     //glUseProgram(shader);
 
-	texture.Bind(0);
-    mesh.Draw();
+	texture->Bind(0);
+    mesh->Draw();
 }

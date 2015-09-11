@@ -36,8 +36,8 @@ private:
 	//unsigned int uuid;
 
 
-	Mesh mesh;
-	Texture texture;
+	Mesh* mesh;
+	Texture* texture;
 	//GLuint shader;
 };
 
