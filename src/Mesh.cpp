@@ -2,7 +2,7 @@
 
 Mesh::Mesh(const char* path) {
     //TextureID  = glGetUniformLocation(programID, "texture_sampler");
-
+/*
     std::vector< glm::vec3 > vertices;
 	std::vector< glm::vec2 > uvs;
 	std::vector< glm::vec3 > normals;
@@ -23,7 +23,8 @@ Mesh::Mesh(const char* path) {
 	std::vector<glm::vec3> indexed_vertices;
 	std::vector<glm::vec2> indexed_uvs;
 	std::vector<glm::vec3> indexed_normals;
-	indexVBO(vertices, uvs, normals, indices, indexed_vertices, indexed_uvs, indexed_normals);
+	//indexVBO(vertices, uvs, normals, indices, indexed_vertices, indexed_uvs, indexed_normals);
+    AssimpLoadFile(path, indexed_vertices, indexed_uvs, indexed_normals, indices);
 
     indices_count = indices.size();
 	//indices_count = vertices.size();

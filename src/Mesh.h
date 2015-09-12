@@ -9,9 +9,8 @@
 #include <glm/glm.hpp>
 #include <vector>
 
-#include "objloader.h"
-#include "vboindexer.h"
 #include "AssimpLoader.h"
+#include "vboindexer.h"
 
 class Mesh {
 public:

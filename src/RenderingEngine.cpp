@@ -55,7 +55,7 @@ void RenderingEngine::ComputeMatrices() {
     		sin(verticalAngle),
     		cos(verticalAngle) * cos(horizontalAngle)
     	);
-		printf("<%.2f, %.2f, %.2f>\n", direction.x, direction.y, direction.z);
+		//printf("<%.2f, %.2f, %.2f>\n", direction.x, direction.y, direction.z);
 
 		//direction = glm::vec3(0, 0, 1);
         right = glm::vec3(
@@ -116,8 +116,9 @@ void RenderingEngine::RenderScene() {
 		attached_entity->GetRigidBody()->getMotionState()->getWorldTransform(entity_pos);
 		btVector3 entity_vec = entity_pos.getOrigin();
 		model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(entity_vec.x(), entity_vec.y(), entity_vec.z()));
-		//model_matrix = glm::mat4(1.0);
-		view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, -15, -50.0));
+		model_matrix = glm::mat4(1.0);
+		//view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, -15, -50.0));
+		view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, 0, -5.0));
 		mvp_matrix = projection_matrix * view_matrix * model_matrix;
 		glUniformMatrix4fv(MvpID, 1, GL_FALSE, &mvp_matrix[0][0]);
 		(*i)->Draw();
