@@ -3,9 +3,9 @@ ExclusionEngine
 the bestest game engine that will never be done
 
 Required pacakages
-Bullet 
-lua
-assimp
+-Bullet
+-lua
+-assimp
 
 design goals:
 
