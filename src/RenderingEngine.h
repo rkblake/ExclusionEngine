@@ -15,11 +15,30 @@
 #include <vector>
 #include <SDL2/SDL.h>
 #include <stdio.h>
+#include <cstring>
 
 enum {
 	FREE_LOOK,
 	FIRST_PERSON,
 	THIRD_PERSON
+};
+
+struct LightInfo {
+    glm::vec4 Position;
+    glm::vec3 La;
+    glm::vec3 Ld;
+    glm::vec3 Ls;
+	LightInfo(glm::vec4 position, glm::vec3 la, glm::vec3 ld, glm::vec3 ls) :
+		Position(position), La(la), Ld(ld), Ls(ls) {}
+};
+
+struct MaterialInfo {
+    glm::vec3 Ka;
+    glm::vec3 Kd;
+    glm::vec3 Ks;
+    float Shininess;
+	MaterialInfo(glm::vec3 ka, glm::vec3 kd, glm::vec3 ks, float shininess) :
+		Ka(ka), Kd(kd), Ks(ks), Shininess(shininess) {}
 };
 
 class RenderingEngine {
@@ -46,11 +65,11 @@ private:
 	Window* window;
 	int _width, _height;
 	glm::mat4 view_matrix, projection_matrix, model_matrix, mvp_matrix;
-	GLuint viewID, projectionID, lightPosID, MvpID, TextureID, ModelID;
+	GLuint viewID, projectionID, lightID, mvpID, textureID, modelViewID, materialID, normalID;
 	float fov, horizontalAngle, verticalAngle;
 	float mouseSpeed;
 	glm::vec3 position, direction, right, up, front;
-	Entity* attached_entity; //entity that the camera is attached
+	Entity* attached_entity; //entity that the camera is attached to
 	unsigned int camera_style;
 	bool isFocus;
 	std::vector<Entity*> entities;

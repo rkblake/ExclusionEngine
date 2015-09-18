@@ -1,6 +1,12 @@
 #include "AssimpLoader.h"
 
-bool AssimpLoadFile(const char* filename, std::vector<glm::vec3>& vertices, std::vector<glm::vec2>& uvs, std::vector<glm::vec3>& normals, std::vector<unsigned short>& indices) {
+bool AssimpLoadFile(
+        const char* filename,
+        std::vector<glm::vec3>& vertices,
+        std::vector<glm::vec2>& uvs,
+        std::vector<glm::vec3>& normals
+        //std::vector<unsigned short>& indices
+    ) {
     printf("Loading file: %s ... ", filename);
     Assimp::Importer importer;
     const aiScene *scene = importer.ReadFile(filename,aiProcessPreset_TargetRealtime_Fast);
@@ -31,6 +37,7 @@ bool AssimpLoadFile(const char* filename, std::vector<glm::vec3>& vertices, std:
 
         }
     }
+    /*
     //for(unsigned int i = 0; i < 2; ++i)
     {
         for(unsigned int j = 0; j < mesh->mNumFaces; ++j)
@@ -42,7 +49,7 @@ bool AssimpLoadFile(const char* filename, std::vector<glm::vec3>& vertices, std:
             }
         }
     }
-
+    */
     printf("SUCCESS\n");
     return true;
 }

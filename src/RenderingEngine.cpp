@@ -23,18 +23,56 @@ RenderingEngine::RenderingEngine() {
 
 void RenderingEngine::Init() {
 
-	GLuint shader = LoadShaders("res/vertex.shader", "res/fragment.shader");
+	GLuint shader = LoadShaders("res/ADS.vs", "res/ADS.fs");
 	glUseProgram(shader);
-	glm::vec3 lightPos(5, 15, 0);
-	//projectionID = glGetUniformLocation(shader, "P");
-	//viewID = glGetUniformLocation(shader, "V");
-	//lightPosID = glGetUniformLocation(shader, "LightPosition_worldspace");
-	MvpID = glGetUniformLocation(shader, "MVP");
-	TextureID = glGetUniformLocation(shader, "texture_sampler");
-	//ModelID = glGetUniformLocation(shader, "M");
+	modelViewID = glGetUniformLocation(shader, "ModelViewMatrix");
+	viewID = glGetUniformLocation(shader, "ViewMatrix");
+	//lightID = glGetUniformLocation(shader, "Light");
+	mvpID = glGetUniformLocation(shader, "MVP");
+	textureID = glGetUniformLocation(shader, "texture_sampler");
+	normalID = glGetUniformLocation(shader, "NormaMatrix");
+	//materialID = glGetUniformLocation(shader, "Material");
 
-	//glUniform3f(lightPosID, lightPos.x, lightPos.y, lightPos.z);
-	glUniform1i(TextureID, 0);
+	LightInfo light = LightInfo(glm::vec4(5,15,5, 0.0), glm::vec3(0.05), glm::vec3(0.05), glm::vec3(0.05));
+	MaterialInfo material = MaterialInfo(glm::vec3(0.05), glm::vec3(0.05), glm::vec3(0.05), 0.2);
+
+	const char* blockNames[] = {"Light", "Material"};
+	const char* lightNames[] = {"Position", "La", "Ld", "Ls"};
+	const char* materialNames[] = {"Ka", "Kd", "Ks", "Shininess"};
+	GLuint ubo[2];
+	glGenBuffers(2, ubo);
+	for(unsigned int i = 0; i < 2; ++i) {
+		GLuint blockIndex;
+		GLint blockSize;
+		blockIndex = glGetUniformBlockIndex(shader, blockNames[i]);
+		glGetActiveUniformBlockiv(shader, blockIndex, GL_UNIFORM_BLOCK_DATA_SIZE, &blockSize);
+		GLubyte* blockBuffer = new GLubyte[blockSize];
+		GLuint indices[4];
+		GLint offsets[4];
+		glBindBuffer(GL_UNIFORM_BUFFER, ubo[i]);
+		if(i == 0) {
+			glGetUniformIndices(shader, 4, lightNames, indices);
+			glGetActiveUniformsiv(shader, 4, indices, GL_UNIFORM_OFFSET, offsets);
+			std::memcpy(blockBuffer + offsets[0], (void*)&light.Position, sizeof(glm::vec4));
+			std::memcpy(blockBuffer + offsets[1], (void*)&light.La, sizeof(glm::vec3));
+			std::memcpy(blockBuffer + offsets[2], (void*)&light.Ld, sizeof(glm::vec3));
+			std::memcpy(blockBuffer + offsets[3], (void*)&light.Ls, sizeof(glm::vec3));
+		}
+		else {
+			glGetUniformIndices(shader, 4, materialNames, indices);
+			glGetActiveUniformsiv(shader, 4, indices, GL_UNIFORM_OFFSET, offsets);
+			std::memcpy(blockBuffer + offsets[0], (void*)&material.Ka, sizeof(glm::vec3));
+			std::memcpy(blockBuffer + offsets[1], (void*)&material.Kd, sizeof(glm::vec3));
+			std::memcpy(blockBuffer + offsets[2], (void*)&material.Ks, sizeof(glm::vec3));
+			std::memcpy(blockBuffer + offsets[3], (void*)&material.Shininess, sizeof(GLfloat));
+		}
+		glBufferData(GL_UNIFORM_BUFFER, blockSize, blockBuffer, GL_DYNAMIC_DRAW);
+		glBindBufferBase(GL_UNIFORM_BUFFER, blockIndex, ubo[i]);
+		delete [] blockBuffer;
+	}
+
+	glUniform1i(textureID, 0);
+
 }
 
 void RenderingEngine::ComputeMatrices() {
@@ -116,11 +154,11 @@ void RenderingEngine::RenderScene() {
 		attached_entity->GetRigidBody()->getMotionState()->getWorldTransform(entity_pos);
 		btVector3 entity_vec = entity_pos.getOrigin();
 		model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(entity_vec.x(), entity_vec.y(), entity_vec.z()));
-		model_matrix = glm::mat4(1.0);
-		//view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, -15, -50.0));
-		view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, 0, -5.0));
+		//model_matrix = glm::mat4(1.0);
+		view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, -15, -50.0));
+		//view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, 0, -5.0));
 		mvp_matrix = projection_matrix * view_matrix * model_matrix;
-		glUniformMatrix4fv(MvpID, 1, GL_FALSE, &mvp_matrix[0][0]);
+		glUniformMatrix4fv(mvpID, 1, GL_FALSE, &mvp_matrix[0][0]);
 		(*i)->Draw();
 	}
 }
