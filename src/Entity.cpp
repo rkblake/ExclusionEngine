@@ -1,17 +1,5 @@
 #include "Entity.h"
 
-/*Entity::Entity(Script script) {
-    uuid = uuid_counter++;
-    this->script = script;
-
-    mesh = Mesh(script.GetString("mesh"));
-    shader = LoadShaders(script.GetString("vertex_shader"), script.GetString("fragment_shader"));
-
-    MatrixID = glGetUniformLocation(shader, "MVP");
-	ViewMatrixID = glGetUniformLocation(shader, "V");
-	ModelMatrixID = glGetUniformLocation(shader, "M");
-}*/
-
 Entity::Entity(const char* name) {
 	std::string path_to_script = "scripts/" + std::string(name) + ".lua";
 	std::string path_to_mesh = "res/" + std::string(name) + ".obj";
@@ -25,6 +13,16 @@ Entity::Entity(const char* name) {
 	btScalar mass = 1;
 	btVector3 inertia(0, 0, 0);
 	collisionShape->calculateLocalInertia(mass, inertia);
+	btRigidBody::btRigidBodyConstructionInfo bodyCI(mass, motionState, collisionShape, inertia);
+	body = new btRigidBody(bodyCI);
+}
+
+Entity::Entity(int) {
+	btCollisionShape* collisionShape = new btSphereShape(1);
+	btDefaultMotionState* motionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 25, -5)));
+	btScalar mass = 1;
+	btVector3 inertia(0, 0, 0);
+	collisionShape->calculateLocalInertia(mass,inertia);
 	btRigidBody::btRigidBodyConstructionInfo bodyCI(mass, motionState, collisionShape, inertia);
 	body = new btRigidBody(bodyCI);
 }

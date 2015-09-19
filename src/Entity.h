@@ -20,6 +20,7 @@ class Entity
 {
 public:
 	Entity() {}
+	Entity(int);
 	//Entity(Script script);
 	Entity(const char* name);
 	~Entity() {}
@@ -27,9 +28,9 @@ public:
 	void Draw();
 	//inline InitUid() {uid = uid_counter++;}
 private:
-	float x, y, z;
+	//float x, y, z;
 	btRigidBody* body;
-	GLuint ModelMatrixID, TextureID;
+	//GLuint ModelMatrixID, TextureID;
 
 
 	Script script;

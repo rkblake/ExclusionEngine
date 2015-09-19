@@ -45,7 +45,8 @@ void CoreEngine::Start() {
 	RenderingEngine::GetInstance().Init();
 	Entity* test = new Entity("test_entity");
 	RegisterEntity(test);
-	RenderingEngine::GetInstance().AttachEntity(test);
+	Entity* null = GetNullEntity();
+	RenderingEngine::GetInstance().AttachEntity(null);
 	Run();
 }
 
@@ -54,7 +55,7 @@ void CoreEngine::Stop() {
 }
 
 Entity* CoreEngine::GetNullEntity() {
-
+	return new Entity(0);
 }
 
 void CoreEngine::Run() {

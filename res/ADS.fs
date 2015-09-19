@@ -9,4 +9,5 @@ uniform sampler2D texture_sampler;
 
 void main() {
     frag_color = vec4(texture(texture_sampler, UV).rgb + lightIntensity, 1.0);
+    //frag_color = vec4(lightIntensity, 1.0);
 }
