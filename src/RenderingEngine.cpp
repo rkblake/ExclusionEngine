@@ -134,7 +134,7 @@ void RenderingEngine::Swap() {
 
 void RenderingEngine::RenderScene() {
 	ComputeMatrices();
-	view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, -15, -50.0));
+	//view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, -15, -50.0));
 	//view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, 0, -5.0));
 	//model_matrix = glm::mat4(1.0);
 	glm::mat4 modelViewMatrix = view_matrix * model_matrix;
@@ -148,7 +148,7 @@ void RenderingEngine::RenderScene() {
 		//if((*i) == attached_entity && camera_style == FIRST_PERSON)
 			//continue;	//don't render attached entity in first person
 		btTransform entity_pos;
-		attached_entity->GetRigidBody()->getMotionState()->getWorldTransform(entity_pos);
+		(*i)->GetRigidBody()->getMotionState()->getWorldTransform(entity_pos);
 		btVector3 entity_vec = entity_pos.getOrigin();
 		model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(entity_vec.x(), entity_vec.y(), entity_vec.z()));
 		mvp_matrix = projection_matrix * view_matrix * model_matrix;

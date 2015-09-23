@@ -18,9 +18,9 @@ bool AssimpLoadFile(
         return false;
     }
     aiMesh *mesh = scene->mMeshes[0];
-    vertices.reserve(mesh->mNumFaces*9);
-    uvs.reserve(mesh->mNumFaces*6);
-    normals.reserve(mesh->mNumFaces*9);
+    //vertices.reserve(mesh->mNumFaces*9);
+    //uvs.reserve(mesh->mNumFaces*6);
+    //normals.reserve(mesh->mNumFaces*9);
     //indices.reserve(mesh->mNumFaces*9);
 
     //float* vertex_array = new float[mesh->mNumFaces*9];

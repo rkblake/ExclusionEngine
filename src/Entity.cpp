@@ -6,7 +6,7 @@ Entity::Entity(const char* name) {
     this->mesh = new Mesh(script->GetString("mesh"));
 
 	btCollisionShape* collisionShape = new btSphereShape(1);
-	btDefaultMotionState* motionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 25, 0)));
+	btDefaultMotionState* motionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
 	btScalar mass = 1;
 	btVector3 inertia(0, 0, 0);
 	collisionShape->calculateLocalInertia(mass, inertia);
@@ -16,7 +16,7 @@ Entity::Entity(const char* name) {
 
 Entity::Entity(int) {
 	btCollisionShape* collisionShape = new btSphereShape(1);
-	btDefaultMotionState* motionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 25, -5)));
+	btDefaultMotionState* motionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
 	btScalar mass = 1;
 	btVector3 inertia(0, 0, 0);
 	collisionShape->calculateLocalInertia(mass,inertia);

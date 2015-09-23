@@ -1,2 +1,2 @@
-mesh = "res/cube.obj"
-texture = "res/cube.png"
+mesh = "res/prism.obj"
+texture = "res/IMG_0101.jpg"
