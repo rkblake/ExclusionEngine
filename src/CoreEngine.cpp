@@ -43,10 +43,13 @@ void CoreEngine::Start() {
 	const char* title = config.GetString("title");
 	CreateWindow(title, width, height);
 	RenderingEngine::GetInstance().Init();
-	Entity* test = new Entity("test_entity");
+	Entity* test = new Entity("scripts/test_entity.lua");
+	//Entity* cube = new Entity("scripts/cube.lua");
+	//cube->translate(0, -1, 0);
+	//RegisterEntity(cube);
 	RegisterEntity(test);
 	Entity* null = GetNullEntity();
-	RenderingEngine::GetInstance().AttachEntity(null);
+	RenderingEngine::GetInstance().AttachEntity(test);
 	Run();
 }
 

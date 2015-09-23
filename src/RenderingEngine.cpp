@@ -3,22 +3,11 @@
 #include <btBulletDynamicsCommon.h>
 
 RenderingEngine::RenderingEngine() {
+	attached_entity = CoreEngine::GetInstance().GetNullEntity();
 	mouseSpeed = 0.0005f;
 	fov = 45.0f;
 	camera_style = FREE_LOOK;
 	isFocus = true;
-
-/*	GLuint shader = LoadShaders("res/vertex.shader", "res/fragment.shader");
-	glUseProgram(shader);
-	glm::vec3 lightPos(0, 5, 0);
-	GLuint projectionID = glGetUniformLocation(shader, "P");
-	GLuint viewID = glGetUniformLocation(shader, "V");
-	GLuint lightPosID = glGetUniformLocation(shader, "LightPosition_worldspace");
-	GLuint MvpID = glGetUniformLocation(shader, "MVP");
-	GLuint TextureID = glGetUniformLocation(shader, "texture_sampler");
-
-	glUniform3f(lightPosID, lightPos.x, lightPos.y, lightPos.z);
-*/
 }
 
 void RenderingEngine::Init() {
@@ -27,16 +16,14 @@ void RenderingEngine::Init() {
 	glUseProgram(shader);
 	modelViewID = glGetUniformLocation(shader, "ModelViewMatrix");
 	viewID = glGetUniformLocation(shader, "ViewMatrix");
-	//lightID = glGetUniformLocation(shader, "Light");
 	mvpID = glGetUniformLocation(shader, "MVP");
 	textureID = glGetUniformLocation(shader, "texture_sampler");
 	normalID = glGetUniformLocation(shader, "NormalMatrix");
 	modelViewID = glGetUniformLocation(shader, "ModelViewMatrix");
 	projectionID = glGetUniformLocation(shader, "ProjectionMatrix");
-	//materialID = glGetUniformLocation(shader, "Material");
 
-	LightInfo light = LightInfo(glm::vec4(1.0,1.0,1.0, 0.0), glm::vec3(0.05), glm::vec3(0.05), glm::vec3(0.05));
-	MaterialInfo material = MaterialInfo(glm::vec3(0.05), glm::vec3(0.05), glm::vec3(0.05), 0.2);
+	LightInfo light = LightInfo(glm::vec4(1.0,1.0,1.0, 0.0), glm::vec3(0.5), glm::vec3(0.5), glm::vec3(0.5));
+	MaterialInfo material = MaterialInfo(glm::vec3(0.5), glm::vec3(0.5), glm::vec3(0.5), 0.5);
 
 	const char* blockNames[] = {"Light", "Material"};
 	const char* lightNames[] = {"Position", "La", "Ld", "Ls"};
@@ -74,7 +61,6 @@ void RenderingEngine::Init() {
 	}
 
 	glUniform1i(textureID, 0);
-
 }
 
 void RenderingEngine::ComputeMatrices() {
@@ -148,9 +134,9 @@ void RenderingEngine::Swap() {
 
 void RenderingEngine::RenderScene() {
 	ComputeMatrices();
-	//view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, -15, -50.0));
-	view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, 0, -5.0));
-	model_matrix = glm::mat4(1.0);
+	view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, -15, -50.0));
+	//view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, 0, -5.0));
+	//model_matrix = glm::mat4(1.0);
 	glm::mat4 modelViewMatrix = view_matrix * model_matrix;
 	glm::mat4 normalMatrix = glm::transpose(glm::inverse(modelViewMatrix));
 	glUniformMatrix4fv(viewID, 1, GL_FALSE, &view_matrix[0][0]);
@@ -159,12 +145,12 @@ void RenderingEngine::RenderScene() {
 	glUniformMatrix4fv(modelViewID, 1, GL_FALSE, &modelViewMatrix[0][0]);
 
 	for(std::vector<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i) {
-		if((*i) == attached_entity && camera_style == FIRST_PERSON)
-			continue;	//don't render attached entity in first person
+		//if((*i) == attached_entity && camera_style == FIRST_PERSON)
+			//continue;	//don't render attached entity in first person
 		btTransform entity_pos;
 		attached_entity->GetRigidBody()->getMotionState()->getWorldTransform(entity_pos);
 		btVector3 entity_vec = entity_pos.getOrigin();
-		//model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(entity_vec.x(), entity_vec.y(), entity_vec.z()));
+		model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(entity_vec.x(), entity_vec.y(), entity_vec.z()));
 		mvp_matrix = projection_matrix * view_matrix * model_matrix;
 		glUniformMatrix4fv(mvpID, 1, GL_FALSE, &mvp_matrix[0][0]);
 		(*i)->Draw();

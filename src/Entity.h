@@ -12,7 +12,7 @@
 	#include <GL/glew.h>
 #endif
 #include <btBulletDynamicsCommon.h>
-#include <string>
+#include <cstring>
 
 //static unsigned int uuid_counter = 0;
 
@@ -25,6 +25,8 @@ public:
 	Entity(const char* name);
 	~Entity() {}
 	btRigidBody* GetRigidBody() {return body;}
+	void setVelocity(float x, float y, float z);
+	void translate(float x, float y, float z);
 	void Draw();
 	//inline InitUid() {uid = uid_counter++;}
 private:
@@ -33,7 +35,7 @@ private:
 	//GLuint ModelMatrixID, TextureID;
 
 
-	Script script;
+	Script* script;
 	//unsigned int uuid;
 
 

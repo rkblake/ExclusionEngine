@@ -1,5 +1,7 @@
 #include "AssimpLoader.h"
 
+//using namespace Assimp;
+
 bool AssimpLoadFile(
         const char* filename,
         std::vector<glm::vec3>& vertices,
@@ -9,15 +11,16 @@ bool AssimpLoadFile(
     ) {
     printf("Loading file: %s ... ", filename);
     Assimp::Importer importer;
+    //DefaultLogger::create("",Logger::VERBOSE);
     const aiScene *scene = importer.ReadFile(filename,aiProcessPreset_TargetRealtime_Fast);
     if(scene == nullptr) {
-        printf("ERROR: failed to load\n", filename);
+        printf("ERROR: %s\n", importer.GetErrorString());
         return false;
     }
     aiMesh *mesh = scene->mMeshes[0];
-    //vertices.reserve(mesh->mNumFaces*9);
-    //uvs.reserve(mesh->mNumFaces*6);
-    //normals.reserve(mesh->mNumFaces*9);
+    vertices.reserve(mesh->mNumFaces*9);
+    uvs.reserve(mesh->mNumFaces*6);
+    normals.reserve(mesh->mNumFaces*9);
     //indices.reserve(mesh->mNumFaces*9);
 
     //float* vertex_array = new float[mesh->mNumFaces*9];

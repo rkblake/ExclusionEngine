@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "Entity.h"
 #include "Shaders.h"
+#include "CoreEngine.h"
 
 #ifdef __APPLE__
 	#include <OpenGL/gl3.h>
