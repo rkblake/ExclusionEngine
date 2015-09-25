@@ -1,24 +1,13 @@
 #include "Mesh.h"
 
-Mesh::Mesh(const char* path) {
+Mesh::Mesh(const char* path, btTriangleIndexVertexArray* tiva) {
     //TextureID  = glGetUniformLocation(programID, "texture_sampler");
 
     std::vector< glm::vec3 > vertices;
 	std::vector< glm::vec2 > uvs;
 	std::vector< glm::vec3 > normals;
 	AssimpLoadFile(path, vertices, uvs, normals);
-/*
-	vertices = {
-		glm::vec3(-0.5, -0.5, 0.0),
-		glm::vec3(0.5, -0.5, 0.0),
-		glm::vec3(0.0, 0.5, 0.0)
-	};
-	uvs = {
-		glm::vec2(0.0, 0.0),
-		glm::vec2(1.0, 0.0),
-		glm::vec2(1.0, 1.0)
-	};
-*/
+
 	std::vector<unsigned short> indices;
 	std::vector<glm::vec3> indexed_vertices;
 	std::vector<glm::vec2> indexed_uvs;
@@ -27,8 +16,6 @@ Mesh::Mesh(const char* path) {
     //AssimpLoadFile(path, indexed_vertices, indexed_uvs, indexed_normals, indices);
 
     indices_count = indices.size();
-	//indices_count = vertices.size();
-    //printf("%d\n", indices_count);
 
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
@@ -56,6 +43,17 @@ Mesh::Mesh(const char* path) {
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned short), &indices[0] , GL_STATIC_DRAW);
 
     glBindVertexArray(0);
+
+    if(tiva != 0) {
+        tiva = new btTriangleIndexVertexArray(
+            indices.size() / 3, //assuming indices is divisible by 3 may not be true
+            (int*)&indices[0],
+            sizeof(unsigned short),
+            indexed_vertices.size(),
+            (btScalar*)&indexed_vertices[0],
+            sizeof(glm::vec3)
+        );
+    }
 }
 
 Mesh::~Mesh() {

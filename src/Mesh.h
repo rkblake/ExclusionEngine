@@ -8,6 +8,7 @@
 #endif
 #include <glm/glm.hpp>
 #include <vector>
+#include <bullet/BulletCollision/CollisionShapes/btTriangleIndexVertexArray.h>
 
 #include "AssimpLoader.h"
 #include "vboindexer.h"
@@ -15,7 +16,8 @@
 class Mesh {
 public:
     Mesh() {}
-    Mesh(const char* path);
+    Mesh(const char* path, btTriangleIndexVertexArray* tiva=0);
+    //Mesh(const char* path, btTriangleMesh &mesh);
     ~Mesh();
 
     void Draw();

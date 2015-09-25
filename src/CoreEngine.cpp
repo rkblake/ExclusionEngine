@@ -96,4 +96,3 @@ void CoreEngine::Run() {
 	}
 	Stop();
 }
-

@@ -26,16 +26,11 @@ PhysicsEngine::~PhysicsEngine() {
 }
 
 void PhysicsEngine::RegisterEntity(Entity* entity) {
-	//btScalar mass = 1;
-	//btVector3 fallInertia(0, 0, 0);
-	//entity->GetRigidBody()->getCollisionShape()->calculateLocalInertia(mass, fallInertia);
-	//btRigidBody::btRigidBodyConstructionInfo entityCI(1, entity->GetRigidBody()->getMotionState(), entity->GetRigidBody()->getCollisionShape(), fallInertia);
-	//btRigidBody* body = new btRigidBody(entityCI);
 	dynamicsWorld->addRigidBody(entity->GetRigidBody());
 }
 
 void PhysicsEngine::Unregister(Entity* entity) {
-
+    dynamicsWorld->removeRigidBody(entity->GetRigidBody());
 }
 
 void PhysicsEngine::StepSimulation() {
@@ -43,5 +38,5 @@ void PhysicsEngine::StepSimulation() {
 }
 
 void Dispose () {
-
+    
 }
