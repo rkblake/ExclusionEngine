@@ -3,7 +3,18 @@
 
 #include "Entity.h"
 #include "Window.h"
+#include "RenderingEngine.h"
+#include "PhysicsEngine.h"
+#include "Script.h"
+#include "World.h"
 
+#ifdef __APPLE__
+	#include <OpenGL/gl3.h>
+#else
+	#include <GL/glew.h>
+#endif
+#include <SDL2/SDL.h>
+#include <map>
 #include <string>
 
 //extern SDL_Window* mWindow;

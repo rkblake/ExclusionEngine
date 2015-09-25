@@ -144,6 +144,8 @@ void RenderingEngine::RenderScene() {
 	glUniformMatrix4fv(normalID, 1, GL_FALSE, &normalMatrix[0][0]);
 	glUniformMatrix4fv(modelViewID, 1, GL_FALSE, &modelViewMatrix[0][0]);
 
+	
+
 	for(std::vector<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i) {
 		//if((*i) == attached_entity && camera_style == FIRST_PERSON)
 			//continue;	//don't render attached entity in first person

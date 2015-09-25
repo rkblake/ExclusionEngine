@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "Shaders.h"
 #include "CoreEngine.h"
+#include "World.h"
 
 #ifdef __APPLE__
 	#include <OpenGL/gl3.h>
@@ -62,6 +63,7 @@ public:
 	void RenderScene();
 	void SetFocus(bool focus) {isFocus = focus;}
 	void AttachEntity(Entity* entity) {attached_entity = entity;}
+	void SetWorld(World* w) {world = w;}
 private:
 	Window* window;
 	int _width, _height;
@@ -71,6 +73,7 @@ private:
 	float mouseSpeed;
 	glm::vec3 position, direction, right, up, front;
 	Entity* attached_entity; //entity that the camera is attached to
+	World* world;
 	unsigned int camera_style;
 	bool isFocus;
 	std::vector<Entity*> entities;

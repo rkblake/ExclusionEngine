@@ -1,17 +1,5 @@
 #include "CoreEngine.h"
 
-#include "RenderingEngine.h"
-#include "PhysicsEngine.h"
-#include "Script.h"
-
-#ifdef __APPLE__
-	#include <OpenGL/gl3.h>
-#else
-	#include <GL/glew.h>
-#endif
-#include <SDL2/SDL.h>
-#include <map>
-
 CoreEngine::CoreEngine()
 	//renderer(RenderingEngine::GetInstance()),
 	//physics(PhysicsEngine::GetInstance()),
@@ -43,14 +31,17 @@ void CoreEngine::Start() {
 	const char* title = config.GetString("title");
 	CreateWindow(title, width, height);
 	RenderingEngine::GetInstance().Init();
+	World* world = new World("scripts/world1.lua");
 	Entity* test = new Entity("scripts/test_entity.lua");
-	Entity* cube = new Entity("scripts/cube.lua");
+	//Entity* cube = new Entity("scripts/cube.lua");
 	test->translate(0, 50, 0);
-	cube->translate(10,25,0);
-	RegisterEntity(cube);
+	PhysicsEngine::GetInstance().SetWorld(world);
+	RenderingEngine::GetInstance().SetWorld(world);
+	//cube->translate(10,25,0);
+	//RegisterEntity(cube);
 	RegisterEntity(test);
 	Entity* null = GetNullEntity();
-	RenderingEngine::GetInstance().AttachEntity(cube);
+	RenderingEngine::GetInstance().AttachEntity(test);
 	Run();
 }
 
