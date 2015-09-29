@@ -1,5 +1,7 @@
 #include "CoreEngine.h"
 
+const double FPS = 1.0/60.0;
+
 CoreEngine::CoreEngine()
 	//renderer(RenderingEngine::GetInstance()),
 	//physics(PhysicsEngine::GetInstance()),
@@ -33,8 +35,9 @@ void CoreEngine::Start() {
 	RenderingEngine::GetInstance().Init();
 	World* world = new World("scripts/world1.lua");
 	Entity* test = new Entity("scripts/test_entity.lua");
+	player = test;
 	//Entity* cube = new Entity("scripts/cube.lua");
-	test->translate(0, 50, 0);
+	test->Renderable::translate(0, 10, 0);
 	PhysicsEngine::GetInstance().SetWorld(world);
 	RenderingEngine::GetInstance().SetWorld(world);
 	//cube->translate(10,25,0);
@@ -65,6 +68,8 @@ void CoreEngine::Run() {
 		currentTime = SDL_GetTicks();
 		deltaTime = currentTime - lastTime;
 		lastTime = currentTime;
+		if(deltaTime > FPS)
+			deltaTime = FPS;
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		PhysicsEngine::GetInstance().StepSimulation();
@@ -81,9 +86,17 @@ void CoreEngine::Run() {
 
 		if(keys[SDL_SCANCODE_ESCAPE])
 			isRunning = false;
+		if(keys[SDL_SCANCODE_W])
+			player->setVelocity(0, 0, 0.1);
+		if(keys[SDLK_a])
+			player->translate(-0.1 * deltaTime, 0, 0);
+		if(keys[SDLK_d])
+			player->translate(0.1 * deltaTime, 0, 0);
+		if(keys[SDLK_s])
+			player->translate(0, 0, -0.1 * deltaTime);
 
-		if(FPS - deltaTime > 0)
-			SDL_Delay(FPS - deltaTime);
+		if(deltaTime - FPS > 0)
+			SDL_Delay(deltaTime - FPS);
 	}
 	Stop();
 }

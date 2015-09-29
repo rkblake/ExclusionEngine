@@ -27,7 +27,7 @@ Entity::Entity(int) {
 void Entity::setVelocity(float x, float y, float z) {
 	body->setLinearVelocity(btVector3(x, y, z));
 }
-
+/*
 void Entity::translate(float x, float y, float z) {
 	body->translate(btVector3(x, y, z));
 }
@@ -38,3 +38,4 @@ void Entity::Draw() {
 	texture->Bind(0);
     mesh->Draw();
 }
+*/

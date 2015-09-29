@@ -10,11 +10,11 @@ PhysicsEngine::PhysicsEngine() {
     dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
     dynamicsWorld->setGravity(btVector3(0, -1, 0));
 
-	//btCollisionShape* ground = new btStaticPlaneShape(btVector3(0, 1, 0), 1);
-	//btDefaultMotionState* groundState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
-	//btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(0, groundState, ground, btVector3(0, 0, 0));
-	//btRigidBody* groundBody = new btRigidBody(groundRigidBodyCI);
-	//dynamicsWorld->addRigidBody(groundBody);
+	btCollisionShape* ground = new btStaticPlaneShape(btVector3(0, 1, 0), 1);
+	btDefaultMotionState* groundState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
+	btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(0, groundState, ground, btVector3(0, 0, 0));
+	btRigidBody* groundBody = new btRigidBody(groundRigidBodyCI);
+	dynamicsWorld->addRigidBody(groundBody);
 }
 
 PhysicsEngine::~PhysicsEngine() {
@@ -26,22 +26,23 @@ PhysicsEngine::~PhysicsEngine() {
 }
 
 void PhysicsEngine::RegisterEntity(Entity* entity) {
-	dynamicsWorld->addRigidBody(entity->GetRigidBody());
+	dynamicsWorld->addRigidBody(entity->getRigidBody());
 }
 
 void PhysicsEngine::Unregister(Entity* entity) {
-    dynamicsWorld->removeRigidBody(entity->GetRigidBody());
+    dynamicsWorld->removeRigidBody(entity->getRigidBody());
 }
 
 void PhysicsEngine::SetWorld(World* w) {
 	if(world == nullptr)
-		dynamicsWorld->addRigidBody(w->GetRigidBody());
+		dynamicsWorld->addRigidBody(w->getRigidBody());
 	else {
-		dynamicsWorld->removeRigidBody(world->GetRigidBody());
-		dynamicsWorld->addRigidBody(w->GetRigidBody());
+		dynamicsWorld->removeRigidBody(world->getRigidBody());
+		dynamicsWorld->addRigidBody(w->getRigidBody());
 	}
 	world = w;
-	dynamicsWorld->addRigidBody(world->GetRigidBody());
+	dynamicsWorld->addRigidBody(world->getRigidBody());
+    world->getRigidBody()->setGravity(btVector3(0, 0, 0));
 }
 
 void PhysicsEngine::StepSimulation() {
@@ -49,5 +50,5 @@ void PhysicsEngine::StepSimulation() {
 }
 
 void Dispose () {
-    
+
 }

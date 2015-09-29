@@ -1,6 +1,7 @@
 #ifndef EE_ENTITY_H
 #define EE_ENTITY_H
 
+#include "Renderable.h"
 #include "Script.h"
 #include "Mesh.h"
 #include "Texture.h"
@@ -16,7 +17,7 @@
 
 //static unsigned int uuid_counter = 0;
 
-class Entity
+class Entity : public Renderable
 {
 public:
 	Entity() {}
@@ -24,23 +25,23 @@ public:
 	//Entity(Script script);
 	Entity(const char* name);
 	~Entity() {}
-	btRigidBody* GetRigidBody() {return body;}
+	//btRigidBody* GetRigidBody() {return body;}
 	void setVelocity(float x, float y, float z);
-	void translate(float x, float y, float z);
-	void Draw();
+	//void translate(float x, float y, float z);
+	//void Draw();
 	//inline InitUid() {uid = uid_counter++;}
 private:
 	//float x, y, z;
-	btRigidBody* body;
+	//btRigidBody* body;
 	//GLuint ModelMatrixID, TextureID;
 
 
-	Script* script;
+	//Script* script;
 	//unsigned int uuid;
 
 
-	Mesh* mesh;
-	Texture* texture;
+	//Mesh* mesh;
+	//Texture* texture;
 	//GLuint shader;
 };
 

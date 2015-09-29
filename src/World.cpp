@@ -7,7 +7,7 @@ World::World(const char* path_to_script) {
 	texture = new Texture(script->GetString("texture"));
 
 	//btCollisionShape* collisionShape = new btBvhTriangleMeshShape(tiva, false);
-	btCollisionShape* collisionShape = new btStaticPlaneShape(btVector3(0, -1, 0), 1);
+	btCollisionShape* collisionShape = new btStaticPlaneShape(btVector3(0, 0, 0), 1);
 	btDefaultMotionState* motionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
 	btScalar mass = 0;
 	btVector3 inertia(0, 0, 0);
@@ -15,3 +15,9 @@ World::World(const char* path_to_script) {
 	btRigidBody::btRigidBodyConstructionInfo bodyCI(mass, motionState, collisionShape, inertia);
 	body = new btRigidBody(bodyCI);
 }
+/*
+void World::Draw() {
+	texture->Bind(0);
+    mesh->Draw();
+}
+*/
