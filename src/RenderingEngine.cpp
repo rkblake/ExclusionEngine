@@ -11,6 +11,7 @@ RenderingEngine::RenderingEngine() {
 }
 
 void RenderingEngine::Init() {
+	up = glm::vec3(0,1,0);
 
 	GLuint shader = LoadShaders("res/ADS.vs", "res/ADS.fs");
 	glUseProgram(shader);
@@ -73,46 +74,39 @@ void RenderingEngine::ComputeMatrices() {
         verticalAngle += mouseSpeed * (_height/2 - y_pos);
     }
 
+	direction = glm::vec3(
+		cos(verticalAngle) * sin(horizontalAngle),
+		sin(verticalAngle),
+		cos(verticalAngle) * cos(horizontalAngle)
+	);
+
+	right = glm::vec3(
+		sin(horizontalAngle - 3.14f/2.0f),
+		0,
+		cos(horizontalAngle - 3.14f/2.0f)
+	);
+
+	front = glm::vec3(
+		sin(horizontalAngle - 3.13f/2.0),
+		0,
+		0
+	);
+
+
     if(camera_style == FREE_LOOK) {
 		position = glm::vec3(0, 10, -50);
 
-        direction = glm::vec3(
-    		cos(verticalAngle) * sin(horizontalAngle),
-    		sin(verticalAngle),
-    		cos(verticalAngle) * cos(horizontalAngle)
-    	);
-		//printf("<%.2f, %.2f, %.2f>\n", direction.x, direction.y, direction.z);
-
-		//direction = glm::vec3(0, 0, 1);
-        right = glm::vec3(
-    		sin(horizontalAngle - 3.14f/2.0f),
-    		0,
-    		cos(horizontalAngle - 3.14f/2.0f)
-    	);
-
-    	front = glm::vec3(
-    		sin(horizontalAngle - 3.14f/2.0f),
-    		0,
-    		0);
-
-        up = glm::vec3(0,1,0);
-
         projection_matrix = glm::perspective(fov, 4.0f / 3.0f, 0.1f, 100.0f);
-		//btTransform entity_pos;
-		//attached_entity->GetRigidBody()->getMotionState()->getWorldTransform(entity_pos);
-		//btVector3 entity_vec = entity_pos.getOrigin();
-		//position = glm::vec3(entity_vec.x(), entity_vec.y(), entity_vec.z());
-		//view_matrix = glm::lookAt(position, position, up);
     	view_matrix = glm::lookAt(position, position+direction, up);
     }
     else if(camera_style == FIRST_PERSON) {
-        //direction = attached_entity->GetDirection();
+        direction = attached_entity->GetDirection();
         //float
         //right = glm::vec3()
 
     }
-    else {
-
+    else { //THIRD_PERSON
+		glm::vec3 camera_pos = glm::vec3(
     }
 }
 
@@ -134,7 +128,7 @@ void RenderingEngine::Swap() {
 
 void RenderingEngine::RenderScene() {
 	ComputeMatrices();
-	view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, -15, -50.0));
+	//view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, -15, -50.0));
 	//view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, 0, -5.0));
 	//model_matrix = glm::mat4(1.0);
 	//glm::mat4 modelViewMatrix = view_matrix * model_matrix;

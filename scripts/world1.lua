@@ -1,2 +1,2 @@
-mesh = "res/prism.obj"
+mesh = "res/world1.obj"
 texture = "res/cube.png"

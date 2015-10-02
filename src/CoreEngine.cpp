@@ -34,17 +34,17 @@ void CoreEngine::Start() {
 	CreateWindow(title, width, height);
 	RenderingEngine::GetInstance().Init();
 	World* world = new World("scripts/world1.lua");
-	Entity* test = new Entity("scripts/test_entity.lua");
-	player = test;
+	Entity* sphere = new Entity("scripts/test_entity.lua");
+	player = sphere;
 	//Entity* cube = new Entity("scripts/cube.lua");
-	test->Renderable::translate(0, 10, 0);
+	sphere->Renderable::translate(0, 10, 0);
 	PhysicsEngine::GetInstance().SetWorld(world);
 	RenderingEngine::GetInstance().SetWorld(world);
 	//cube->translate(10,25,0);
 	//RegisterEntity(cube);
-	RegisterEntity(test);
-	Entity* null = GetNullEntity();
-	RenderingEngine::GetInstance().AttachEntity(test);
+	RegisterEntity(sphere);
+	//Entity* null = GetNullEntity();
+	RenderingEngine::GetInstance().AttachEntity(sphere);
 	Run();
 }
 
