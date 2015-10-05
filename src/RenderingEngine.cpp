@@ -100,13 +100,13 @@ void RenderingEngine::ComputeMatrices() {
     	view_matrix = glm::lookAt(position, position+direction, up);
     }
     else if(camera_style == FIRST_PERSON) {
-        direction = attached_entity->GetDirection();
+        //direction = attached_entity->GetDirection();
         //float
         //right = glm::vec3()
 
     }
     else { //THIRD_PERSON
-		glm::vec3 camera_pos = glm::vec3(
+		//glm::vec3 camera_pos = glm::vec3(
     }
 }
 

@@ -87,7 +87,7 @@ void CoreEngine::Run() {
 		if(keys[SDL_SCANCODE_ESCAPE])
 			isRunning = false;
 		if(keys[SDL_SCANCODE_W])
-			player->setVelocity(0, 0, 0.1);
+			player->getRigidBody()->getMotionState()->setWorldTransform(btTransform(btQuaternion(0,0,0,1), btVector3(2,0,0)));
 		if(keys[SDLK_a])
 			player->translate(-0.1 * deltaTime, 0, 0);
 		if(keys[SDLK_d])
