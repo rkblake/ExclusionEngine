@@ -2,6 +2,7 @@
 
 PhysicsEngine::PhysicsEngine() {
     broadphase = new btDbvtBroadphase();
+    broadphase->getOverlappingPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
     collisionConfiguration = new btDefaultCollisionConfiguration();
     dispatcher = new btCollisionDispatcher(collisionConfiguration);
     btGImpactCollisionAlgorithm::registerAlgorithm(dispatcher);
@@ -27,6 +28,10 @@ PhysicsEngine::~PhysicsEngine() {
 
 void PhysicsEngine::RegisterEntity(Entity* entity) {
 	dynamicsWorld->addRigidBody(entity->getRigidBody());
+    if(entity->getGhostObject() != nullptr)
+        dynamicsWorld->addCollisionObject(entity->getGhostObject());
+    if(entity->getController() != nullptr)
+        dynamicsWorld->addAction(entity->getController());
 }
 
 void PhysicsEngine::Unregister(Entity* entity) {

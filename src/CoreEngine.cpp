@@ -87,13 +87,13 @@ void CoreEngine::Run() {
 		if(keys[SDL_SCANCODE_ESCAPE])
 			isRunning = false;
 		if(keys[SDL_SCANCODE_W])
-			player->getRigidBody()->getMotionState()->setWorldTransform(btTransform(btQuaternion(0,0,0,1), btVector3(2,0,0)));
+			player->getController()->setWalkDirection(btVector3(0,0,-1));
 		if(keys[SDLK_a])
-			player->translate(-0.1 * deltaTime, 0, 0);
+			player->getController()->setWalkDirection(btVector3(-1,0,0));
 		if(keys[SDLK_d])
-			player->translate(0.1 * deltaTime, 0, 0);
+			player->getController()->setWalkDirection(btVector3(0,0,1));
 		if(keys[SDLK_s])
-			player->translate(0, 0, -0.1 * deltaTime);
+			player->getController()->setWalkDirection(btVector3(1,0,0));
 
 		if(deltaTime - FPS > 0)
 			SDL_Delay(deltaTime - FPS);

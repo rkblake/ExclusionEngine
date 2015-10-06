@@ -5,6 +5,8 @@
 #include "Mesh.h"
 #include "Texture.h"
 #include <btBulletDynamicsCommon.h>
+#include <bullet/BulletDynamics/character/btKinematicCharacterController.h>
+#include <bullet/BulletCollision/CollisionDispatch/btGhostObject.h>
 
 class Renderable {
 public:
@@ -24,8 +26,16 @@ public:
     virtual btRigidBody* getRigidBody() {
         return body;
     }
+    virtual btPairCachingGhostObject* getGhostObject() {
+        return ghostObject;
+    }
+    virtual btKinematicCharacterController* getController() {
+        return controller;
+    }
 protected:
     btRigidBody* body;
+    btPairCachingGhostObject* ghostObject;
+    btKinematicCharacterController* controller;
     Script* script;
     Mesh* mesh;
     Texture* texture;
