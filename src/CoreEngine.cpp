@@ -73,6 +73,7 @@ void CoreEngine::Run() {
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		PhysicsEngine::GetInstance().StepSimulation();
+		player->getController()->playerStep(PhysicsEngine::GetInstance().getWorld(), deltaTime);
 		RenderingEngine::GetInstance().RenderScene();
 		window->SwapBuffers();
 
@@ -84,16 +85,30 @@ void CoreEngine::Run() {
 			}
 		}
 
+		/*
+		switch ((unsigned int)keys) {
+			case SDL_SCANCODE_ESCAPE:
+				isRunning = false;
+				break;
+			case SDL_SCANCODE_W:
+				player->getController()->setVelocityForTimeInterval(btVector3(0,0,-1), 100);
+				player->getController()->setWalkDirection(btVector3(0,0,-1));
+		}
+		*/
+
 		if(keys[SDL_SCANCODE_ESCAPE])
 			isRunning = false;
-		if(keys[SDL_SCANCODE_W])
+		if(keys[SDL_SCANCODE_W]) {
+			player->getController()->setVelocityForTimeInterval(btVector3(0,0,-1), 100);
 			player->getController()->setWalkDirection(btVector3(0,0,-1));
+		}
 		if(keys[SDLK_a])
 			player->getController()->setWalkDirection(btVector3(-1,0,0));
 		if(keys[SDLK_d])
 			player->getController()->setWalkDirection(btVector3(0,0,1));
 		if(keys[SDLK_s])
 			player->getController()->setWalkDirection(btVector3(1,0,0));
+
 
 		if(deltaTime - FPS > 0)
 			SDL_Delay(deltaTime - FPS);

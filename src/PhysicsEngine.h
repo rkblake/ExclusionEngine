@@ -37,6 +37,7 @@ public:
 	void Unregister(Entity* e);
 	void StepSimulation();
 	void Dispose();
+    btDiscreteDynamicsWorld* getWorld() {return dynamicsWorld;}
 
 private:
 	PhysicsEngine();
