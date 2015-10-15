@@ -5,12 +5,12 @@ Entity::Entity(const char* name) {
 	this->texture = new Texture(script->GetString("texture"));
     this->mesh = new Mesh(script->GetString("mesh"));
 
-	btConvexShape* collisionShape = new btCapsuleShape(0.25, 1);
-	ghostObject = new btPairCachingGhostObject();
-	ghostObject->setWorldTransform(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
-	ghostObject->setCollisionShape(collisionShape);
-	ghostObject->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
-	controller = new btKinematicCharacterController(ghostObject,collisionShape,0.5);
+	btCollisionShape* collisionShape = new btCapsuleShape(0.25, 1);
+	//ghostObject = new btPairCachingGhostObject();
+	//ghostObject->setWorldTransform(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+	//ghostObject->setCollisionShape(collisionShape);
+	//ghostObject->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
+	//controller = new btKinematicCharacterController(ghostObject,collisionShape,0.5);
 	btDefaultMotionState* motionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
 	btScalar mass = 1;
 	btVector3 inertia(0, 0, 0);
@@ -35,7 +35,8 @@ Entity::Entity(int) {
 }
 
 void Entity::setVelocity(float x, float y, float z) {
-	//body->setLinearVelocity(btVector3(x, y, z));
+	body->setLinearVelocity(btVector3(x, y, z));
+	body->activate();
 }
 /*
 void Entity::translate(float x, float y, float z) {
