@@ -5,7 +5,7 @@
 #include "Mesh.h"
 #include "Texture.h"
 #include <btBulletDynamicsCommon.h>
-#include <bullet/BulletDynamics/character/btKinematicCharacterController.h>
+#include <bullet/BulletDynamics/Character/btKinematicCharacterController.h>
 #include <bullet/BulletCollision/CollisionDispatch/btGhostObject.h>
 
 class Renderable {
