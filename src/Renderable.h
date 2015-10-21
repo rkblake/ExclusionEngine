@@ -35,6 +35,7 @@ public:
 protected:
     btRigidBody* body;
     btPairCachingGhostObject* ghostObject;
+    btCollisionShape* collisionShape;
     btKinematicCharacterController* controller;
     Script* script;
     Mesh* mesh;
