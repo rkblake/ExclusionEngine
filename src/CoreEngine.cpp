@@ -109,8 +109,8 @@ void CoreEngine::Run() {
 			player->setVelocity(0.5,0,0);
 
 
-		if(deltaTime - FPS > 0)
-			SDL_Delay(deltaTime - FPS);
+		if(FPS - deltaTime > 0)
+			SDL_Delay(FPS - deltaTime);
 	}
 	Stop();
 }
