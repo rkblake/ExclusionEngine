@@ -37,7 +37,7 @@ void CoreEngine::Start() {
 	Entity* sphere = new Entity("scripts/test_entity.lua");
 	player = sphere;
 	//Entity* cube = new Entity("scripts/cube.lua");
-	//sphere->Renderable::translate(0, 10, 0);
+	sphere->Renderable::translate(0, 10, 0);
 	PhysicsEngine::GetInstance().SetWorld(world);
 	RenderingEngine::GetInstance().SetWorld(world);
 	//cube->translate(10,25,0);
@@ -98,14 +98,15 @@ void CoreEngine::Run() {
 
 		if(keys[SDL_SCANCODE_ESCAPE])
 			isRunning = false;
+		player->setVelocity(0,0,0);
 		if(keys[SDL_SCANCODE_W])
-			player->setVelocity(0,1,0);
+			player->setVelocity(0,0,-0.5);
 		if(keys[SDL_SCANCODE_A])
-			player->setVelocity(-1,0,0);
+			player->setVelocity(-0.5,0,0);
 		if(keys[SDL_SCANCODE_S])
-			player->setVelocity(0,-1,0);
+			player->setVelocity(0,0,0.5);
 		if(keys[SDL_SCANCODE_D])
-			player->setVelocity(1,0,0);
+			player->setVelocity(0.5,0,0);
 
 
 		if(deltaTime - FPS > 0)
