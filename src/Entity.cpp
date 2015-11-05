@@ -5,7 +5,7 @@ Entity::Entity(const char* name) {
 	this->texture = new Texture(script->GetString("texture"));
     this->mesh = new Mesh(script->GetString("mesh"));
 
-	btCollisionShape* collisionShape = new btCapsuleShape(0.25, 1);
+	btCollisionShape* collisionShape = new btSphereShape(1);
 	//ghostObject = new btPairCachingGhostObject();
 	//ghostObject->setWorldTransform(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
 	//ghostObject->setCollisionShape(collisionShape);

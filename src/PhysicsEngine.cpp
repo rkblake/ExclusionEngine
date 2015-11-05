@@ -11,7 +11,7 @@ PhysicsEngine::PhysicsEngine() {
     dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
     dynamicsWorld->setGravity(btVector3(0, -1, 0));
 
-	btCollisionShape* ground = new btStaticPlaneShape(btVector3(1, 1, 1), 1);
+	btCollisionShape* ground = new btStaticPlaneShape(btVector3(0, 1, 0), 1);
 	btDefaultMotionState* groundState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
 	btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(0, groundState, ground, btVector3(0, 0, 0));
 	btRigidBody* groundBody = new btRigidBody(groundRigidBodyCI);
