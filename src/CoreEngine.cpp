@@ -1,7 +1,5 @@
 #include "CoreEngine.h"
 
-const double FPS = 1.0/60.0;
-
 CoreEngine::CoreEngine()
 	//renderer(RenderingEngine::GetInstance()),
 	//physics(PhysicsEngine::GetInstance()),
@@ -61,15 +59,15 @@ void CoreEngine::Run() {
 	SDL_Event e;
 	const Uint8* keys;
 	keys = SDL_GetKeyboardState(NULL);
-	double lastTime = SDL_GetTicks();
-	double deltaTime, currentTime;
+	//double lastTime = SDL_GetTicks();
+	//double deltaTime, currentTime;
 
 	while(isRunning) {
-		currentTime = SDL_GetTicks();
-		deltaTime = currentTime - lastTime;
-		lastTime = currentTime;
-		if(deltaTime > FPS)
-			deltaTime = FPS;
+		// currentTime = SDL_GetTicks();
+		// deltaTime = currentTime - lastTime;
+		// lastTime = currentTime;
+		// if(deltaTime > FPS)
+		// 	deltaTime = FPS;
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		PhysicsEngine::GetInstance().StepSimulation();
@@ -109,8 +107,8 @@ void CoreEngine::Run() {
 			player->setVelocity(0.5,0,0);
 
 
-		if(FPS - deltaTime > 0)
-			SDL_Delay(FPS - deltaTime);
+		// if(FPS - deltaTime > 0)
+		// 	SDL_Delay(FPS - deltaTime);
 	}
 	Stop();
 }

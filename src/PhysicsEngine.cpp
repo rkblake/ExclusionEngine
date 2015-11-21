@@ -1,6 +1,8 @@
 #include "PhysicsEngine.h"
 
 PhysicsEngine::PhysicsEngine() {
+    Timer timer(10, 60.0);
+
     broadphase = new btDbvtBroadphase();
     //broadphase->getOverlappingPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
     collisionConfiguration = new btDefaultCollisionConfiguration();

@@ -3,11 +3,15 @@
 
 #include "Entity.h"
 #include "World.h"
+#include "util/Timer.h"
 
 #include <btBulletDynamicsCommon.h>
 #include <bullet/BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h>
 #include <map>
 #include <vector>
+#include <list>
+
+const double FPS = 1.0/60.0;
 
 class PhysicsEngine
 {
@@ -22,6 +26,9 @@ public:
 	void Unregister(Entity* e);
 	void StepSimulation();
 	void Dispose();
+    //Timer* getTimer() {return &m_timer;}
+    float getTimeMultiplier() {return m_timer.getTimeMultiplier();}
+
     btDiscreteDynamicsWorld* getWorld() {return dynamicsWorld;}
 
 private:
@@ -31,6 +38,7 @@ private:
 	//std::map<unsigned int, PhysicsObjectWrapper> PhysicsObjects;
 	std::vector<Entity*> entities;
 	World* world;
+    Timer m_timer;
 
 	btBroadphaseInterface* broadphase;
 	btDefaultCollisionConfiguration* collisionConfiguration;

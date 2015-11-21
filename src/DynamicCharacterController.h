@@ -9,6 +9,8 @@
 
 #include <bullet/BulletCollision/CollisionDispatch/btGhostObject.h>
 
+#include "PhysicsEngine.h"
+
 class DynamicCharacterController
 {
 private:

@@ -70,11 +70,11 @@ DynamicCharacterController::DynamicCharacterController(btDiscreteDynamicsWorld* 
 
 DynamicCharacterController::~DynamicCharacterController()
 {
-	/*if(!m_pScene->IsClearing_SceneObjects())
-	{
-		m_pPhysicsWorld->m_pDynamicsWorld->removeRigidBody(m_pRigidBody);
-		m_pPhysicsWorld->m_pDynamicsWorld->removeCollisionObject(m_pGhostObject);
-	}*/
+	// if(!m_pScene->IsClearing_SceneObjects())
+	// {
+	// 	m_pPhysicsWorld->removeRigidBody(m_pRigidBody);
+	// 	m_pPhysicsWorld->removeCollisionObject(m_pGhostObject);
+	// }
 
 	delete m_pCollisionShape;
 	delete m_pMotionState;
@@ -119,10 +119,8 @@ void DynamicCharacterController::Update()
 	UpdateVelocity();
 
 	// Update jump timer
-    //TODO
 	if(m_jumpRechargeTimer < m_jumpRechargeTime)
-        {}
-		//m_jumpRechargeTimer += m_pPhysicsWorld->GetScene()->m_frameTimer.GetTimeMultiplier();
+		m_jumpRechargeTimer += PhysicsEngine::GetInstance().getTimeMultiplier();
 }
 
 void DynamicCharacterController::ParseGhostContacts()

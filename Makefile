@@ -9,7 +9,7 @@ TARGET = ExclusionEngine
 UNIX_LIBS=-lSDL2 -lGL -lGLEW -llua -lBulletDynamics -lBulletCollision -lLinearMath -lassimp
 MAC_LIBS=-framework OpenGL -framework SDL2 -framework BulletDynamics -framework BulletCollision -framework LinearMath -llua -lassimp
 
-OBJ := $(patsubst %.cpp,%.o,$(wildcard src/*.cpp))
+OBJ := $(patsubst %.cpp,%.o,$(wildcard src/*.cpp) $(wildcard src/**/*.cpp))
 OS := $(shell uname -s)
 
 all: $(TARGET)
