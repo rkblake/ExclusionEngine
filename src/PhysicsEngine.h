@@ -9,21 +9,6 @@
 #include <map>
 #include <vector>
 
-class ExclusionMotionState : public btMotionState {
-public:
-    void getWorldTransform (btTransform &worldTrans) const {
-
-    }
-    void setWorldTransform (const btTransform &worldTrans) {
-
-    }
-};
-
-typedef struct {
-    ExclusionMotionState motionState;
-    btRigidBody body;
-} PhysicsObjectWrapper;
-
 class PhysicsEngine
 {
 public:
