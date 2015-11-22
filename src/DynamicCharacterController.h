@@ -3,6 +3,7 @@
 
 #include <glm/glm.hpp>
 #include <vector>
+#include <cmath>
 
 #include <btBulletDynamicsCommon.h>
 #include <btBulletCollisionCommon.h>
@@ -10,6 +11,7 @@
 #include <bullet/BulletCollision/CollisionDispatch/btGhostObject.h>
 
 #include "PhysicsEngine.h"
+#include "utils/utils.h"
 
 class DynamicCharacterController
 {
@@ -34,8 +36,8 @@ private:
 
 	btTransform m_motionTransform;
 
-	glm::vec3 m_manualVelocity;
-	std::vector<btVector3> m_surfaceHitNormals;
+	Vec3f m_manualVelocity;
+	std::vector<Vec3f> m_surfaceHitNormals;
 
 	btVector3 m_previousPosition;
 
@@ -54,21 +56,21 @@ public:
 	float m_jumpRechargeTime;
 
 	//DynamicCharacterController(Scene* pScene, SceneObject_PhysicsWorld* pPhysicsWorld, const Vec3f spawnPos, float radius, float height, float mass, float stepHeight);
-    DynamicCharacterController(btDiscreteDynamicsWorld* pPhysicsWorld, const glm::vec3 spawnPos, float radius, float height, float mass, float stepHeight);
+    DynamicCharacterController(btDiscreteDynamicsWorld* pPhysicsWorld, const Vec3f spawnPos, float radius, float height, float mass, float stepHeight);
 	~DynamicCharacterController();
 
 	// Acceleration vector in XZ plane
-	void Walk(const glm::vec2 dir);
+	void Walk(const Vec2f dir);
 
 	// Ignores y
-	void Walk(const glm::vec3 dir);
+	void Walk(const Vec3f dir);
 
 	void Update();
 
 	void Jump();
 
-	btVector3 GetPosition() const;
-	btVector3 GetVelocity() const;
+	Vec3f GetPosition() const;
+	Vec3f GetVelocity() const;
 
 	bool IsOnGround() const;
 };

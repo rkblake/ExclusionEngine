@@ -23,7 +23,7 @@ public:
 	}
 };
 
-DynamicCharacterController::DynamicCharacterController(btDiscreteDynamicsWorld* pPhysicsWorld, const glm::vec3 spawnPos, float radius, float height, float mass, float stepHeight)
+DynamicCharacterController::DynamicCharacterController(btDiscreteDynamicsWorld* pPhysicsWorld, const Vec3f spawnPos, float radius, float height, float mass, float stepHeight)
 	: m_pPhysicsWorld(pPhysicsWorld), m_bottomYOffset(height / 2.0f + radius), m_bottomRoundedRegionYOffset((height + radius) / 2.0f),
 	m_deceleration(0.1f), m_maxSpeed(5.0f), m_jumpImpulse(600.0f),
 	m_manualVelocity(0.0f, 0.0f, 0.0f), m_onGround(false), m_hittingWall(false),
@@ -83,12 +83,12 @@ DynamicCharacterController::~DynamicCharacterController()
 	delete m_pGhostObject;
 }
 
-void DynamicCharacterController::Walk(const glm::vec2 dir)
+void DynamicCharacterController::Walk(const Vec2f dir)
 {
-	glm::vec2 velocityXZ(dir + glm::vec2(m_manualVelocity.x, m_manualVelocity.z));
+	Vec2f velocityXZ(dir + Vec2f(m_manualVelocity.x , m_manualVelocity.z));
 
 	// Prevent from going over maximum speed
-	float speedXZ = glm::length(velocityXZ);
+	float speedXZ = velocityXZ.length();
 
 	if(speedXZ > m_maxSpeed)
 		velocityXZ = velocityXZ / speedXZ * m_maxSpeed;
@@ -97,9 +97,9 @@ void DynamicCharacterController::Walk(const glm::vec2 dir)
 	m_manualVelocity.z = velocityXZ.y;
 }
 
-void DynamicCharacterController::Walk(const glm::vec3 dir)
+void DynamicCharacterController::Walk(const Vec3f dir)
 {
-	Walk(glm::vec2(dir.x, dir.z));
+	Walk(Vec2f(dir.x, dir.z));
 }
 
 void DynamicCharacterController::Update()
@@ -187,23 +187,22 @@ void DynamicCharacterController::UpdateVelocity()
 	// Adjust only xz velocity
 	m_manualVelocity.y = m_pRigidBody->getLinearVelocity().getY();
 
-	m_pRigidBody->setLinearVelocity(btVector3(m_manualVelocity.x, m_manualVelocity.y, m_manualVelocity.z));
+	m_pRigidBody->setLinearVelocity(m_manualVelocity.toBt());
 
 	// Decelerate
-    //TODO
-	//m_manualVelocity -= m_manualVelocity * m_deceleration * m_pPhysicsWorld->GetScene()->m_frameTimer.GetTimeMultiplier();
+	m_manualVelocity -= m_manualVelocity * m_deceleration * PhysicsEngine::GetInstance().getTimeMultiplier();
 
 	if(m_hittingWall)
 	{
 		for(unsigned int i = 0, size = m_surfaceHitNormals.size(); i < size; i++)
 		{
 			// Cancel velocity across normal
-            //TODO: use glm::proj
 			//glm::vec3 velInNormalDir(m_manualVelocity.Project(m_surfaceHitNormals[i]));
+            Vec3f velInNormalDir = m_manualVelocity.project(m_surfaceHitNormals[i]);
+
 
 			// Apply correction
-            //TODO
-			//m_manualVelocity -= velInNormalDir * 1.05f;
+			m_manualVelocity -= velInNormalDir * 1.05f;
 		}
 
 		// Do not adjust rigid body velocity manually (so bodies can still be pushed by character)
@@ -272,14 +271,14 @@ void DynamicCharacterController::Jump()
 	}
 }
 
-btVector3 DynamicCharacterController::GetPosition() const
+Vec3f DynamicCharacterController::GetPosition() const
 {
-	return m_motionTransform.getOrigin();
+	return Vec3f(m_motionTransform.getOrigin());
 }
 
-btVector3 DynamicCharacterController::GetVelocity() const
+Vec3f DynamicCharacterController::GetVelocity() const
 {
-	return m_pRigidBody->getLinearVelocity();
+	return Vec3f(m_pRigidBody->getLinearVelocity());
 }
 
 bool DynamicCharacterController::IsOnGround() const

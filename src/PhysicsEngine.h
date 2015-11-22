@@ -3,7 +3,7 @@
 
 #include "Entity.h"
 #include "World.h"
-#include "util/Timer.h"
+#include "utils/Timer.h"
 
 #include <btBulletDynamicsCommon.h>
 #include <bullet/BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h>
