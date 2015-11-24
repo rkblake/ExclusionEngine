@@ -1,59 +1,50 @@
 #ifndef EE_INPUTMANAGER_H
 #define EE_INPUTMANAGER_H
 
-//#include "Engine.h"
-
-#include <map>
-//#include <pair>
 #include <SDL2/SDL.h>
-#include <string>
 
-class Engine;
-
-typedef union {
-	SDL_Keycode keycode; //Uint8
-	SDL_Scancode scancode; //Uint8
-	Sint32 mouse_button;
-} Button;
-
-enum CommandsEnum {
-	FORARD,
-	BACKWARD,
-	LEFT_STRAFE,
-	RIGHT_STRAFE,
-	FIRE,
-	RELOAD
-};
-
-const std::string Commands[] = {
-	"FORWARD",
-	"BACKWARD",
-	"LEFT_STRAFE",
-	"RIGHT_STRAFE",
-	"JUMP",
-	"FIRE",
-	"RELOAD",
-	"\0"
-};
-
-typedef std::pair<Button, std::string*> map_item;
-typedef std::pair<std::string*, bool> press_map_item;
+#include "Window.h"
 
 class InputManager
 {
 public:
-	static inline InputManager& GetInstance() {
-		static InputManager sInputManager;
-		return sInputManager;
-	}
+	InputManager();
+	~InputManager();
 
-	void init();
+	void GetInputs();
+	bool Quit();
+	bool LMBDown();
+	bool RMBDown();
+	bool LMBClicked();
+	bool RMBClicked();
+
+	Uint8 GetCurrentKeyState(Uint8 key);
+	Uint8 GetCurrentKeyState(SDL_Keycode key);
+	Uint8 GetPastKeyState(Uint8 key);
+	Uint8 GetPastKeyState(SDL_Keycode key);
+
+	bool KeyPressed(Uint8 key);
+	bool KeyPressed(SDL_Keycode key);
+	bool KeyReleased(Uint8 key);
+	bool KeyReleased(SDL_Keycode key);
+
+	unsigned int GetMouseX();
+	unsigned int GetMouseY();
+
+	void SetMousePos(unsigned int x, unsigned int y);
+	void KeepMouseInWindow(bool keepInWindow);
+	void ShowMouse(bool show);
 private:
-	InputManager() {}
-	~InputManager() {}
+	Window* m_pWindow;
 
-	std::map<Button, std::string*> input_map;
-	std::map<std::string*, bool> input_press_map;
+	unsigned int m_mouseX, m_mouseY;
+	bool m_quit;
+	bool m_lmbDown, m_rmbDown;
+	bool m_lmbClicked, m_rmbClicked;
+	Uint8* m_pPastKeyStates;
+	Uint8* m_pCurrentKeyStates;
+	int m_numKeys;
+	int m_keyStateArraySizeBytes;
 };
 
 #endif

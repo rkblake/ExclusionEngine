@@ -1,6 +1,6 @@
 #include "Mesh.h"
 
-Mesh::Mesh(const char* path, btTriangleIndexVertexArray* tiva) {
+Mesh::Mesh(const char* path) {
     //TextureID  = glGetUniformLocation(programID, "texture_sampler");
 
     std::vector< glm::vec3 > vertices;
@@ -43,7 +43,7 @@ Mesh::Mesh(const char* path, btTriangleIndexVertexArray* tiva) {
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned short), &indices[0] , GL_STATIC_DRAW);
 
     glBindVertexArray(0);
-
+    /*
     if(tiva != 0) {
         tiva = new btTriangleIndexVertexArray(
             indices.size() / 3, //assuming indices is divisible by 3 may not be true
@@ -53,7 +53,7 @@ Mesh::Mesh(const char* path, btTriangleIndexVertexArray* tiva) {
             (btScalar*)&indexed_vertices[0],
             sizeof(glm::vec3)
         );
-    }
+    }*/
 }
 
 Mesh::~Mesh() {

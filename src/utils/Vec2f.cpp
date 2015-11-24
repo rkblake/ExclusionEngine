@@ -27,7 +27,9 @@ Vec2f Vec2f::operator-() const {
 }
 
 const Vec2f& Vec2f::operator-=(const Vec2f& other) {
-    return Vec2f(x -= other.x, y -= other.y);
+    x -= other.x;
+    y -= other.x;
+    return *this;
 }
 
 bool Vec2f::operator==(const Vec2f& other) const {

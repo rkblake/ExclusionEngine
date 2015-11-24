@@ -146,13 +146,13 @@ void RenderingEngine::RenderScene() {
 	glUniformMatrix4fv(mvpID, 1, GL_FALSE, &mvp_matrix[0][0]);
 	glUniformMatrix4fv(modelViewID, 1, GL_FALSE, &mv_matrix[0][0]);
 	glUniformMatrix4fv(normalID, 1, GL_FALSE, &normalMatrix[0][0]);
-	world->Draw();
+	world->Render();
 
 	for(std::vector<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i) {
 		//if((*i) == attached_entity && camera_style == FIRST_PERSON)
 			//continue;	//don't render attached entity in first person
 		btTransform entity_pos;
-		(*i)->getRigidBody()->getMotionState()->getWorldTransform(entity_pos);
+		//(*i)->getRigidBody()->getMotionState()->getWorldTransform(entity_pos);
 		btVector3 entity_vec = entity_pos.getOrigin();
 		//entity_pos.getOpenGLMatrix(&model_matrix[0][0]);
 		model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(entity_vec.x(), entity_vec.y(), entity_vec.z()));
@@ -162,6 +162,6 @@ void RenderingEngine::RenderScene() {
 		glUniformMatrix4fv(mvpID, 1, GL_FALSE, &mvp_matrix[0][0]);
 		glUniformMatrix4fv(modelViewID, 1, GL_FALSE, &mv_matrix[0][0]);
 		glUniformMatrix4fv(normalID, 1, GL_FALSE, &normalMatrix[0][0]);
-		(*i)->Draw();
+		(*i)->Render();
 	}
 }

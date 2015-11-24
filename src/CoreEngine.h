@@ -43,6 +43,7 @@ public:
 	void Stop();
 	Entity* GetNullEntity();
 	void RegisterEntity(Entity* entity);
+	Window* GetWindow() {return window;}
 private:
 	void CreateWindow(const char* name, int width, int height);
 	CoreEngine();

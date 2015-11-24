@@ -14,10 +14,15 @@
 #endif
 #include <btBulletDynamicsCommon.h>
 #include <cstring>
+#include <glm/glm.hpp>
 
-//static unsigned int uuid_counter = 0;
+#include "utils/Vec3f.h"
+//#include "DynamicCharacterController.h"
+//#include "PhysicsEngine.h"
+//class DynamicCharacterController;
+//class PhysicsEngine;
 
-class Entity : public Renderable
+class Entity
 {
 public:
 	Entity() {}
@@ -25,24 +30,20 @@ public:
 	//Entity(Script script);
 	Entity(const char* name);
 	~Entity() {}
-	//btRigidBody* GetRigidBody() {return body;}
-	void setVelocity(float x, float y, float z);
-	//void translate(float x, float y, float z);
-	//void Draw();
-	//inline InitUid() {uid = uid_counter++;}
+
+	void Update();
+	void Render();
 private:
-	//float x, y, z;
-	//btRigidBody* body;
-	//GLuint ModelMatrixID, TextureID;
+	Vec3f direction;
+	//DynamicCharacterController* controller;
+	//btDiscreteDynamicsWorld* m_physicsWorld;
+	glm::mat4 m_entityTransform;
 
+	Script* script;
 
-	//Script* script;
-	//unsigned int uuid;
-
-
-	//Mesh* mesh;
-	//Texture* texture;
-	//GLuint shader;
+	Mesh* mesh;
+	Texture* texture;
+	GLuint shader;
 };
 
 #endif

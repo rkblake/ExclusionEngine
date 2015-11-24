@@ -2,11 +2,11 @@ INCLUDE=/usr/include/
 LOCAL_INCLUDE=/usr/local/include/
 BULLET_INC=/usr/local/include/bullet/
 LIB_DIR=/usr/lib/
-LOCA_LIB_DIR=/usr/local/lib/
+LOCAL_LIB_DIR=/usr/local/lib/
 SDL_CFLAGS := $(shell sdl2-config --cflags)
 SDL_LIBS := $(shell sdl2-config --libs)
 CC=g++
-CPPFLAGS+=-g -std=c++11 $(SDL_CFLAGS) -I$(INCLUDE) -I$(LOCAL_INCLUDE) -I$(LIB_DIR) _I$(LOCAL_LIB_DIR) -I$(BULLET_INC)
+CPPFLAGS+=-g -std=c++11 $(SDL_CFLAGS) -I$(INCLUDE) -I$(LOCAL_INCLUDE) -I$(LIB_DIR) -I$(LOCAL_LIB_DIR) -I$(BULLET_INC)
 #CPPFLAGS+=-g -O2 -I$(DIR) -I$(LUA_INC) -L$(LUA_LIB)
 TARGET = ExclusionEngine
 

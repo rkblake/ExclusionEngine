@@ -29,7 +29,10 @@ Vec3f Vec3f::operator-() const {
 }
 
 const Vec3f& Vec3f::operator-=(const Vec3f& other) {
-    return Vec3f(x -= other.x, y -= other.y, z -= other.z);
+    x -= other.x;
+    y -= other.y;
+    z -= other.z;
+    return *this;
 }
 
 bool Vec3f::operator==(const Vec3f& other) const {

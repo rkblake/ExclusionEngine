@@ -13,13 +13,13 @@ public:
     World() {}
     World(const char* path_to_script);
 
-	//btRigidBody* GetRigidBody() {return body;}
-	//void Draw();
+	btRigidBody* GetRigidBody() {return body;}
+	void Render();
 private:
-    //Mesh* mesh;
-    //Script* script;
-	//Texture* texture;
-    //btRigidBody* body;
+    Mesh* mesh;
+    Script* script;
+	Texture* texture;
+    btRigidBody* body;
 };
 
 #endif

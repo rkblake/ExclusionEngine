@@ -29,23 +29,19 @@ PhysicsEngine::~PhysicsEngine() {
 }
 
 void PhysicsEngine::RegisterEntity(Entity* entity) {
-	dynamicsWorld->addRigidBody(entity->getRigidBody());
-    //if(entity->getGhostObject() != nullptr)
-        //dynamicsWorld->addCollisionObject(entity->getGhostObject());
-    //if(entity->getController() != nullptr)
-        //dynamicsWorld->addAction(entity->getController());
+	//dynamicsWorld->addRigidBody(entity->getRigidBody());
 }
 
 void PhysicsEngine::Unregister(Entity* entity) {
-    dynamicsWorld->removeRigidBody(entity->getRigidBody());
+    //dynamicsWorld->removeRigidBody(entity->getRigidBody());
 }
 
 void PhysicsEngine::SetWorld(World* w) {
 	if(world != nullptr)
-		dynamicsWorld->removeRigidBody(world->getRigidBody());
+		//dynamicsWorld->removeRigidBody(world->getRigidBody());
 	world = w;
-	dynamicsWorld->addRigidBody(world->getRigidBody());
-    world->getRigidBody()->setGravity(btVector3(0, 0, 0));
+	//dynamicsWorld->addRigidBody(world->getRigidBody());
+    //world->getRigidBody()->setGravity(btVector3(0, 0, 0));
 }
 
 void PhysicsEngine::StepSimulation() {
