@@ -13,6 +13,8 @@
 
 const double FPS = 1.0/60.0;
 
+class Entity;
+
 class PhysicsEngine
 {
 public:

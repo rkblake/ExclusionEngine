@@ -23,6 +23,10 @@ void CoreEngine::RegisterEntity(Entity* entity) {
 	PhysicsEngine::GetInstance().RegisterEntity(entity);
 }
 
+InputManager* CoreEngine::GetInputManager() {
+	return m_pInputManager;
+}
+
 void CoreEngine::Start() {
 	Script config("scripts/config.lua");
 	//Script main("scripts/main.lua");
@@ -31,6 +35,7 @@ void CoreEngine::Start() {
 	const char* title = config.GetString("title");
 	CreateWindow(title, width, height);
 	RenderingEngine::GetInstance().Init();
+	m_pInputManager = new InputManager();
 	World* world = new World("scripts/world1.lua");
 	Entity* sphere = new Entity("scripts/test_entity.lua");
 	player = sphere;
@@ -59,15 +64,8 @@ void CoreEngine::Run() {
 	SDL_Event e;
 	const Uint8* keys;
 	keys = SDL_GetKeyboardState(NULL);
-	//double lastTime = SDL_GetTicks();
-	//double deltaTime, currentTime;
 
 	while(isRunning) {
-		// currentTime = SDL_GetTicks();
-		// deltaTime = currentTime - lastTime;
-		// lastTime = currentTime;
-		// if(deltaTime > FPS)
-		// 	deltaTime = FPS;
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		PhysicsEngine::GetInstance().StepSimulation();
@@ -83,23 +81,9 @@ void CoreEngine::Run() {
 			}
 		}
 
-		/*
-		switch ((unsigned int)keys) {
-			case SDL_SCANCODE_ESCAPE:
-				isRunning = false;
-				break;
-			case SDL_SCANCODE_W:
-				player->getController()->setVelocityForTimeInterval(btVector3(0,0,-1), 100);
-				player->getController()->setWalkDirection(btVector3(0,0,-1));
-		}
-		*/
-
 		if(keys[SDL_SCANCODE_ESCAPE])
 			isRunning = false;
 
-
-		// if(FPS - deltaTime > 0)
-		// 	SDL_Delay(FPS - deltaTime);
 	}
 	Stop();
 }

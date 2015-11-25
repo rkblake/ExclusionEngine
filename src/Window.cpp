@@ -1,10 +1,12 @@
 #include "Window.h"
 #include <stdio.h>
 
+extern
+
 Window::Window(const char* title, int width, int height)
 {
-	_width = width;
-	_height = height;
+	windowWidth = width;
+	windowHeight = height;
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -15,8 +17,8 @@ Window::Window(const char* title, int width, int height)
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
 #endif
 
-	_window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _width, _height, SDL_WINDOW_OPENGL);
-	_glContext = SDL_GL_CreateContext(_window);
+	g_window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_OPENGL);
+	_glContext = SDL_GL_CreateContext(g_window);
 
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
@@ -31,8 +33,6 @@ Window::Window(const char* title, int width, int height)
 	glDepthFunc(GL_LESS);
 	glEnable(GL_CULL_FACE);
 
-	//printf("%s\n", glGetString(GL_VERSION));
-
 #ifndef __APPLE__
 	glewExperimental = true;
 	GLenum err = glewInit();
@@ -45,42 +45,16 @@ Window::Window(const char* title, int width, int height)
 #else
 	printf("%s\n", glGetString(GL_VERSION));
 #endif
-
-	//SDL_WarpMouse(_width/2, _height/2);
 }
 
 Window::~Window()
 {
 	SDL_GL_DeleteContext(_glContext);
-	SDL_DestroyWindow(_window);
+	SDL_DestroyWindow(g_window);
 	SDL_Quit();
 }
 
 void Window::SwapBuffers()
 {
-	SDL_GL_SwapWindow(_window);
+	SDL_GL_SwapWindow(g_window);
 }
-
-/*void Window::Update()
-{
-	while(SDL_PollEvent(&e)) {
-		switch(e.type) {
-		case SDL_QUIT:
-			isCloseRequested = true;
-			break;
-		case SDL_KEYDOWN:
-			//key down
-			break;
-		case SDL_KEYUP:
-			//key up
-			break;
-		case SDL_MOUSEBUTTONDOWN:
-			//mouse down
-			break;
-		case SDL_MOUSEBUTTONUP:
-			//mouse up
-			break;
-		}
-
-	}
-}*/

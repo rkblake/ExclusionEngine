@@ -31,9 +31,9 @@ public:
 	unsigned int GetMouseX();
 	unsigned int GetMouseY();
 
-	void SetMousePos(unsigned int x, unsigned int y);
-	void KeepMouseInWindow(bool keepInWindow);
-	void ShowMouse(bool show);
+	static void SetMousePos(unsigned int x, unsigned int y);
+	static void KeepMouseInWindow(bool keepInWindow);
+	static void ShowMouse(bool show);
 private:
 	Window* m_pWindow;
 

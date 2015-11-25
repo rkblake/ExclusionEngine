@@ -19,6 +19,8 @@
 #include <stdio.h>
 #include <cstring>
 
+class Entity;
+
 enum {
 	FREE_LOOK,
 	FIRST_PERSON,

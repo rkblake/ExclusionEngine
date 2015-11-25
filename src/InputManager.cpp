@@ -3,7 +3,12 @@
 #include <assert.h>
 #include <string.h>
 
-#include "CoreEngine.h"
+#include <SDL2/SDL.h>
+
+#include "Window.h"
+
+SDL_Window* g_window;
+unsigned int windowWidth, windowHeight;
 
 InputManager::InputManager()
     : m_pWindow(NULL), m_quit(false),
@@ -48,7 +53,7 @@ void InputManager::GetInputs() {
 			if(m_pWindow == NULL)
 				m_mouseY = sdlEvent.motion.y;
 			else
-				m_mouseY = m_pWindow->getHeight() - sdlEvent.motion.y;
+				m_mouseY = windowHeight - sdlEvent.motion.y;
 			break;
 
 		case SDL_MOUSEBUTTONDOWN:
@@ -150,19 +155,17 @@ bool InputManager::KeyReleased(SDL_Keycode key) {
 }
 
 void InputManager::SetMousePos(unsigned int x, unsigned int y) {
-    //TODO: use SDL2
-    //SDL_WarpMouse(x, y);
+    SDL_WarpMouseInWindow(g_window, x, y);
 }
 
 void InputManager::KeepMouseInWindow(bool keepInWindow) {
     //m_pWindow = CoreEngine::GetInstance().GetWindow();
     if(keepInWindow)
-        SDL_SetWindowGrab(m_pWindow->GetWindow(), SDL_TRUE);
+        SDL_SetWindowGrab(g_window, SDL_TRUE);
     else
-        SDL_SetWindowGrab(m_pWindow->GetWindow(), SDL_FALSE);
+        SDL_SetWindowGrab(g_window, SDL_FALSE);
 }
 
 void InputManager::ShowMouse(bool show) {
-    //TODO: use SDL2
-    //SDL_ShowCursor(show);
+    SDL_ShowCursor(show);
 }

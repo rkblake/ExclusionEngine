@@ -10,6 +10,9 @@
 #include <SDL2/SDL.h>
 //#include <SDL2/SDL_opengl.h>
 
+extern SDL_Window* g_window;
+extern unsigned int windowHeight, windowWidth;
+
 class Window
 {
 public:
@@ -21,26 +24,26 @@ public:
 	//void Update();
 	void SetFullscreen();
 	//void BindAsRenderTarget() const;
-	inline int getWidth()
-	{
-		return _width;
-	}
-	inline int getHeight()
-	{
-		return _height;
-	}
+	// inline int getWidth()
+	// {
+	// 	return _width;
+	// }
+	// inline int getHeight()
+	// {
+	// 	return _height;
+	// }
 	inline SDL_Window* GetWindow()
 	{
-		return _window;
+		return g_window;
 	}
 	inline bool getIsCloseRequested()
 	{
 		return isCloseRequested;
 	}
 private:
-	int _width, _height;
+	//int _width, _height;
 	bool isCloseRequested;
-	SDL_Window* _window;
+	//SDL_Window* _window;
 	SDL_GLContext _glContext;
 	SDL_Event e;
 	//InputManager* input;

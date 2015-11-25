@@ -1,13 +1,6 @@
 #ifndef EE_COREENGINE_H
 #define EE_COREENGINE_H
 
-#include "Entity.h"
-#include "Window.h"
-#include "RenderingEngine.h"
-#include "PhysicsEngine.h"
-#include "Script.h"
-#include "World.h"
-
 #ifdef __APPLE__
 	#include <OpenGL/gl3.h>
 #else
@@ -17,13 +10,19 @@
 #include <map>
 #include <string>
 
-//extern SDL_Window* mWindow;
-//class Game;
+#include "Entity.h"
+#include "Window.h"
+#include "RenderingEngine.h"
+#include "PhysicsEngine.h"
+#include "Script.h"
+#include "World.h"
+#include "InputManager.h"
 
 class PhysicsEngine;
 class RenderingEngine;
 //class ScriptingEngine;
 class InputManager;
+class Entity;
 
 class CoreEngine
 {
@@ -44,6 +43,7 @@ public:
 	Entity* GetNullEntity();
 	void RegisterEntity(Entity* entity);
 	Window* GetWindow() {return window;}
+	InputManager* GetInputManager();
 private:
 	void CreateWindow(const char* name, int width, int height);
 	CoreEngine();
@@ -51,6 +51,7 @@ private:
 
 	Entity* player;
 	Window* window;
+	InputManager* m_pInputManager;
 	//const double FPS = 1.0/1.0;
 protected:
 
