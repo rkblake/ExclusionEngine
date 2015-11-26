@@ -15,27 +15,9 @@ const float pif_over_2 = pif / 2.0f;
 const float pif_over_4 = pif / 4.0f;
 const float degToRadMultiplier = pif / 180.0f;
 
-float DegToRad(float deg)
-{
-	return deg * degToRadMultiplier;
-}
-
-float RadToDeg(float rad)
-{
-	return rad / degToRadMultiplier;
-}
-
-Vec3f RotationToVector(float xRotRads, float yRotRads)
-{
-	Vec3f dir;
-	float cosY = cosf(yRotRads);
-
-	dir.x = sinf(xRotRads) * cosY;
-	dir.y = -sinf(yRotRads);
-	dir.z = cosf(xRotRads) * cosY;
-
-	return dir;
-}
+float DegToRad(float deg);
+float RadToDeg(float rad);
+Vec3f RotationToVector(float xRotRads, float yRotRads);
 
 template<class T>
 T Wrap(T val, T size) {

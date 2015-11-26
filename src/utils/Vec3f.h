@@ -17,17 +17,25 @@ public:
     Vec3f operator/(float scale) const;
     Vec3f operator+(const Vec3f& other) const;
     Vec3f operator-(const Vec3f& other) const;
+
     Vec3f operator-() const;
-    const Vec3f& operator-=(const Vec3f& other);
+
+    const Vec3f &operator*=(float scale);
+	const Vec3f &operator/=(float scale);
+	const Vec3f &operator+=(const Vec3f &other);
+	const Vec3f &operator-=(const Vec3f &other);
+	const Vec3f &operator*=(const Vec3f &other);
+	const Vec3f &operator/=(const Vec3f &other);
 
     bool operator==(const Vec3f& other) const;
     bool operator!=(const Vec3f& other) const;
 
-    float length() const;
-    float lengthSquared() const;
-    void normalize();
+    float Magnitude() const;
+    float MagnitudeSquared() const;
+    void NormalizeThis();
+    Vec3f Normalize() const;
     float dot(const Vec3f& other) const;
-    Vec3f cross(const Vec3f& other) const;
+    Vec3f Cross(const Vec3f& other) const;
     Vec3f project(const Vec3f& other) const;
 
     btVector3 toBt() const;
