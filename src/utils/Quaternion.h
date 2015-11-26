@@ -58,7 +58,7 @@ public:
 
 	void CalculateWFromXYZ();
 
-	// void MulMatrix();
+	void MulMatrix();
 
 	static Quaternion Lerp(const Quaternion &first, const Quaternion &second, float interpolationCoefficient);
 	static Quaternion Slerp(const Quaternion &first, const Quaternion &second, float interpolationCoefficient);

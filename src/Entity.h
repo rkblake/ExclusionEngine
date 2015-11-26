@@ -45,7 +45,7 @@ private:
 	float m_accel, m_decel, m_maxSpeed, m_jumpVel, m_mouseSensitivity;
 	bool m_mouseLocked;
 
-	DynamicCharacterController* m_pController;
+	DynamicCharacterController* m_pCharacterController;
 	btDiscreteDynamicsWorld* m_pPhysicsWorld;
 	glm::mat4 m_entityTransform;
 

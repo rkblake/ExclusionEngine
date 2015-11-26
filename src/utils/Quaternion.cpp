@@ -168,10 +168,10 @@ void Quaternion::Reset()
 	z = 0.0f;
 }
 
-// void Quaternion::MulMatrix()
-// {
-// 	GetMatrix().GL_Mult();
-// }
+void Quaternion::MulMatrix()
+{
+	//GetMatrix().GL_Mult();
+}
 
 Matrix4x4f Quaternion::GetMatrix() const
 {

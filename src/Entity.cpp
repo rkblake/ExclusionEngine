@@ -13,7 +13,7 @@ Entity::Entity(const char* name)
 
 	m_pPhysicsWorld = PhysicsEngine::GetInstance().getWorld();
 	m_direction = Vec3f(0, 0, 0);
-	m_pController = new DynamicCharacterController(m_pPhysicsWorld, Vec3f(0, 0, 0), 1, 1, 1, 1);
+	m_pCharacterController = new DynamicCharacterController(m_pPhysicsWorld, Vec3f(0, 0, 0), 1, 1, 1, 1);
 }
 
 Entity::Entity(int) {
@@ -25,7 +25,7 @@ Vec3f Entity::GetViewVec() {
 }
 
 Vec3f Entity::GetPosition() {
-	return m_pController->GetPosition();
+	return m_pCharacterController->GetPosition();
 }
 
 void Entity::Render() {
@@ -79,5 +79,31 @@ void Entity::Run() {
 	float xRotRads = DegToRad(m_rotation.x);
 	float yRotRads = DegToRad(m_rotation.y);
 
-	
+	m_direction = RotationToVector(xRotRads, yRotRads);
+
+	//TODO: set camera rotation
+
+	Vec2f xzPlaneForwardDirection(sinf(xRotRads), cosf(xRotRads));
+	Vec2f xzPlaneSideDirection(xzPlaneForwardDirection.y, -xzPlaneForwardDirection.x);
+
+	if(CoreEngine::GetInstance().GetInputManager()->GetCurrentKeyState(SDLK_w)) {
+		m_pCharacterController->Walk(-xzPlaneForwardDirection * m_accel);
+	}
+	else if(CoreEngine::GetInstance().GetInputManager()->GetCurrentKeyState(SDLK_s)) {
+		m_pCharacterController->Walk(xzPlaneForwardDirection * m_accel);
+	}
+	if(CoreEngine::GetInstance().GetInputManager()->GetCurrentKeyState(SDLK_a)) {
+		m_pCharacterController->Walk(-xzPlaneSideDirection * m_accel);
+	}
+	else if(CoreEngine::GetInstance().GetInputManager()->GetCurrentKeyState(SDLK_d)) {
+		m_pCharacterController->Walk(xzPlaneSideDirection * m_accel);
+	}
+
+	if(CoreEngine::GetInstance().GetInputManager()->GetCurrentKeyState(SDLK_SPACE)) {
+		m_pCharacterController->Jump();
+	}
+
+	m_pCharacterController->Update();
+
+	//TODO: update camera position
 }
