@@ -7,6 +7,9 @@ Camera::Camera()
 
 void Camera::ApplyTransformation()
 {
+    view_matrix.SetIdentity();
+    view_matrix.RotateMatrix(m_rotation.GetEulerAngles());
+    view_matrix.TranslateMatrix(m_position);
 	//m_rotation.MulMatrix();
 	//glTranslatef(-m_position.x, -m_position.y, -m_position.z);
 }

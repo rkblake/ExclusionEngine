@@ -159,7 +159,6 @@ void InputManager::SetMousePos(unsigned int x, unsigned int y) {
 }
 
 void InputManager::KeepMouseInWindow(bool keepInWindow) {
-    //m_pWindow = CoreEngine::GetInstance().GetWindow();
     if(keepInWindow)
         SDL_SetWindowGrab(g_window, SDL_TRUE);
     else

@@ -1,12 +1,6 @@
 #ifndef EE_RENDERINGENGINE_H
 #define EE_RENDERINGENGINE_H
 
-#include "Window.h"
-#include "Entity.h"
-#include "Shaders.h"
-#include "CoreEngine.h"
-#include "World.h"
-
 #ifdef __APPLE__
 	#include <OpenGL/gl3.h>
 #else
@@ -18,6 +12,14 @@
 #include <SDL2/SDL.h>
 #include <stdio.h>
 #include <cstring>
+
+#include "Window.h"
+#include "Entity.h"
+#include "Shaders.h"
+#include "CoreEngine.h"
+#include "World.h"
+#include "Camera.h"
+#include "utils/Matrix4x4f.h"
 
 class Entity;
 
@@ -53,8 +55,8 @@ public:
 	}
 
 	void ComputeMatrices();
-	glm::mat4 GetProjectionMatrix() {return projection_matrix;}
-	glm::mat4 GetViewMatrix() {return view_matrix;}
+	Matrix4x4f GetProjectionMatrix() {return projection_matrix;}
+	Matrix4x4f GetViewMatrix() {return view_matrix;}
 	void SetFreeLook() {camera_style = FREE_LOOK;}
 	void SetFirstPerson() {camera_style = FIRST_PERSON;}
 	void SetThirdPerson() {camera_style = THIRD_PERSON;}
@@ -66,10 +68,12 @@ public:
 	void SetFocus(bool focus) {isFocus = focus;}
 	void AttachEntity(Entity* entity) {attached_entity = entity;}
 	void SetWorld(World* w) {world = w;}
+	Camera* GetCamera();
 private:
+	Camera* m_camera;
 	Window* window;
 	int _width, _height;
-	glm::mat4 view_matrix, projection_matrix, model_matrix, mvp_matrix;
+	Matrix4x4f view_matrix, projection_matrix, model_matrix, mvp_matrix;
 	GLuint viewID, projectionID, lightID, mvpID, textureID, modelViewID, materialID, normalID;
 	float fov, horizontalAngle, verticalAngle;
 	float mouseSpeed;

@@ -6,8 +6,10 @@ RenderingEngine::RenderingEngine() {
 	attached_entity = CoreEngine::GetInstance().GetNullEntity();
 	mouseSpeed = 0.0005f;
 	fov = 45.0f;
-	camera_style = FREE_LOOK;
+	camera_style = FIRST_PERSON;
 	isFocus = true;
+	m_camera = new Camera();
+	projection_matrix = Matrix4x4f(glm::perspective(fov, 4.0f / 3.0f, 0.1f, 100.0f));
 }
 
 void RenderingEngine::Init() {
@@ -65,33 +67,37 @@ void RenderingEngine::Init() {
 	glUniform1i(textureID, 0);
 }
 
+Camera* RenderingEngine::GetCamera() {
+	return m_camera;
+}
+
 void RenderingEngine::ComputeMatrices() {
-    int x_pos, y_pos;
-    SDL_GetMouseState(&x_pos, &y_pos);
+    //int x_pos, y_pos;
+    //SDL_GetMouseState(&x_pos, &y_pos);
 
     if(isFocus) {
-        SDL_WarpMouseInWindow(window->GetWindow(), _width/2, _height/2);
-        horizontalAngle += mouseSpeed * (_width/2 - x_pos);
-        verticalAngle += mouseSpeed * (_height/2 - y_pos);
+        //SDL_WarpMouseInWindow(window->GetWindow(), _width/2, _height/2);
+        //horizontalAngle += mouseSpeed * (_width/2 - x_pos);
+        //verticalAngle += mouseSpeed * (_height/2 - y_pos);
     }
 
-	direction = glm::vec3(
-		cos(verticalAngle) * sin(horizontalAngle),
-		sin(verticalAngle),
-		cos(verticalAngle) * cos(horizontalAngle)
-	);
-
-	right = glm::vec3(
-		sin(horizontalAngle - 3.14f/2.0f),
-		0,
-		cos(horizontalAngle - 3.14f/2.0f)
-	);
-
-	front = glm::vec3(
-		sin(horizontalAngle - 3.13f/2.0),
-		0,
-		0
-	);
+	// direction = glm::vec3(
+	// 	cos(verticalAngle) * sin(horizontalAngle),
+	// 	sin(verticalAngle),
+	// 	cos(verticalAngle) * cos(horizontalAngle)
+	// );
+	//
+	// right = glm::vec3(
+	// 	sin(horizontalAngle - 3.14f/2.0f),
+	// 	0,
+	// 	cos(horizontalAngle - 3.14f/2.0f)
+	// );
+	//
+	// front = glm::vec3(
+	// 	sin(horizontalAngle - 3.13f/2.0),
+	// 	0,
+	// 	0
+	// );
 
 
     if(camera_style == FREE_LOOK) {
@@ -101,10 +107,7 @@ void RenderingEngine::ComputeMatrices() {
     	view_matrix = glm::lookAt(position, position+direction, up);
     }
     else if(camera_style == FIRST_PERSON) {
-        //direction = attached_entity->GetDirection();
-        //float
-        //right = glm::vec3()
-
+        m_camera->GetViewMatrix(view_matrix);
     }
     else { //THIRD_PERSON
 		//glm::vec3 camera_pos = glm::vec3(
@@ -130,22 +133,25 @@ void RenderingEngine::Swap() {
 void RenderingEngine::RenderScene() {
 	ComputeMatrices();
 	//view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, -15, -50.0));
-	view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, -5, -25.0));
+	//view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, -5, -25.0));
 	//model_matrix = glm::mat4(1.0);
 	//glm::mat4 modelViewMatrix = view_matrix * model_matrix;
 	//glm::mat4 normalMatrix = glm::transpose(glm::inverse(modelViewMatrix));
-	glUniformMatrix4fv(viewID, 1, GL_FALSE, &view_matrix[0][0]);
-	glUniformMatrix4fv(projectionID, 1, GL_FALSE, &projection_matrix[0][0]);
+	glUniformMatrix4fv(viewID, 1, GL_FALSE, &view_matrix[0]);
+	glUniformMatrix4fv(projectionID, 1, GL_FALSE, &projection_matrix[0]);
 	//glUniformMatrix4fv(normalID, 1, GL_FALSE, &normalMatrix[0][0]);
 	//glUniformMatrix4fv(modelViewID, 1, GL_FALSE, &modelViewMatrix[0][0]);
 
-	model_matrix = glm::mat4(1.0);
+	model_matrix.SetIdentity();
 	mvp_matrix = projection_matrix * view_matrix * model_matrix;
-	glm::mat4 mv_matrix = view_matrix * model_matrix;
-	glm::mat4 normalMatrix = glm::transpose(glm::inverse(mv_matrix));
-	glUniformMatrix4fv(mvpID, 1, GL_FALSE, &mvp_matrix[0][0]);
-	glUniformMatrix4fv(modelViewID, 1, GL_FALSE, &mv_matrix[0][0]);
-	glUniformMatrix4fv(normalID, 1, GL_FALSE, &normalMatrix[0][0]);
+	Matrix4x4f mv_matrix = view_matrix * model_matrix;
+	//Matrix4x4f normalMatrix = glm::transpose(glm::inverse(mv_matrix));
+	Matrix4x4f inverse_normal;
+	mv_matrix.Inverse(inverse_normal);
+	Matrix4x4f normalMatrix = inverse_normal.Transpose();
+	glUniformMatrix4fv(mvpID, 1, GL_FALSE, &mvp_matrix[0]);
+	glUniformMatrix4fv(modelViewID, 1, GL_FALSE, &mv_matrix[0]);
+	glUniformMatrix4fv(normalID, 1, GL_FALSE, &normalMatrix[0]);
 	world->Render();
 
 	for(std::vector<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i) {
@@ -157,11 +163,14 @@ void RenderingEngine::RenderScene() {
 		//entity_pos.getOpenGLMatrix(&model_matrix[0][0]);
 		model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(entity_vec.x(), entity_vec.y(), entity_vec.z()));
 		mvp_matrix = projection_matrix * view_matrix * model_matrix;
-		glm::mat4 mv_matrix = view_matrix * model_matrix;
-		glm::mat4 normalMatrix = glm::transpose(glm::inverse(mv_matrix));
-		glUniformMatrix4fv(mvpID, 1, GL_FALSE, &mvp_matrix[0][0]);
-		glUniformMatrix4fv(modelViewID, 1, GL_FALSE, &mv_matrix[0][0]);
-		glUniformMatrix4fv(normalID, 1, GL_FALSE, &normalMatrix[0][0]);
+		Matrix4x4f mv_matrix = view_matrix * model_matrix;
+		//Matrix4x4f normalMatrix = glm::transpose(glm::inverse(mv_matrix));
+		Matrix4x4f inverse_normal;
+		mv_matrix.Inverse(inverse_normal);
+		Matrix4x4f normalMatrix = inverse_normal.Transpose();
+		glUniformMatrix4fv(mvpID, 1, GL_FALSE, &mvp_matrix[0]);
+		glUniformMatrix4fv(modelViewID, 1, GL_FALSE, &mv_matrix[0]);
+		glUniformMatrix4fv(normalID, 1, GL_FALSE, &normalMatrix[0]);
 		(*i)->Render();
 	}
 }

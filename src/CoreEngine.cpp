@@ -70,6 +70,7 @@ void CoreEngine::Run() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		PhysicsEngine::GetInstance().StepSimulation();
 		//player->getController()->playerStep(PhysicsEngine::GetInstance().getWorld(), deltaTime);
+		player->Update();
 		RenderingEngine::GetInstance().RenderScene();
 		window->SwapBuffers();
 

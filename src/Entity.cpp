@@ -1,6 +1,7 @@
 #include "Entity.h"
 
 #include "InputManager.h"
+#include "RenderingEngine.h"
 #include "utils/utils.h"
 
 Entity::Entity(const char* name)
@@ -35,7 +36,7 @@ void Entity::Render() {
 
 void Entity::Update() {
 	if(m_mouseLocked) {
-		if(CoreEngine::GetInstance().GetInputManager()->KeyReleased(SDLK_ESCAPE)) {
+		if(CoreEngine::GetInstance().GetInputManager()->KeyReleased(SDLK_q)) {
 			m_mouseLocked = false;
 
 			InputManager::ShowMouse(true);
@@ -60,7 +61,7 @@ void Entity::Update() {
 		}
 	}
 	else {
-		if(CoreEngine::GetInstance().GetInputManager()->KeyReleased(SDLK_ESCAPE))
+		if(CoreEngine::GetInstance().GetInputManager()->KeyReleased(SDLK_q))
 			m_mouseLocked = true;
 
 			InputManager::ShowMouse(false);
@@ -72,7 +73,7 @@ void Entity::Update() {
 
 	Run();
 
-	//TODO: calculate player transform
+	//TODO: calculate player transform. maybe
 }
 
 void Entity::Run() {
@@ -81,7 +82,12 @@ void Entity::Run() {
 
 	m_direction = RotationToVector(xRotRads, yRotRads);
 
-	//TODO: set camera rotation
+	Quaternion xRotQuad;
+	xRotQuad.Rotate(xRotRads, Vec3f(0.0f, 1.0f, 0.0f));
+	Quaternion yRotQuad;
+	yRotQuad.Rotate(yRotRads, Vec3f(1.0f, 0.0f, 0.0f));
+
+	RenderingEngine::GetInstance().GetCamera()->m_rotation = xRotQuad * yRotQuad;
 
 	Vec2f xzPlaneForwardDirection(sinf(xRotRads), cosf(xRotRads));
 	Vec2f xzPlaneSideDirection(xzPlaneForwardDirection.y, -xzPlaneForwardDirection.x);
@@ -105,5 +111,5 @@ void Entity::Run() {
 
 	m_pCharacterController->Update();
 
-	//TODO: update camera position
+	RenderingEngine::GetInstance().GetCamera()->m_position = m_pCharacterController->GetPosition();
 }

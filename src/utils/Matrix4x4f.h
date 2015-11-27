@@ -3,6 +3,7 @@
 
 #include "Vec3f.h"
 #include "Vec4f.h"
+#include "glm/glm.hpp"
 
 //Column-major order
 
@@ -13,6 +14,7 @@ public:
     float m_elements[16];
 
     Matrix4x4f();
+    Matrix4x4f(glm::mat4 glm_mat);
 
     float& operator[](int i);
 
