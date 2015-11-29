@@ -47,7 +47,7 @@ void CoreEngine::Start() {
 	//RegisterEntity(cube);
 	RegisterEntity(sphere);
 	//Entity* null = GetNullEntity();
-	RenderingEngine::GetInstance().AttachEntity(sphere);
+	//RenderingEngine::GetInstance().AttachEntity(sphere);
 	Run();
 }
 

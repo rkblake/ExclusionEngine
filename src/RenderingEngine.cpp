@@ -133,7 +133,7 @@ void RenderingEngine::Swap() {
 void RenderingEngine::RenderScene() {
 	ComputeMatrices();
 	//view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, -15, -50.0));
-	//view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, -5, -25.0));
+	view_matrix.TranslateMatrix(Vec3f(0, -5, -25));
 	//model_matrix = glm::mat4(1.0);
 	//glm::mat4 modelViewMatrix = view_matrix * model_matrix;
 	//glm::mat4 normalMatrix = glm::transpose(glm::inverse(modelViewMatrix));

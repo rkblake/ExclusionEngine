@@ -14,7 +14,7 @@ Entity::Entity(const char* name)
 
 	m_pPhysicsWorld = PhysicsEngine::GetInstance().getWorld();
 	m_direction = Vec3f(0, 0, 0);
-	m_pCharacterController = new DynamicCharacterController(m_pPhysicsWorld, Vec3f(0, 0, 0), 1, 1, 1, 1);
+	m_pCharacterController = new DynamicCharacterController(m_pPhysicsWorld, Vec3f(0, 10, 0), 1, 1, 1, 1);
 }
 
 Entity::Entity(int) {
@@ -36,7 +36,7 @@ void Entity::Render() {
 
 void Entity::Update() {
 	if(m_mouseLocked) {
-		if(CoreEngine::GetInstance().GetInputManager()->KeyReleased(SDLK_q)) {
+		if(CoreEngine::GetInstance().GetInputManager()->KeyReleased(SDL_SCANCODE_Q)) {
 			m_mouseLocked = false;
 
 			InputManager::ShowMouse(true);
@@ -61,7 +61,7 @@ void Entity::Update() {
 		}
 	}
 	else {
-		if(CoreEngine::GetInstance().GetInputManager()->KeyReleased(SDLK_q))
+		if(CoreEngine::GetInstance().GetInputManager()->KeyReleased(SDL_SCANCODE_Q))
 			m_mouseLocked = true;
 
 			InputManager::ShowMouse(false);
@@ -92,16 +92,16 @@ void Entity::Run() {
 	Vec2f xzPlaneForwardDirection(sinf(xRotRads), cosf(xRotRads));
 	Vec2f xzPlaneSideDirection(xzPlaneForwardDirection.y, -xzPlaneForwardDirection.x);
 
-	if(CoreEngine::GetInstance().GetInputManager()->GetCurrentKeyState(SDLK_w)) {
+	if(CoreEngine::GetInstance().GetInputManager()->GetCurrentKeyState(SDL_SCANCODE_W)) {
 		m_pCharacterController->Walk(-xzPlaneForwardDirection * m_accel);
 	}
-	else if(CoreEngine::GetInstance().GetInputManager()->GetCurrentKeyState(SDLK_s)) {
+	else if(CoreEngine::GetInstance().GetInputManager()->GetCurrentKeyState(SDL_SCANCODE_S)) {
 		m_pCharacterController->Walk(xzPlaneForwardDirection * m_accel);
 	}
-	if(CoreEngine::GetInstance().GetInputManager()->GetCurrentKeyState(SDLK_a)) {
+	if(CoreEngine::GetInstance().GetInputManager()->GetCurrentKeyState(SDL_SCANCODE_A)) {
 		m_pCharacterController->Walk(-xzPlaneSideDirection * m_accel);
 	}
-	else if(CoreEngine::GetInstance().GetInputManager()->GetCurrentKeyState(SDLK_d)) {
+	else if(CoreEngine::GetInstance().GetInputManager()->GetCurrentKeyState(SDL_SCANCODE_D)) {
 		m_pCharacterController->Walk(xzPlaneSideDirection * m_accel);
 	}
 
