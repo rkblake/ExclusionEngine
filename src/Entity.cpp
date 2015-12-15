@@ -3,6 +3,7 @@
 #include "InputManager.h"
 #include "RenderingEngine.h"
 #include "utils/utils.h"
+#include <stdio.h>
 
 Entity::Entity(const char* name)
 	: m_mouseSensitivity(0.1f), m_rotation(Vec2f(0.0, 0.0)),
@@ -14,7 +15,7 @@ Entity::Entity(const char* name)
 
 	m_pPhysicsWorld = PhysicsEngine::GetInstance().getWorld();
 	m_direction = Vec3f(0, 0, 0);
-	m_pCharacterController = new DynamicCharacterController(m_pPhysicsWorld, Vec3f(0, 10, 0), 1, 1, 1, 1);
+	m_pCharacterController = new DynamicCharacterController(m_pPhysicsWorld, Vec3f(0, 2, 0), 1, 1, 1, 1);
 }
 
 Entity::Entity(int) {
@@ -38,7 +39,7 @@ void Entity::Update() {
 	if(m_mouseLocked) {
 		if(CoreEngine::GetInstance().GetInputManager()->KeyReleased(SDL_SCANCODE_Q)) {
 			m_mouseLocked = false;
-
+			printf("Unlocked\n");
 			InputManager::ShowMouse(true);
 			InputManager::KeepMouseInWindow(false);
 		}
@@ -63,7 +64,7 @@ void Entity::Update() {
 	else {
 		if(CoreEngine::GetInstance().GetInputManager()->KeyReleased(SDL_SCANCODE_Q))
 			m_mouseLocked = true;
-
+			printf("Locked\n");
 			InputManager::ShowMouse(false);
 			InputManager::KeepMouseInWindow(true);
 

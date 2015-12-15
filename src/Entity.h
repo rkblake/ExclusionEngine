@@ -11,6 +11,7 @@
 #include <cstring>
 
 #include <glm/glm.hpp>
+#include <SDL2/SDL.h>
 
 #include "utils/Vec3f.h"
 #include "utils/Vec2f.h"

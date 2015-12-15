@@ -61,7 +61,7 @@ Entity* CoreEngine::GetNullEntity() {
 
 void CoreEngine::Run() {
 	bool isRunning = true;
-	SDL_Event e;
+	//SDL_Event e;
 	const Uint8* keys;
 	keys = SDL_GetKeyboardState(NULL);
 
@@ -70,10 +70,11 @@ void CoreEngine::Run() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		PhysicsEngine::GetInstance().StepSimulation();
 		//player->getController()->playerStep(PhysicsEngine::GetInstance().getWorld(), deltaTime);
+		m_pInputManager->GetInputs();
 		player->Update();
 		RenderingEngine::GetInstance().RenderScene();
 		window->SwapBuffers();
-
+/*
 		while(SDL_PollEvent(&e)) {
 			switch(e.type) {
 				case SDL_QUIT:
@@ -81,7 +82,7 @@ void CoreEngine::Run() {
 					break;
 			}
 		}
-
+*/
 		if(keys[SDL_SCANCODE_ESCAPE])
 			isRunning = false;
 

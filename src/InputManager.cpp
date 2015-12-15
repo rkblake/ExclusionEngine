@@ -2,6 +2,7 @@
 
 #include <assert.h>
 #include <string.h>
+#include <stdio.h>
 
 #include <SDL2/SDL.h>
 
@@ -38,6 +39,8 @@ void InputManager::GetInputs() {
 
 	m_lmbClicked = false;
 	m_rmbClicked = false;
+
+    //memcpy(m_pPastKeyStates, m_pCurrentKeyStates, m_keyStateArraySizeBytes);
 
 	while(SDL_PollEvent(&sdlEvent))
 	{
@@ -81,6 +84,16 @@ void InputManager::GetInputs() {
 				m_rmbDown = false;
 
 			break;
+
+        case SDL_KEYDOWN:
+            //m_pCurrentKeyStates[sdlEvent.key.keysym.scancode] = 1;
+            break;
+
+        case SDL_KEYUP:
+            //m_pCurrentKeyStates[sdlEvent.key.keysym.scancode] = 0;
+            //m_pPastKeyStates[sdlEvent.key.keysym.scancode] = 1;
+            break;
+
 		}
 	}
 
@@ -89,6 +102,7 @@ void InputManager::GetInputs() {
 
 	// Get key states
 	const Uint8* pStates = SDL_GetKeyboardState(NULL);
+
 
 	// Copy new states
 	memcpy(m_pCurrentKeyStates, pStates, m_keyStateArraySizeBytes);
