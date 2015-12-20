@@ -62,7 +62,7 @@ void Entity::Update() {
 		}
 	}
 	else {
-		if(CoreEngine::GetInstance().GetInputManager()->KeyReleased(SDL_SCANCODE_Q))
+		if(CoreEngine::GetInstance().GetInputManager()->KeyReleased(SDL_SCANCODE_Q)) {
 			m_mouseLocked = true;
 			printf("Locked\n");
 			InputManager::ShowMouse(false);
@@ -70,6 +70,7 @@ void Entity::Update() {
 
 			// Set position now so don't get a view direction jump
 			InputManager::SetMousePos(100, 100);
+		}
 	}
 
 	Run();
