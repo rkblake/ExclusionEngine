@@ -8,6 +8,6 @@
 
 int main(int, char**)
 {
-	CoreEngine::GetInstance().Start();
+	CoreEngine::GetInstance().Start("scripts/config.lua");
 	return 0;
 }

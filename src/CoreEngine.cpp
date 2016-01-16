@@ -14,45 +14,45 @@ CoreEngine::~CoreEngine()
 
 }
 
-void CoreEngine::CreateWindow(const char* title, int width, int height) {
-	window = RenderingEngine::GetInstance().CreateWindow(title, width, height);
-}
+void CoreEngine::Start(const char* windowConfigPath) {
+	/* Get the singleton instance of the RenderingEngine. */
+	static RenderingEngine& renderer = RenderingEngine::GetInstance();
+	static PhysicsEngine& physics = PhysicsEngine::GetInstance();
 
-void CoreEngine::RegisterEntity(Entity* entity) {
-	RenderingEngine::GetInstance().RegisterEntity(entity);
-	PhysicsEngine::GetInstance().RegisterEntity(entity);
-}
-
-InputManager* CoreEngine::GetInputManager() {
-	return m_pInputManager;
-}
-
-void CoreEngine::Start() {
-	Script config("scripts/config.lua");
+	/* Load window configuration. */
+	Script config(windowConfigPath);
 	//Script main("scripts/main.lua");
-	int width = (int)config.GetNumber("width");
-	int height = (int)config.GetNumber("height");
-	const char* title = config.GetString("title");
-	CreateWindow(title, width, height);
-	RenderingEngine::GetInstance().Init();
+	CreateWindow(config);
+
+	/* Initialize the RenderingEngine. */
+	renderer.Init();
+
 	m_pInputManager = new InputManager();
+    
+	/* testing purposes only. */
+	demo(renderer, physics);
+	
+	Run();
+}
+
+void CoreEngine::Stop() {
+	// TODO: cleanup
+}
+
+void CoreEngine::demo(RenderingEngine& renderer, PhysicsEngine& physics) {
 	World* world = new World("scripts/world1.lua");
 	Entity* sphere = new Entity("scripts/test_entity.lua");
 	player = sphere;
 	//Entity* cube = new Entity("scripts/cube.lua");
 	//sphere->Renderable::translate(0, 10, 0);
-	PhysicsEngine::GetInstance().SetWorld(world);
-	RenderingEngine::GetInstance().SetWorld(world);
+	
+	physics.SetWorld(world);
+	renderer.SetWorld(world);
 	//cube->translate(10,25,0);
 	//RegisterEntity(cube);
 	RegisterEntity(sphere);
 	//Entity* null = GetNullEntity();
 	//RenderingEngine::GetInstance().AttachEntity(sphere);
-	Run();
-}
-
-void CoreEngine::Stop() {
-	//do cleanup
 }
 
 Entity* CoreEngine::GetNullEntity() {
@@ -74,7 +74,7 @@ void CoreEngine::Run() {
 		player->Update();
 		RenderingEngine::GetInstance().RenderScene();
 		window->SwapBuffers();
-/*
+/* TODO: fix SDL_QUIT handling
 		while(SDL_PollEvent(&e)) {
 			switch(e.type) {
 				case SDL_QUIT:
@@ -88,4 +88,20 @@ void CoreEngine::Run() {
 
 	}
 	Stop();
+}
+
+void CoreEngine::CreateWindow(Script config) {
+	int width = (int)config.GetNumber("width");
+	int height = (int)config.GetNumber("height");
+	const char* title = config.GetString("title");
+	window = RenderingEngine::GetInstance().CreateWindow(title, width, height);
+}
+
+void CoreEngine::RegisterEntity(Entity* entity) {
+	RenderingEngine::GetInstance().RegisterEntity(entity);
+	PhysicsEngine::GetInstance().RegisterEntity(entity);
+}
+
+InputManager* CoreEngine::GetInputManager() {
+	return m_pInputManager;
 }

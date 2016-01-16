@@ -37,7 +37,7 @@ public:
 	//inline ScriptingEngine* GetScriptingEngine() {return scripter;}
 	//inline InputManager* GetInputManager() {return input;}
 
-	void Start();
+	void Start(const char* windowConfigPath);
 	void Run();
 	void Stop();
 	Entity* GetNullEntity();
@@ -45,9 +45,11 @@ public:
 	Window* GetWindow() {return window;}
 	InputManager* GetInputManager();
 private:
-	void CreateWindow(const char* name, int width, int height);
+	void CreateWindow(Script windowConfig);
 	CoreEngine();
 	~CoreEngine();
+
+	void demo(RenderingEngine& renderer, PhysicsEngine& physics);
 
 	Entity* player;
 	Window* window;
