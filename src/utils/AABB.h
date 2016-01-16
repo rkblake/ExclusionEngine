@@ -55,7 +55,6 @@ public:
 	// Maximum dimension
 	float GetRadius() const;
 
-	friend class AABB;
 private:
     Vec3f m_center;
     Vec3f m_halfDims;

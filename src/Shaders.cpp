@@ -1,13 +1,25 @@
 #include "Shaders.h"
 
 #include <fstream>
-#include <string>
+#include <string.h>
 #include <vector>
 
+#define EXTENSION_LENGTH 3
 
-GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path)
+
+GLuint LoadShadersByName(const char * name)
 {
+        unsigned int len = sizeof(char) * (strlen(name) + EXTENSION_LENGTH + 1);
+        char * vs_path = (char*)malloc(len);
+        sprintf(vs_path, "%s.vs", name);
+        char * fs_path = (char*)malloc(len);
+        sprintf(fs_path, "%s.fs", name);
 
+        return LoadShaders(vs_path, fs_path);
+}
+
+GLuint LoadShaders(const char* vertex_file_path, const char * fragment_file_path)
+{
 	// Create the shaders
 	GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	GLuint FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
