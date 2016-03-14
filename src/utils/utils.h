@@ -1,9 +1,10 @@
-#ifndef EE_UTILS
-#define EE_UTILS
+#ifndef EE_UTILS_H
+#define EE_UTILS_H
 
 #include <glm/glm.hpp>
 #include <bullet/LinearMath/btVector3.h>
 #include <math.h>
+
 
 #include "Vec2f.h"
 #include "Vec3f.h"
@@ -38,5 +39,8 @@ T Clamp(T val, T min, T max) {
 
 	return val;
 }
+
+unsigned char* LoadImage(const char* file, int* width, int* height, int* numComponents, int layout);
+void FreeImage(unsigned char* data);
 
 #endif

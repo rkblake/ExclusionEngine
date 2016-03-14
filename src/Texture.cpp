@@ -1,13 +1,12 @@
 #include "Texture.h"
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
 #include <cassert>
 #include <stdio.h>
+
 
 Texture::Texture(const std::string& filename)
 {
 	int width, height, numComponents;
-	unsigned char* imageData = stbi_load(filename.c_str(), &width, &height, &numComponents, STBI_rgb_alpha);
+	unsigned char* imageData = LoadImage(filename.c_str(), &width, &height, &numComponents, 4);
 
 	if(imageData == nullptr)
 		printf("Texture loading failed: %s\n", filename.c_str());
@@ -23,7 +22,7 @@ Texture::Texture(const std::string& filename)
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 
-	stbi_image_free(imageData);
+	//stbi_image_free(imageData);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, mTexture);

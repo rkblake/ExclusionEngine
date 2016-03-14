@@ -6,6 +6,7 @@
 #else
 	#include <GL/glew.h>
 #endif
+#include "utils/utils.h"
 
 #include <string>
 
