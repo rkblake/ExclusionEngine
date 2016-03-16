@@ -1,5 +1,7 @@
 #include "CoreEngine.h"
 
+#include <vector>
+
 CoreEngine::CoreEngine()
 	//renderer(RenderingEngine::GetInstance()),
 	//physics(PhysicsEngine::GetInstance()),
@@ -28,10 +30,10 @@ void CoreEngine::Start(const char* windowConfigPath) {
 	renderer.Init();
 
 	m_pInputManager = new InputManager();
-    
+
 	/* testing purposes only. */
 	demo(renderer, physics);
-	
+
 	Run();
 }
 
@@ -41,18 +43,30 @@ void CoreEngine::Stop() {
 
 void CoreEngine::demo(RenderingEngine& renderer, PhysicsEngine& physics) {
 	World* world = new World("scripts/world1.lua");
-	Entity* sphere = new Entity("scripts/test_entity.lua");
+
+	std::vector<const char*> files;
+	files.push_back("res/skybox/right.jpg");
+	files.push_back("res/skybox/left.jpg");
+	files.push_back("res/skybox/top.jpg");
+	files.push_back("res/skybox/bottom.jpg");
+	files.push_back("res/skybox/back.jpg");
+	files.push_back("res/skybox/front.jpg");
+	Skybox* skybox = new Skybox(files);
+
+	// Entity* sphere = new Entity("scripts/test_entity.lua");
+	Entity* sphere = new Entity(0);
 	player = sphere;
 	//Entity* cube = new Entity("scripts/cube.lua");
 	//sphere->Renderable::translate(0, 10, 0);
-	
+
 	physics.SetWorld(world);
 	renderer.SetWorld(world);
+	renderer.SetSkybox(skybox);
 	//cube->translate(10,25,0);
 	//RegisterEntity(cube);
 	RegisterEntity(sphere);
 	//Entity* null = GetNullEntity();
-	//RenderingEngine::GetInstance().AttachEntity(sphere);
+	RenderingEngine::GetInstance().AttachEntity(sphere);
 }
 
 Entity* CoreEngine::GetNullEntity() {

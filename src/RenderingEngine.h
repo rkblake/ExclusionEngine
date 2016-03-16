@@ -19,6 +19,7 @@
 #include "CoreEngine.h"
 #include "World.h"
 #include "Camera.h"
+#include "Skybox.h"
 #include "utils/Matrix4x4f.h"
 
 class Entity;
@@ -68,18 +69,21 @@ public:
 	void SetFocus(bool focus) {isFocus = focus;}
 	void AttachEntity(Entity* entity) {attached_entity = entity;}
 	void SetWorld(World* w) {world = w;}
+	void SetSkybox(Skybox* s) {skybox = s;}
 	Camera* GetCamera();
 private:
 	Camera* m_camera;
 	Window* window;
 	int _width, _height;
 	Matrix4x4f view_matrix, projection_matrix, model_matrix, mvp_matrix;
+	GLuint shader;
 	GLuint viewID, projectionID, lightID, mvpID, textureID, modelViewID, materialID, normalID;
 	float fov, horizontalAngle, verticalAngle;
 	float mouseSpeed;
 	glm::vec3 position, direction, right, up, front;
 	Entity* attached_entity; //entity that the camera is attached to
 	World* world;
+	Skybox* skybox;
 	unsigned int camera_style;
 	bool isFocus;
 	std::vector<Entity*> entities;

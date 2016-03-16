@@ -45,7 +45,7 @@ GLfloat Skybox::skyboxVertices[] = {
      1.0f, -1.0f,  1.0f
 };
 
-Skybox::Skybox(const char** file) {
+Skybox::Skybox(std::vector<const char*> files) {
     glGenTextures(1, &textureID);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
@@ -54,7 +54,7 @@ Skybox::Skybox(const char** file) {
     unsigned char* imageData;
 
     for(int i = 0; i < 6; ++i) {
-        imageData = LoadImage(file[i], &width, &height, &numComponents, 3);
+        imageData = LoadImage(files[i], &width, &height, &numComponents, 3);
         glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB,
             width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, imageData);
     }

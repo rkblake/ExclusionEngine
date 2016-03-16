@@ -11,6 +11,7 @@ public:
 	Quaternion m_rotation;
 	void ApplyTransformation();
 	void GetViewMatrix(Matrix4x4f& viewMatrix);
+	Matrix4x4f GetViewMatrix() {return view_matrix;}
 private:
     Matrix4x4f view_matrix;
 };

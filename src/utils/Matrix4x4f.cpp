@@ -25,6 +25,17 @@ Matrix4x4f::Matrix4x4f(glm::mat4 glm_mat) {
 	m_elements[14] = glm_mat[2][3];	m_elements[15] = glm_mat[3][3];
 }
 
+Matrix4x4f::Matrix4x4f(Mat3 mat3) {
+	m_elements[0] = mat3[0];	m_elements[1] = mat3[1];
+	m_elements[2] = mat3[2];	m_elements[3] = 0;
+	m_elements[4] = mat3[3];	m_elements[5] = mat3[4];
+	m_elements[6] = mat3[5];	m_elements[7] = 0;
+	m_elements[8] = mat3[6];	m_elements[9] = mat3[7];
+	m_elements[10] = mat3[8];	m_elements[11] = 0;
+	m_elements[12] = 0;	m_elements[13] = 0;
+	m_elements[14] = 0;	m_elements[15] = 1;
+}
+
 float& Matrix4x4f::operator[](int i) {
     assert(i >= 0 && i < 16);
 

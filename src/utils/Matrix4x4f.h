@@ -3,18 +3,20 @@
 
 #include "Vec3f.h"
 #include "Vec4f.h"
+#include "Mat3.h"
 #include "glm/glm.hpp"
 
 //Column-major order
+
+class Mat3;
 
 class Matrix4x4f {
 public:
     static const float s_directionMatrixNormalizationTolerance;
 
-    float m_elements[16];
-
     Matrix4x4f();
     Matrix4x4f(glm::mat4 glm_mat);
+    Matrix4x4f(Mat3 mat3);
 
     float& operator[](int i);
 
@@ -61,7 +63,7 @@ public:
 	Vec4f operator*(const Vec4f &vec) const;
 	Vec3f operator*(const Vec3f &vec) const;
 private:
-
+    float m_elements[16];
 };
 
 #endif

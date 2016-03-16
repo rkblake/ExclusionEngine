@@ -37,5 +37,5 @@ void Script::LoadScript(const char* path) {
 }
 
 void Script::CloseScript() {
-    lua_close(L);
+    //lua_close(L);
 }

@@ -14,7 +14,7 @@ RenderingEngine::RenderingEngine() {
 
 void RenderingEngine::Init() {
 	up = glm::vec3(0,1,0);
-	GLuint shader = LoadShadersByName("res/ADS");
+	shader = LoadShadersByName("res/ADS");
 
 	glUseProgram(shader);
 	modelViewID = glGetUniformLocation(shader, "ModelViewMatrix");
@@ -132,6 +132,8 @@ void RenderingEngine::Swap() {
 
 void RenderingEngine::RenderScene() {
 	ComputeMatrices();
+
+	glUseProgram(shader);
 	//view_matrix = glm::translate(glm::mat4(1.0), glm::vec3(0, -15, -50.0));
 	view_matrix.TranslateMatrix(Vec3f(0, -5, -25));
 	//model_matrix = glm::mat4(1.0);
@@ -141,6 +143,7 @@ void RenderingEngine::RenderScene() {
 	glUniformMatrix4fv(projectionID, 1, GL_FALSE, &projection_matrix[0]);
 	//glUniformMatrix4fv(normalID, 1, GL_FALSE, &normalMatrix[0][0]);
 	//glUniformMatrix4fv(modelViewID, 1, GL_FALSE, &modelViewMatrix[0][0]);
+
 
 	model_matrix.SetIdentity();
 	mvp_matrix = projection_matrix * view_matrix * model_matrix;
@@ -155,8 +158,8 @@ void RenderingEngine::RenderScene() {
 	world->Render();
 
 	for(std::vector<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i) {
-		//if((*i) == attached_entity && camera_style == FIRST_PERSON)
-			//continue;	//don't render attached entity in first person
+		if((*i) == attached_entity && camera_style == FIRST_PERSON)
+			continue;	//don't render attached entity in first person
 		//btTransform entity_pos;
 		//(*i)->getRigidBody()->getMotionState()->getWorldTransform(entity_pos);
 		//btVector3 entity_vec = entity_pos.getOrigin();
@@ -175,4 +178,11 @@ void RenderingEngine::RenderScene() {
 		glUniformMatrix4fv(normalID, 1, GL_FALSE, &normalMatrix[0]);
 		(*i)->Render();
 	}
+
+	view_matrix.SetIdentity();
+	view_matrix = Matrix4x4f(Mat3(m_camera->GetViewMatrix()));
+	//projection_matrix =
+	glUniformMatrix4fv(glGetUniformLocation(skybox->GetShader(), "view"), 1, GL_FALSE, &view_matrix[0]);
+	glUniformMatrix4fv(glGetUniformLocation(skybox->GetShader(), "projection"), 1, GL_FALSE, &projection_matrix[0]);
+	skybox->Draw();
 }

@@ -38,9 +38,11 @@ public:
 	void Update();
 	void Render();
 	void Run();
+	void RunNoClip();
 	Vec3f GetViewVec();
 	Vec3f GetPosition();
 private:
+	Vec3f m_position;
 	Vec3f m_direction;
 	Vec2f m_rotation;
 	float m_accel, m_decel, m_maxSpeed, m_jumpVel, m_mouseSensitivity;
@@ -49,6 +51,8 @@ private:
 	DynamicCharacterController* m_pCharacterController;
 	btDiscreteDynamicsWorld* m_pPhysicsWorld;
 	glm::mat4 m_entityTransform;
+
+	void (Entity::*m_physicsFunc)();
 
 	Script* script;
 
