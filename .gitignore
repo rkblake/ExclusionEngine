@@ -34,3 +34,4 @@ bin
 *.sw*
 
 .DS_Store
+*.vcxproj*
