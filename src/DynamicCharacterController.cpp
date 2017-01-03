@@ -174,7 +174,7 @@ void DynamicCharacterController::ParseGhostContacts()
 					{
 						m_hittingWall = true;
 
-						m_surfaceHitNormals.push_back(point.m_normalWorldOnB);
+						m_surfaceHitNormals.push_back(Vec3f(point.m_normalWorldOnB));
 					}
 				}
 			}

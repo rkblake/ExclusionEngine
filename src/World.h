@@ -6,7 +6,7 @@
 #include "Mesh.h"
 #include "Texture.h"
 #include <btBulletDynamicsCommon.h>
-#include <bullet/BulletCollision/CollisionShapes/btTriangleIndexVertexArray.h>
+#include <BulletCollision/CollisionShapes/btTriangleIndexVertexArray.h>
 
 class World : public Renderable {
 public:

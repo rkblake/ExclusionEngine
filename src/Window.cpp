@@ -1,7 +1,7 @@
 #include "Window.h"
 #include <stdio.h>
 
-extern
+
 
 Window::Window(const char* title, int width, int height)
 {

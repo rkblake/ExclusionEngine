@@ -88,15 +88,7 @@ void CoreEngine::Run() {
 		player->Update();
 		RenderingEngine::GetInstance().RenderScene();
 		window->SwapBuffers();
-/* TODO: fix SDL_QUIT handling
-		while(SDL_PollEvent(&e)) {
-			switch(e.type) {
-				case SDL_QUIT:
-					isRunning = false;
-					break;
-			}
-		}
-*/
+
 		if(keys[SDL_SCANCODE_ESCAPE])
 			isRunning = false;
 

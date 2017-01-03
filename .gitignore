@@ -2,7 +2,7 @@
 *.slo
 *.lo
 *.o
-#*.obj #this is the extension for wavefront object files
+*.obj
 
 # Precompiled Headers
 *.gch
@@ -29,8 +29,11 @@
 
 # Output Directory
 bin
+Debug
 
 # Thanks
 *.sw*
 
 .DS_Store
+*.vcxproj*
+x64

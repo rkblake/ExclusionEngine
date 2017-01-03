@@ -8,7 +8,7 @@
 #include <btBulletDynamicsCommon.h>
 #include <btBulletCollisionCommon.h>
 
-#include <bullet/BulletCollision/CollisionDispatch/btGhostObject.h>
+#include <BulletCollision/CollisionDispatch/btGhostObject.h>
 
 #include "PhysicsEngine.h"
 #include "utils/utils.h"

@@ -6,7 +6,7 @@
 #include "utils/Timer.h"
 
 #include <btBulletDynamicsCommon.h>
-#include <bullet/BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h>
+#include <BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h>
 #include <map>
 #include <vector>
 #include <list>

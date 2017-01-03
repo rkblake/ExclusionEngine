@@ -2,7 +2,7 @@
 #define EE_VEC3F
 
 #include <glm/glm.hpp>
-#include <bullet/LinearMath/btVector3.h>
+#include <LinearMath/btVector3.h>
 
 class Vec3f {
 public:
@@ -10,7 +10,7 @@ public:
 
     Vec3f();
     Vec3f(float x, float y, float z);
-    Vec3f(glm::vec3 glm_vec);
+    Vec3f(glm::vec3& glm_vec);
     Vec3f(btVector3 btVec);
 
     Vec3f operator*(float scale) const;

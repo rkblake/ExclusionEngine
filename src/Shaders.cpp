@@ -1,12 +1,14 @@
 #include "Shaders.h"
 
+#include "utils\utils.h"
+
 #include <fstream>
-#include <string.h>
+#include <string>
 #include <vector>
 
 #define EXTENSION_LENGTH 3
 
-
+/*
 GLuint LoadShadersByName(const char * name)
 {
         unsigned int len = sizeof(char) * (strlen(name) + EXTENSION_LENGTH + 1);
@@ -17,7 +19,7 @@ GLuint LoadShadersByName(const char * name)
 
         return LoadShaders(vs_path, fs_path);
 }
-
+*/
 GLuint LoadShaders(const char* vertex_file_path, const char * fragment_file_path)
 {
 	// Create the shaders
@@ -88,7 +90,7 @@ GLuint LoadShaders(const char* vertex_file_path, const char * fragment_file_path
 	// Check the program
 	glGetProgramiv(ProgramID, GL_LINK_STATUS, &Result);
 	glGetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-	std::vector<char> ProgramErrorMessage( std::max(InfoLogLength, int(1)) );
+	std::vector<char> ProgramErrorMessage( max(InfoLogLength, int(1)) );
 	glGetProgramInfoLog(ProgramID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
 	fprintf(stdout, "%s\n", &ProgramErrorMessage[0]);
 

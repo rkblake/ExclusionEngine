@@ -2,7 +2,7 @@
 #define EE_UTILS_H
 
 #include <glm/glm.hpp>
-#include <bullet/LinearMath/btVector3.h>
+#include <LinearMath/btVector3.h>
 #include <math.h>
 
 
@@ -38,6 +38,10 @@ T Clamp(T val, T min, T max) {
 		return min;
 
 	return val;
+}
+
+template <class T> const T& max(const T& a, const T& b) {
+	return (a<b) ? b : a;     // or: return comp(a,b)?b:a; for version (2)
 }
 
 unsigned char* LoadImage(const char* file, int* width, int* height, int* numComponents, int layout);

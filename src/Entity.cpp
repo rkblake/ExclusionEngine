@@ -31,7 +31,7 @@ Entity::Entity(int)
 }
 
 Vec3f Entity::GetViewVec() {
-
+	return Vec3f();
 }
 
 Vec3f Entity::GetPosition() {
