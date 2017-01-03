@@ -37,6 +37,9 @@ $(TARGET): bin $(OBJ)
 bin:
 	mkdir -p $@
 
+run:
+	bin/$(TARGET)
+
 .PHONY: clean
 clean:
 	$(RM) $(OBJ)

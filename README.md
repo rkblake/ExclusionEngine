@@ -1,26 +1,31 @@
-ExclusionEngine
-===============
-the bestest game engine that will never be done
+#ExclusionEngine
+Exclusion is the bestest game engine that will never be done.
 
-## Required pacakages
-- Bullet
-- lua
-- assimp
 
-## design goals:
+## Dependencies 
+- glm, math lib based on GLSL
+- bullet, 3D collision detection and rigid body dynamics lib
+- assimp, 3D model importing lib
+- lua (prefer latest)
 
-[ ]	first, third, and free look camera
 
-[ ] entirely script controlled for game designers
+## Building
+The build system is not complex.
 
-[ ] AI, possibly using neural networks
+### Arch Linux
+To build using pacman:
+<pre>
+$ sudo pacman -S glm bullet assimp
+$ make
+</pre>
 
-[ ] particle system
 
-[ ] physics engine
-
-[ ] shaders
-
-[ ] decals
-
-[ ] different lighting types
+## Design Goals
+* first, third, and free look camera
+* lua scripting for game designers
+* pathfinding AI
+* particle system
+* physics
+* shaders
+* decals
+* different lighting types
