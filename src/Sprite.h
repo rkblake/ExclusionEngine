@@ -8,7 +8,9 @@
 #include <glm/glm.hpp>
 #include <vector>
 
-class Sprite {
+#include "Component.h"
+
+class Sprite : public Component {
 public:
 	Sprite() {}
 	Sprite(const char* path);

@@ -1,8 +1,11 @@
 #ifndef EE_SCENE
 #define EE_SCENE
 
-struct tree_node {
+#include "Component.h"
 
+struct tree_node {
+	Component* comp;
+	tree_node* sub_nodes;
 };
 
 class Scene {
