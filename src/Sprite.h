@@ -22,6 +22,8 @@ private:
 	GLuint textureID;
 	GLuint vertex_buffer;
 	GLuint uv_buffer;
+	static const GLfloat vertices[];
+	static const GLfloat uv[];
 };
 
 #endif // !EE_SPRITE
