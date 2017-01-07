@@ -103,7 +103,10 @@ void RenderingEngine::ComputeMatrices() {
     if(camera_style == FREE_LOOK) {
 		position = glm::vec3(0, 10, -50);
 
-        projection_matrix = glm::perspective(fov, 4.0f / 3.0f, 0.1f, 100.0f);
+		if (is3D)
+			projection_matrix = glm::perspective(fov, 4.0f / 3.0f, 0.1f, 100.0f);
+		else
+			projection_matrix = glm::mat4x4(1.0);
     	view_matrix = glm::lookAt(position, position+direction, up);
     }
     else if(camera_style == FIRST_PERSON) {

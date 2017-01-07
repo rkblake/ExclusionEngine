@@ -86,6 +86,7 @@ private:
 	Skybox* skybox;
 	unsigned int camera_style;
 	bool isFocus;
+	bool is3D;
 	std::vector<Entity*> entities;
 
 	RenderingEngine();
