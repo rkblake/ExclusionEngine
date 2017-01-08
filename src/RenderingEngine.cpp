@@ -14,7 +14,7 @@ RenderingEngine::RenderingEngine() {
 
 void RenderingEngine::Init() {
 	up = glm::vec3(0,1,0);
-	shader = LoadShaders("res/ADS.vs", "res/ADS.fs");
+	shader = LoadShaders("res/basic.vs", "res/basic.fs");
 
 	glUseProgram(shader);
 	modelViewID = glGetUniformLocation(shader, "ModelViewMatrix");

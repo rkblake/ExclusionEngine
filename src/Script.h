@@ -7,6 +7,12 @@ extern "C" {
     #include <lualib.h>
 }
 
+struct table_node {
+	char* name;
+	char* script;
+	table_node* children;
+};
+
 class Script {
 public:
     Script() {}
@@ -16,6 +22,7 @@ public:
 	double GetNumber(const char* var_name);
 	bool GetBoolean(const char* var_name);
 	const char* GetString(const char* var_name);
+	table_node getTable(const char* var_name);
 private:
     void LoadScript(const char* path);
     void CloseScript();

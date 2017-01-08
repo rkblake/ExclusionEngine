@@ -28,6 +28,10 @@ const char* Script::GetString(const char* var_name) {
 	return value;
 }
 
+table_node getTable(const char* var_name) {
+	table_node root;
+}
+
 void Script::LoadScript(const char* path) {
     lua_State* L = luaL_newstate();
 	luaL_openlibs(L);

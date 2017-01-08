@@ -1,0 +1,1 @@
+texture="res/cube.png"
