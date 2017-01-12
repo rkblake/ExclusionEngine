@@ -25,7 +25,7 @@ void RenderingEngine::Init() {
 	modelViewID = glGetUniformLocation(shader, "ModelViewMatrix");
 	projectionID = glGetUniformLocation(shader, "ProjectionMatrix");
 
-
+#if 0
 	LightInfo light = LightInfo(glm::vec4(1.0,1.0,1.0, 0.0), glm::vec3(0.25), glm::vec3(0.25), glm::vec3(0.25));
 	MaterialInfo material = MaterialInfo(glm::vec3(0.25), glm::vec3(0.25), glm::vec3(0.25), 0.5);
 
@@ -63,7 +63,7 @@ void RenderingEngine::Init() {
 		glBindBufferBase(GL_UNIFORM_BUFFER, blockIndex, ubo[i]);
 		delete [] blockBuffer;
 	}
-
+#endif
 	glUniform1i(textureID, 0);
 }
 
@@ -187,5 +187,5 @@ void RenderingEngine::RenderScene() {
 	//projection_matrix =
 	glUniformMatrix4fv(glGetUniformLocation(skybox->GetShader(), "view"), 1, GL_FALSE, &view_matrix[0]);
 	glUniformMatrix4fv(glGetUniformLocation(skybox->GetShader(), "projection"), 1, GL_FALSE, &projection_matrix[0]);
-	skybox->Draw();
+	//skybox->Draw();
 }

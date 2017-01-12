@@ -12,8 +12,9 @@
 
 #include "AssimpLoader.h"
 #include "vboindexer.h"
+#include "Component.h"
 
-class Mesh {
+class Mesh : public Component {
 public:
     Mesh() {}
     Mesh(const char* path);

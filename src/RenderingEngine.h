@@ -21,6 +21,7 @@
 #include "Camera.h"
 #include "Skybox.h"
 #include "utils/Matrix4x4f.h"
+#include "Scene.h"
 
 class Entity;
 
@@ -70,6 +71,8 @@ public:
 	void AttachEntity(Entity* entity) {attached_entity = entity;}
 	void SetWorld(World* w) {world = w;}
 	void SetSkybox(Skybox* s) {skybox = s;}
+	void setScene(Scene* s) {current_scene = s;}
+	void set3D(bool 3d) {is3D = 3d;}
 	Camera* GetCamera();
 private:
 	Camera* m_camera;
@@ -88,6 +91,7 @@ private:
 	bool isFocus;
 	bool is3D;
 	std::vector<Entity*> entities;
+	Scene* current_scene;
 
 	RenderingEngine();
 	~RenderingEngine() {}
