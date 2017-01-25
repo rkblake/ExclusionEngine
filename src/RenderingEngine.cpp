@@ -133,6 +133,12 @@ void RenderingEngine::Swap() {
     window->SwapBuffers();
 }
 
+void RenderingEngine::Render(Component& c) {
+	mvp_matrix = projection_matrix * view_matrix * c.getModelMatrix();
+	glUniformMatrix4fv(mvpID, 1, GL_FALSE, &mvp_matrix[0]);
+	c.Draw();
+}
+
 void RenderingEngine::RenderScene() {
 	ComputeMatrices();
 
@@ -158,7 +164,7 @@ void RenderingEngine::RenderScene() {
 	glUniformMatrix4fv(mvpID, 1, GL_FALSE, &mvp_matrix[0]);
 	glUniformMatrix4fv(modelViewID, 1, GL_FALSE, &mv_matrix[0]);
 	glUniformMatrix4fv(normalID, 1, GL_FALSE, &normalMatrix[0]);
-	world->Render();
+	//world->Render();
 
 	for(std::vector<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i) {
 		if((*i) == attached_entity && camera_style == FIRST_PERSON)

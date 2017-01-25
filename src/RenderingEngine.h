@@ -22,6 +22,7 @@
 #include "Skybox.h"
 #include "utils/Matrix4x4f.h"
 #include "Scene.h"
+#include "Component.h"
 
 class Entity;
 
@@ -63,6 +64,7 @@ public:
 	void SetFirstPerson() {camera_style = FIRST_PERSON;}
 	void SetThirdPerson() {camera_style = THIRD_PERSON;}
 	Window* CreateWindow(const char* title, int width, int height);
+	void Render(Component& c);
 	void Init();
 	void RegisterEntity(Entity* entity);
 	void Swap();
@@ -72,7 +74,7 @@ public:
 	void SetWorld(World* w) {world = w;}
 	void SetSkybox(Skybox* s) {skybox = s;}
 	void setScene(Scene* s) {current_scene = s;}
-	void set3D(bool 3d) {is3D = 3d;}
+	void set3D(bool _3d) {is3D = _3d;}
 	Camera* GetCamera();
 private:
 	Camera* m_camera;
