@@ -6,7 +6,7 @@
 
 class Component {
 public:
-	virtual void Draw() = 0;
+	virtual void Render() = 0;
 	Matrix4x4f getModelMatrix() {return transform;}
 protected:
 	Component() {}

@@ -136,7 +136,7 @@ void RenderingEngine::Swap() {
 void RenderingEngine::Render(Component& c) {
 	mvp_matrix = projection_matrix * view_matrix * c.getModelMatrix();
 	glUniformMatrix4fv(mvpID, 1, GL_FALSE, &mvp_matrix[0]);
-	c.Draw();
+	c.Render();
 }
 
 void RenderingEngine::RenderScene() {

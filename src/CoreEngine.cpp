@@ -42,6 +42,7 @@ void CoreEngine::Stop() {
 }
 
 void CoreEngine::demo(RenderingEngine& renderer, PhysicsEngine& physics) {
+#if 0
 	World* world = new World("scripts/world1.lua");
 
 	std::vector<const char*> files;
@@ -67,6 +68,10 @@ void CoreEngine::demo(RenderingEngine& renderer, PhysicsEngine& physics) {
 	RegisterEntity(sphere);
 	//Entity* null = GetNullEntity();
 	RenderingEngine::GetInstance().AttachEntity(sphere);
+#endif
+
+	Sprite s("scripts/sprite.lua");
+	renderer.Render(s);
 }
 
 Entity* CoreEngine::GetNullEntity() {

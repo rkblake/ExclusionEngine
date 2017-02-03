@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "Component.h"
+#include "Texture.h"
 
 class Sprite : public Component {
 public:
@@ -16,10 +17,11 @@ public:
 	Sprite(const char* path);
 	~Sprite();
 
-	void Draw();
+	//void Render();
 private:
 	GLuint vao;
 	GLuint textureID;
+	Texture tex;
 	GLuint vertex_buffer;
 	GLuint uv_buffer;
 	static const GLfloat vertices[];

@@ -17,6 +17,8 @@
 #include "Script.h"
 #include "World.h"
 #include "InputManager.h"
+#include "Component.h"
+#include "Sprite.h"
 
 class PhysicsEngine;
 class RenderingEngine;

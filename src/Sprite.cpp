@@ -13,6 +13,9 @@ const GLfloat Sprite::uv[] = {
 };
 
 Sprite::Sprite(const char* path) {
+	this->script = new Script(path);
+	this->texture = new Texture(script->getString("texture"));
+
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
@@ -33,9 +36,13 @@ Sprite::Sprite(const char* path) {
 
 Sprite::~Sprite() {
 	glDeleteVertexArrays(1, &vao);
+	delete this->script;
+	delete this->texture;
 }
 
-void Sprite::Draw() {
+void Sprite::Render() {
+	texture->bind(0);
+
 	glBindVertexArray(vao);
 
 	glDrawArrays(GL_TRIANGLES, 0, 3);
