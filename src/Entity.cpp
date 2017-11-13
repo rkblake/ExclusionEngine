@@ -11,7 +11,7 @@ Entity::Entity(const char* name)
 {
 	this->script = new Script(name);
 	this->texture = new Texture(script->GetString("texture"));
-    this->mesh = new Mesh(script->GetString("mesh"));
+    //this->mesh = new Mesh(script->GetString("mesh"));
 
 	m_pPhysicsWorld = PhysicsEngine::GetInstance().getWorld();
 	m_direction = Vec3f(0, 0, 0);

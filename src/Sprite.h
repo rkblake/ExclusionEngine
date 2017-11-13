@@ -17,7 +17,7 @@ public:
 	Sprite(const char* path);
 	~Sprite();
 
-	//void Render();
+	void Render();
 private:
 	GLuint vao;
 	GLuint textureID;

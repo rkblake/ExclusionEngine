@@ -4,7 +4,7 @@ World::World(const char* path_to_script) {
 	script = new Script(path_to_script);
 	btTriangleIndexVertexArray* tiva;
 	// mesh = new Mesh(script->GetString("mesh"), tiva);
-	mesh = new Mesh(script->GetString("mesh"));
+	//mesh = new Mesh(script->GetString("mesh"));
 	texture = new Texture(script->GetString("texture"));
 
 	//btCollisionShape* collisionShape = new btBvhTriangleMeshShape(tiva, false);
